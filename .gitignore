@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Data & Databases (Large or specific to session)
+*.csv
+*.json
+!match_metadata.json
+!tactical_knowledge_base.json
+!youtube_tactics.json
+
+# Generated Analysis Artifacts
+*.png
+*.pdf
+*.tex
+*.aux
+*.log
+*.out
+
+# OS specific
+.DS_Store
+Thumbs.db
