@@ -10,10 +10,11 @@ AURORA has transitioned from a static data visualizer to a live neural ecosystem
 
 ## 💎 Key Features
 - **Multimodal VOD Review**: Upload local files or paste YouTube links to receive a deep-match critique.
-- **Neural Spatial Synchronization**: The AI identifies the map (Ascent, Bind, etc.) and round number, dynamically updating 2D tactical maps to match the visual evidence.
+- **High-Fidelity Neural Graphics**: On-the-fly generation of smooth **KDE Heatmaps** and **Dense Pathing Webs** for professional match visualization.
+- **Predictive Tactical Intelligence**: Real-time extraction of **Rotation Latency** and **Win Rate Prediction** based on detected gameplay patterns.
+- **Neural Spatial Synchronization**: AI-driven map detection that automatically swaps tactical assets for Ascent, Bind, and Haven.
+- **Unified HUD Sync**: Global performance benchmarks (Latency, Stability) hard-wired to the live VOD analysis stream.
 - **Universal Ingestion**: Support for drag-and-drop file uploads, local system paths, and cloud video streams.
-- **Tactical Knowledge Base**: A structured RAG (Retrieval-Augmented Generation) system built from pro transcripts and instructional guides.
-- **Neural Auth Gateway**: A high-fidelity authentication simulation using the "Neural Link" aesthetic.
 
 ## 🛠️ Technical Setup
 ### Prerequisites
