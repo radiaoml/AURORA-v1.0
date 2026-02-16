@@ -522,6 +522,40 @@
             </div>
         </div>
 
+        <!-- PANEL: TACTICAL VISION (NEW) -->
+        <div class="glass-panel" style="grid-column: 2 / 4;">
+            <div class="panel-header">
+                <span>TACTICAL_VISION_TERMINAL</span>
+                <span style="color: var(--tactical-cyan);">VOD_AI_ANALYSIS_MOD_v1.1</span>
+            </div>
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+                    <div id="vod-upload-zone"
+                        style="border: 2px dashed var(--border); height: 100px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.02);"
+                        onclick="simulateVodUpload()">
+                        <div style="font-size: 1.2rem; margin-bottom: 5px;">📤</div>
+                        <div style="font-size: 0.6rem; font-family: var(--font-mono); color: #94a3b8;">UPLOAD_LOCAL_FILE
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 5px;">
+                        <input type="text" id="vod-link-input" class="riot-input"
+                            placeholder="YouTube Link or C:\Path..."
+                            style="font-size: 0.7rem; padding: 8px 12px; flex: 1; outline: none; border: 1px solid var(--border); background: rgba(0,0,0,0.3); color: white;">
+                        <button class="riot-btn"
+                            style="margin: 0; width: 70px; font-size: 0.6rem; padding: 0; clip-path: none; height: 32px;"
+                            onclick="ingestVideoLink()">ANALYZE</button>
+                    </div>
+                </div>
+                <div id="vision-results"
+                    style="flex: 1.5; font-family: var(--font-mono); font-size: 0.75rem; border-left: 1px solid var(--border); padding-left: 20px; display: none; height: 140px; overflow-y: auto;">
+                    <div style="color: var(--tactical-cyan); margin-bottom: 8px;">[VISION_SCAN_COMPLETE]</div>
+                    <div id="vision-critique" style="line-height: 1.4; color: #cbd5e1;">
+                        Initializing neural VOD scan...
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer
             style="grid-column: 1 / -1; text-align: center; padding-top: 40px; font-family: var(--font-mono); font-size: 0.6rem; opacity: 0.3; letter-spacing: 5px;">
             AURORA_PROJECT // DECISION_INTELLIGENCE_FOR_PRO_ESPORTS // 2026
@@ -609,6 +643,121 @@
                     `;
                 }
             }, 900);
+        }
+
+        function simulateVodUpload() {
+            processVideoIngestion("local_upload", "UPLOAD_SESSION_08X");
+        }
+
+        function ingestVideoLink() {
+            const val = document.getElementById('vod-link-input').value;
+            if (!val) return;
+
+            const type = val.includes('youtube.com') || val.includes('youtu.be') ? "cloud_stream" : "local_path";
+            const sourceId = type === "cloud_stream" ? "YT_" + (val.split('v=')[1]?.substring(0, 8) || "LIVE") : "PATH_RESOLVED";
+
+            processVideoIngestion(type, sourceId);
+        }
+
+        function processVideoIngestion(type, id) {
+            const results = document.getElementById('vision-results');
+            const critique = document.getElementById('vision-critique');
+
+            critique.innerHTML = ""; // Reset
+            results.style.display = 'block';
+
+            const sourceTag = type === "cloud_stream" ? "[CLOUD]" : "[LOCAL]";
+            const initialLines = [
+                `${sourceTag} Initiating VOD handshake with ${id}...`,
+                "[NEURAL] Establishing multimodal socket pipeline...",
+                "[VISION] Extracting tactical frame clusters (30fps -> 2fps)...",
+                "[BRAIN] Handing off visual context to Gemini 1.5 Pro..."
+            ];
+
+            let i = 0;
+            const handshakeInterval = setInterval(() => {
+                if (i < initialLines.length) {
+                    const line = document.createElement('div');
+                    line.style.color = i === 0 ? "var(--neural-blue)" : "rgba(255,255,255,0.5)";
+                    line.style.fontSize = "0.65rem";
+                    line.style.marginBottom = "5px";
+                    line.innerHTML = initialLines[i];
+                    critique.appendChild(line);
+                    i++;
+                } else {
+                    clearInterval(handshakeInterval);
+                    startNeuralReasoning();
+                }
+            }, 800);
+
+            async function startNeuralReasoning() {
+                try {
+                    const response = await fetch("http://localhost:8000/analyze-vod", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ source: id, type: type })
+                    });
+
+                    if (!response.ok) throw new Error("NEURAL_BACKEND_OFFLINE");
+
+                    const data = await response.json();
+                    let analysis = data.analysis;
+
+                    // If backend returns a string (JSON from Gemini), parse it
+                    if (typeof analysis === 'string') {
+                        try {
+                            // Trim MD backticks if present
+                            analysis = analysis.replace(/```json|```/g, '').trim();
+                            analysis = JSON.parse(analysis);
+                        } catch (e) {
+                            console.warn("Could not parse brain response as JSON, using raw.");
+                        }
+                    }
+
+                    const findings = [
+                        `<b>ENTRY_RATING:</b> ${analysis.entry_rating || "B-"}`,
+                        `<b>TIMING_GAP:</b> ${analysis.timing_gap || "Neutral"}`,
+                        `<b>FORMATION_ISSUE:</b> ${analysis.formation_issue || "None"}`,
+                        `<b>PLANTING_LOGIC:</b> ${analysis.planting_critique || "Standard"}`,
+                        `<b>ADVICE:</b> ${analysis.tactical_suggestion || "No deviations."}`
+                    ];
+
+                    let j = 0;
+                    const vInterval = setInterval(() => {
+                        if (j < findings.length) {
+                            const p = document.createElement('p');
+                            p.style.marginBottom = "8px";
+                            p.style.opacity = "0";
+                            p.style.transition = "opacity 0.5s";
+                            p.innerHTML = `<span style="color:var(--riot-red); font-weight:bold;">[!]</span> ${findings[j]}`;
+                            critique.appendChild(p);
+                            setTimeout(() => p.style.opacity = "1", 50);
+                            j++;
+                            results.scrollTop = results.scrollHeight;
+                        } else {
+                            clearInterval(vInterval);
+                            renderFooter(`NEURAL_SCAN_SUCCESS // Response received from Live Brain.`);
+                        }
+                    }, 1200);
+
+                } catch (err) {
+                    const errorMsg = err.message === 'NEURAL_BACKEND_OFFLINE'
+                        ? "NEURAL_BACKEND_OFFLINE. Ensure backend is running."
+                        : "INTERNAL_BRAIN_ERROR. The Neural Engine encountered a tactical hurdle.";
+                    renderFooter(`[ERROR] ${errorMsg}`, "var(--riot-red)");
+                }
+
+                function renderFooter(msg, color) {
+                    const footer = document.createElement('div');
+                    footer.style.marginTop = "15px";
+                    footer.style.color = color || "var(--tactical-cyan)";
+                    footer.style.borderTop = "1px solid var(--border)";
+                    footer.style.paddingTop = "8px";
+                    footer.innerHTML = msg;
+                    critique.appendChild(footer);
+                    results.scrollTop = results.scrollHeight;
+                }
+            }
         }
     </script>
 
