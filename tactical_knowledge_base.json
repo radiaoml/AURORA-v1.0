@@ -1,0 +1,35 @@
+[
+    {
+        "source_id": "8vTSQTCANWc",
+        "extracted_maps": [
+            "Ascent"
+        ],
+        "extracted_agents": [],
+        "tactical_concepts": [
+            "Mid Control",
+            "Rotate"
+        ],
+        "raw_insights": "On Ascent, locking down the A site with Killjoy utility is game-changing. You need to place your turret on Heaven and your alarm bot near the switch. ..."
+    },
+    {
+        "source_id": "schjOxr9hiE",
+        "extracted_maps": [
+            "Bind"
+        ],
+        "extracted_agents": [],
+        "tactical_concepts": [
+            "Rotate",
+            "Eco"
+        ],
+        "raw_insights": "On Bind, Showers and Hookah are the most critical lanes. If you lose control of Hookah, the B site becomes an easy hit. Use the teleporters to fake yo..."
+    },
+    {
+        "source_id": "Z4wK6y_h7aE",
+        "extracted_maps": [],
+        "extracted_agents": [],
+        "tactical_concepts": [
+            "Eco"
+        ],
+        "raw_insights": "Mastering rotations is about understanding the defender chain. If you get a pick in mid, visualize where the remaining defenders are likely to move. Y..."
+    }
+]
