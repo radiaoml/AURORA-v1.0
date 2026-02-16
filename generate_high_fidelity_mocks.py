@@ -4,12 +4,15 @@ import seaborn as sns
 import numpy as np
 import os
 
-def generate_pro_viz(map_name, prefix):
+def generate_pro_viz(map_name, heatmap_path, path_path):
     # Set dark style
     plt.style.use('dark_background')
     
     # Generate random data points for the heatmap
-    np.random.seed(42 if map_name == "ASCENT" else 1337)
+    # Use a dynamic seed based on the map name to ensure some variety even if called twice
+    import time
+    seed = int(time.time() * 1000) % 2**32
+    np.random.seed(seed)
     
     # --- 1. PRO HEATMAP (KDE Style) ---
     fig, ax = plt.subplots(figsize=(10, 8))
@@ -38,7 +41,6 @@ def generate_pro_viz(map_name, prefix):
     plt.text(20, 920, "SCAN_DENSITY: ALPHA_STABLE", color='#94a3b8', fontsize=8, family='monospace')
     
     plt.tight_layout()
-    heatmap_path = f"{prefix}_heatmap_pro.png"
     plt.savefig(heatmap_path, dpi=120, facecolor='#0b0e14')
     plt.close()
     
@@ -69,13 +71,12 @@ def generate_pro_viz(map_name, prefix):
     plt.text(20, 920, "COORD_STREAM: RESOLVED", color='#94a3b8', fontsize=8, family='monospace')
     
     plt.tight_layout()
-    path_path = f"{prefix}_pathing_pro.png"
     plt.savefig(path_path, dpi=120, facecolor='#0b0e14')
     plt.close()
     
-    print(f"[SUCCESS] Generated Pro Viz for {map_name}")
+    print(f"[SUCCESS] Generated Pro Viz for {map_name} at {heatmap_path}")
 
 if __name__ == "__main__":
-    generate_pro_viz("ASCENT", "ascent")
-    generate_pro_viz("BIND", "bind")
-    generate_pro_viz("HAVEN", "haven")
+    generate_pro_viz("ASCENT", "ascent_heatmap_pro.png", "ascent_pathing_pro.png")
+    generate_pro_viz("BIND", "bind_heatmap_pro.png", "bind_pathing_pro.png")
+    generate_pro_viz("HAVEN", "haven_heatmap_pro.png", "haven_pathing_pro.png")

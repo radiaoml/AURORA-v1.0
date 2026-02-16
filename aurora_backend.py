@@ -23,6 +23,10 @@ class AnalysisRequest(BaseModel):
 async def root():
     return {"status": "AURORA_BACKEND_ONLINE", "version": "1.0.0"}
 
+import json
+import time
+from generate_high_fidelity_mocks import generate_pro_viz
+
 @app.post("/analyze-vod")
 async def analyze_vod(request: AnalysisRequest):
     """
@@ -34,39 +38,45 @@ async def analyze_vod(request: AnalysisRequest):
         # 1. Initialize the Engine
         engine = TacticalVisionEngine(request.source)
         
-        # 2. Extract Frames (Real logic)
+        # 2. Extract Frames
         frames, source_meta = engine.extract_tactical_frames()
         
         # 3. Call the Multimodal Brain (Gemini 1.5 Pro)
-        critique = engine.get_multimodal_critique(frames, source_meta=source_meta)
+        raw_critique = engine.get_multimodal_critique(frames, source_meta=source_meta)
         
-        # 4. Neural Spatial Sync: Fetch coordinates based on detected context
-        # In production, this would query a real database or the .csv
+        # Parse the JSON if it's a string
+        critique = raw_critique
+        if isinstance(raw_critique, str):
+            try:
+                # Remove markdown code blocks if Gemini includes them
+                json_str = raw_critique.replace("```json", "").replace("```", "").strip()
+                critique = json.loads(json_str)
+            except:
+                print("[WARNING] Failed to parse Gemini response as JSON.")
+                critique = {"raw": raw_critique}
+
+        # 4. Neural Spatial Sync: Generate CUSTOM graphics for this analysis
+        detected_map = "ASCENT"
+        if isinstance(critique, dict):
+            detected_map = critique.get("detected_map", "ASCENT").upper()
+
+        # Generate unique filenames to prevent caching and cross-talk
+        ts = int(time.time())
+        heatmap_name = f"analysis_heatmap_{ts}.png"
+        pathing_name = f"analysis_pathing_{ts}.png"
+        
+        print(f"[BACKEND] Generating live tactical viz for {detected_map}...")
+        generate_pro_viz(detected_map, heatmap_name, pathing_name)
+        
         spatial_payload = {
-            "map_id": "ASCENT",
-            "heatmap_url": "tactical_kill_heatmap.png",
-            "trajectories_url": "round_1_trajectories.png",
+            "map_id": detected_map,
+            "heatmap_url": heatmap_name,
+            "trajectories_url": pathing_name,
             "live_coords": [
                 {"agent": "Jett", "x": 1250, "y": 800, "event": "Entry"},
                 {"agent": "Omen", "y": 450, "x": 900, "event": "Smoke"}
             ]
         }
-        
-        # Override based on detected map (Simulation of dynamic lookup)
-        if isinstance(critique, dict):
-            detected_map = critique.get("detected_map", "Unknown").upper()
-            if "BIND" in detected_map:
-                spatial_payload["map_id"] = "BIND"
-                spatial_payload["heatmap_url"] = "bind_heatmap_pro.png"
-                spatial_payload["trajectories_url"] = "bind_pathing_pro.png"
-            elif "HAVEN" in detected_map:
-                spatial_payload["map_id"] = "HAVEN"
-                spatial_payload["heatmap_url"] = "haven_heatmap_pro.png"
-                spatial_payload["trajectories_url"] = "haven_pathing_pro.png"
-            else:
-                spatial_payload["map_id"] = "ASCENT"
-                spatial_payload["heatmap_url"] = "ascent_heatmap_pro.png"
-                spatial_payload["trajectories_url"] = "ascent_pathing_pro.png"
         
         return {
             "status": "SUCCESS",

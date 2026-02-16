@@ -495,16 +495,17 @@
             <div class="panel-header">PERFORMANCE_BENCHMARKS</div>
             <div class="hud-stat">
                 <span class="stat-label">ROTATION_LATENCY</span>
-                <div class="stat-value">34.2s <span style="font-size: 1rem; opacity: 0.3;">/ 20.0s PRO</span></div>
+                <div class="stat-value"><span id="rotation-latency-val">34.2s</span> <span
+                        style="font-size: 1rem; opacity: 0.3;">/ 20.0s PRO</span></div>
                 <div class="benchmark-bar">
-                    <div class="bar-fill" style="width: 58%;"></div>
+                    <div class="bar-fill" id="rotation-latency-bar" style="width: 58%;"></div>
                 </div>
             </div>
             <div class="hud-stat" style="border-color: var(--tactical-cyan);">
                 <span class="stat-label">WIN_RATE_STABILITY</span>
-                <div class="stat-value" style="color: var(--tactical-cyan);">62.5%</div>
+                <div class="stat-value" style="color: var(--tactical-cyan);" id="win-rate-val">62.5%</div>
                 <div class="benchmark-bar">
-                    <div class="bar-fill" style="width: 82%; background: var(--neural-blue);"></div>
+                    <div class="bar-fill" id="win-rate-bar" style="width: 82%; background: var(--neural-blue);"></div>
                 </div>
             </div>
         </div>
@@ -749,6 +750,8 @@
                         `<b>TIMING_GAP:</b> ${analysis.timing_gap || "Neutral"}`,
                         `<b>FORMATION_ISSUE:</b> ${analysis.formation_issue || "None"}`,
                         `<b>PLANTING_LOGIC:</b> ${analysis.planting_critique || "Standard"}`,
+                        `<b>ROTATION_LATENCY:</b> ${analysis.rotation_latency || "0.0s"}`,
+                        `<b>WIN_RATE_PRED:</b> ${analysis.win_rate_prediction || "50%"}`,
                         `<b>ADVICE:</b> ${analysis.tactical_suggestion || "No deviations."}`
                     ];
 
@@ -772,6 +775,9 @@
                             if (data.spatial_data) {
                                 updateTacticalMaps(data.spatial_data);
                             }
+
+                            // PERFORMANCE SYNC: Update global benchmarks
+                            updateGlobalBenchmarks(analysis);
                         }
                     }, 1200);
 
@@ -792,6 +798,30 @@
                     critique.appendChild(footer);
                     results.scrollTop = results.scrollHeight;
                 }
+            }
+
+            function updateGlobalBenchmarks(analysis) {
+                console.log("[SYNC] Updating global performance benchmarks...");
+
+                // 1. Update Rotation Latency
+                const latVal = analysis.rotation_latency || "0.0s";
+                const latNum = parseFloat(latVal.replace(/[^\d.]/g, '')) || 0;
+                document.getElementById('rotation-latency-val').innerText = latVal;
+
+                // Assuming 40s is the "max" for the bar visualization, and 20s is pro
+                const latPercent = Math.min(100, Math.max(10, (1 - (latNum / 40)) * 100));
+                document.getElementById('rotation-latency-bar').style.width = latPercent + "%";
+
+                // 2. Update Win Rate Stability
+                const wrVal = analysis.win_rate_prediction || "50%";
+                const wrNum = parseFloat(wrVal.replace(/[^\d.]/g, '')) || 50;
+                document.getElementById('win-rate-val').innerText = wrVal;
+                document.getElementById('win-rate-bar').style.width = wrNum + "%";
+
+                // Trigger a small visual pulse on update
+                const metricHud = document.querySelector('.metric-hud');
+                metricHud.style.boxShadow = "inset 0 0 30px rgba(0, 245, 212, 0.1)";
+                setTimeout(() => metricHud.style.boxShadow = "none", 500);
             }
 
             function updateTacticalMaps(data) {
