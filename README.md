@@ -1,63 +1,50 @@
-# AURORA - Decision Intelligence for eSports
+# AURORA // Multimodal Tactical Intelligence HUD
 
-## Project Overview
-AURORA is an advanced "Decision Intelligence" platform for Valorant, focusing on tactical analysis, predictive modeling, and data-driven performance optimization.
+AURORA is a state-of-the-art **Decision Intelligence** platform for Valorant, bridging high-fidelity data visualization with live multimodal reasoning. It transforms raw gameplay video into specialized tactical critiques using **Gemini 1.5 Pro**.
 
-## Historical Log of Actions
+## 🚀 Core Architecture: The "Zero-Simulation" Bridge
+AURORA has transitioned from a static data visualizer to a live neural ecosystem:
+- **[FRONTEND] Cyber-HUD**: A professional eSports analytics interface (HTML5/CSS3/JS) with real-time asynchronous "Neural Handshakes."
+- **[BACKEND] FastAPI Neural Engine**: A Python-based orchestrator that manages video frame extraction and LLM communications.
+- **[VISION] Gemini 1.5 Pro**: A multimodal large language model that performs visual reasoning on gameplay VODs to extract high-level strategic insights.
 
-### 1. Document Extraction & Analysis
-- **Goal**: Convert "Analyse du marché AURORA.pdf" into professional LaTeX.
-- **Action**: Installed `pypdf` and created an extraction script `extract_pdf.py`.
-- **Command**: `pip install pypdf`
-- **Result**: Extracted content to `extracted_text.txt` and generated an 8-page academic LaTeX document `aurora_analysis.tex`.
+## 💎 Key Features
+- **Multimodal VOD Review**: Upload local files or paste YouTube links to receive a deep-match critique.
+- **Neural Spatial Synchronization**: The AI identifies the map (Ascent, Bind, etc.) and round number, dynamically updating 2D tactical maps to match the visual evidence.
+- **Universal Ingestion**: Support for drag-and-drop file uploads, local system paths, and cloud video streams.
+- **Tactical Knowledge Base**: A structured RAG (Retrieval-Augmented Generation) system built from pro transcripts and instructional guides.
+- **Neural Auth Gateway**: A high-fidelity authentication simulation using the "Neural Link" aesthetic.
 
-### 2. Environment Setup for Visualization
-- **Goal**: Set up Python dependencies for data visualization and tactical mapping.
-- **Action**: Installed core libraries for data processing and imaging.
-- **Command**: `pip install matplotlib pandas seaborn opencv-python`
-- **Date**: 2026-02-16
+## 🛠️ Technical Setup
+### Prerequisites
+- Python 3.10+
+- Google Generative AI API Key (`GEMINI_API_KEY`)
 
-### 3. Implementation of Visualization System (In Progress)
-- **Status**: Execution phase.
-- **Components Pending**:
-    - [ ] `generate_mock_data.py`: Multi-round gameplay data simulator.
-    - [ ] `visualizer.py`: Heatmap and trajectory rendering engine.
-    - [ ] `ascent_blueprint.png`: Tactical map base layer.
+### Installation
+```bash
+pip install fastapi uvicorn google-generativeai opencv-python pydantic matplotlib pandas seaborn
+```
 
-### 5. YouTube Intelligence Expansion (v3)
-- **Goal**: Extract tactical benchmarks from professional instructional videos.
-- **Action**: Developed a harvesting strategy for keywords like `"best tactic in valorant"`.
-- **Result**: Integrated a "Tactical Intelligence" card into the dashboard, featuring transcript-extracted takeaways (e.g., Default strategies, Map Control benchmarks).
+### Deployment
+1. **Initialize the Backend**:
+   ```bash
+   python aurora_backend.py
+   ```
+2. **Launch the HUD**:
+   Open `index.html` in any modern browser.
 
-### 6. Data Acquisition Strategy (Hybrid Architecture)
+## 🛰️ How to Use
+1. **Neural Authorization**: Sign in with your Riot ID to establish the identity handshake.
+2. **Tactical Ingestion**: Upload a VOD or paste a URL into the **Tactical Vision Terminal**.
+3. **Neural Sync**: Watch the terminal status for `[BRAIN] Handing off context...`.
+4. **Analysis View**: Review the dynamic findings and watch the **COORDINATE_GRID_MAPPING** sync with the AI's detected map context.
 
-AURORA uses a hybrid model combining official Riot APIs with a proprietary Computer Vision (CV) engine.
+## 📂 Project Structure
+- `aurora_backend.py`: FastAPI server orchestrating the intelligence pipeline.
+- `gemini_vision_client.py`: Real SDK integration for multimodal reasoning.
+- `video_analyzer.py`: Precision frame extraction and source meta processing.
+- `index.html`: The central analytical Cyber-HUD.
+- `tactical_knowledge_base.json`: The repository of learned pro tactics.
 
-#### A. Official Riot APIs (Metadata & Identity)
-The following endpoints from the Riot Developer Portal are required:
-- **`ACCOUNT-V1`**: `GET /riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}`
-    - *Purpose*: Map player names to PUUIDs for cross-match tracking.
-- **`VAL-MATCH-V1` (PC) / `VAL-CONSOLE-MATCH-V1` (Console)**:
-    - `GET /val/match/v1/matchlists/by-puuid/{puuid}`: Get a list of recent games.
-    - `GET /val/match/v1/matches/{matchId}`: Retrieve the high-level scoreboard, map info, and round results.
-- **`VAL-CONTENT-V1`**:
-    - *Purpose*: Map internal IDs to human-readable Agent and Map names.
-
-#### B. Computer Vision Engine (Tactical Depth)
-Since Riot APIs **do not** provide real-time movement coordinates (X, Y, Z), AURORA extracts these from video sources:
-- **Movement Trajectories**: Extracted from minimap or POV analysis.
-- **Utility Usage**: Detected using pixel-pattern matching for smokes, flashes, and ultimates.
-- **Combat Events**: Synchronized with Match API timestamps for 95% accuracy.
-
-## How to Run
-1. Ensure Python 3.10+ is installed.
-2. Install dependencies: `pip install matplotlib pandas seaborn opencv-python pypdf`
-3. Generate simulation data: `python generate_mock_data.py`
-4. Run the tactical dashboard: `python dashboard.py`
-
-## Output Files
-- `match_metadata.json`: Simulated Riot API metadata.
-- `tactical_kill_heatmap.png`: Tactical kill density analysis.
-- `round_1_trajectories.png`: Movement patterns for the first round.
-- `index.html`: **Interactive Tactical Dashboard** (Open this in your browser).
-- `tactical_knowledge_base.json`: **Structured Mental Model** (Ready for LLM ingestion).
+---
+*AURORA // PROJECT_HANDOFF_v2.0 // NO_SIMULATION_DETECTED*
