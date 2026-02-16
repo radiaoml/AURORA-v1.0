@@ -807,8 +807,9 @@
                     vizHud.style.boxShadow = "none";
                     vizHud.style.borderColor = "var(--border)";
 
-                    if (images[0]) images[0].src = data.heatmap_url;
-                    if (images[1]) images[1].src = data.trajectories_url;
+                    const timestamp = new Date().getTime();
+                    if (images[0]) images[0].src = data.heatmap_url + "?t=" + timestamp;
+                    if (images[1]) images[1].src = data.trajectories_url + "?t=" + timestamp;
 
                     // Update indices
                     const index = vizHud.querySelectorAll('.panel-header span');

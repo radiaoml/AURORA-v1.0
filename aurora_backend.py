@@ -57,9 +57,16 @@ async def analyze_vod(request: AnalysisRequest):
             detected_map = critique.get("detected_map", "Unknown").upper()
             if "BIND" in detected_map:
                 spatial_payload["map_id"] = "BIND"
-                spatial_payload["heatmap_url"] = "bind_heatmap_proto.png" # Assuming these exist or will be generated
+                spatial_payload["heatmap_url"] = "bind_heatmap_pro.png"
+                spatial_payload["trajectories_url"] = "bind_pathing_pro.png"
             elif "HAVEN" in detected_map:
                 spatial_payload["map_id"] = "HAVEN"
+                spatial_payload["heatmap_url"] = "haven_heatmap_pro.png"
+                spatial_payload["trajectories_url"] = "haven_pathing_pro.png"
+            else:
+                spatial_payload["map_id"] = "ASCENT"
+                spatial_payload["heatmap_url"] = "ascent_heatmap_pro.png"
+                spatial_payload["trajectories_url"] = "ascent_pathing_pro.png"
         
         return {
             "status": "SUCCESS",
