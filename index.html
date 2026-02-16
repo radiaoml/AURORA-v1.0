@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURORA // TACTICAL INTELLIGENCE HUD</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --riot-red: #ff4655;
+            --tactical-cyan: #00f5d4;
+            --neural-blue: #3b82f6;
+            --glass: rgba(15, 23, 42, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --font-main: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-deep);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(255, 70, 85, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.02));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* AUTH PORTAL: NEURAL LINK */
+        #auth-portal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: clip-path 1.2s cubic-bezier(0.87, 0, 0.13, 1);
+        }
+
+        #auth-portal.cleared {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        }
+
+        .neural-link-card {
+            width: 520px;
+            padding: 50px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 100px rgba(255, 70, 85, 0.1);
+        }
+
+        .neural-link-card::before,
+        .neural-link-card::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--riot-red);
+            border-style: solid;
+        }
+
+        .neural-link-card::before {
+            top: -5px;
+            left: -5px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .neural-link-card::after {
+            bottom: -5px;
+            right: -5px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .auth-core {
+            width: 60px;
+            height: 60px;
+            background: var(--riot-red);
+            margin: 0 auto 20px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+                box-shadow: 0 0 30px var(--riot-red);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        .input-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .riot-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 12px 20px;
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            flex: 2;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .riot-input:focus {
+            border-color: var(--riot-red);
+        }
+
+        .tag-input {
+            flex: 1;
+        }
+
+        .riot-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--riot-red);
+            color: white;
+            border: none;
+            font-family: var(--font-main);
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 20px;
+            clip-path: polygon(5% 0, 100% 0, 100% 80%, 95% 100%, 0 100%, 0 20%);
+            transition: 0.3s;
+        }
+
+        .riot-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* MAIN HUD LAYOUT */
+        main {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            grid-template-rows: auto 1fr 1fr;
+            gap: 20px;
+            padding: 40px;
+            max-width: 1800px;
+            margin: 0 auto;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        body.authenticated main {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .hud-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hud-subtitle {
+            font-size: 0.7rem;
+            color: var(--neural-blue);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* HUD COMPONENTS */
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #475569;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 8px;
+        }
+
+        /* ADVISOR HUD (CENTERPIECE) */
+        .advisor-hud {
+            grid-row: 2 / 4;
+            border-top: 4px solid var(--riot-red) !important;
+            background: linear-gradient(180deg, rgba(255, 70, 85, 0.05) 0%, transparent 100%);
+        }
+
+        .intelligence-stream {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .stream-tag {
+            color: var(--riot-red);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .recommendation-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--neural-blue);
+            box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.15);
+        }
+
+        /* DATA VIZ HUD */
+        .viz-hud {
+            grid-column: 2 / 4;
+        }
+
+        .map-frame {
+            position: relative;
+            margin-top: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .map-frame::before {
+            content: "LIVE_COORD_STREAM_ACTV";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--tactical-cyan);
+            animation: blink 1s infinite;
+        }
+
+        .viz-hud img {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* METRIC HUD */
+        .metric-hud {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hud-stat {
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 2px solid var(--neural-blue);
+            padding: 15px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--neural-blue);
+        }
+
+        .benchmark-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--tactical-cyan);
+            box-shadow: 0 0 100px var(--tactical-cyan);
+        }
+
+        /* PLAYER PROFILE */
+        .hud-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--font-mono);
+        }
+
+        .rank-diamond {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--neural-blue), var(--tactical-cyan));
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        /* RIOT SIM INTERSTITIAL */
+        #riot-sim {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 10001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--riot-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- STAGE 1: THE NEURAL LINK GATEWAY -->
+    <div id="auth-portal">
+        <div class="neural-link-card">
+            <div class="auth-core"></div>
+            <h1 style="font-weight: 300; letter-spacing: 10px; font-size: 2.5rem; margin-bottom: 10px;">AURORA</h1>
+            <p class="hud-subtitle">Decision Intelligence System</p>
+
+            <div class="input-group">
+                <input type="text" id="riot-id-input" class="riot-input" placeholder="Riot ID (e.g. RadiantPlayer)">
+                <input type="text" id="tag-input" class="riot-input tag-input" placeholder="#TOP1">
+            </div>
+
+            <button class="riot-btn" onclick="startAuth()">Sign in with Riot ID</button>
+            <div style="margin-top: 30px; font-family: var(--font-mono); font-size: 0.6rem; color: #475569;">
+                SECURED BY RIOT IDENTITY V2.1 // 256-BIT ENCRYPTION
+            </div>
+        </div>
+    </div>
+
+    <!-- STAGE 2: RIOT LOGIN INTERSTITIAL -->
+    <div id="riot-sim">
+        <div
+            style="text-align: center; width: 450px; padding: 50px; border: 1px solid #ddd; box-shadow: 0 10px 50px rgba(0,0,0,0.1); border-radius: 4px;">
+            <div
+                style="font-weight: 900; font-size: 1.5rem; color: var(--riot-red); margin-bottom: 30px; letter-spacing: 5px;">
+                RIOT GAMES</div>
+            <p id="auth-message" style="font-size: 1rem; color: #111; margin-bottom: 25px;">Authenticating <b
+                    id="display-id">Player</b>...</p>
+
+            <div id="login-fields">
+                <div
+                    style="background: #eee; height: 50px; margin-bottom: 10px; border-radius: 4px; display: flex; align-items: center; padding: 0 15px; color: #777;">
+                    Username</div>
+                <div
+                    style="background: #eee; height: 50px; margin-bottom: 30px; border-radius: 4px; display: flex; align-items: center; padding: 0 15px; color: #777;">
+                    Password</div>
+                <button class="riot-btn" style="clip-path: none; margin: 0; border-radius: 4px;"
+                    onclick="simulateHandshake()">Sign In</button>
+            </div>
+
+            <div id="loading-state" style="display: none;">
+                <div class="spinner"></div>
+                <p style="color: #555; font-size: 0.9rem; font-family: monospace;">REDIRECTING TO APP SOURCE...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAGE 3: THE DASHBOARD HUD -->
+    <main id="hud-main">
+        <header>
+            <div class="hud-title">
+                <span style="color: var(--riot-red); opacity: 0.8;">◤</span>
+                AURORA_INTEL_HUB
+                <span class="hud-subtitle" style="margin-left: 10px;">Ver. 2.6.Personalized</span>
+            </div>
+            <div class="hud-profile">
+                <div style="text-align: right;">
+                    <div id="final-username" style="font-weight: 900; color: #fff;">RadiantPlayer#TOP1</div>
+                    <div style="font-size: 0.6rem; color: var(--neural-blue); letter-spacing: 2px;">ASCENDANT_RANK_III
+                    </div>
+                </div>
+                <div class="rank-diamond"></div>
+            </div>
+        </header>
+
+        <!-- PANEL: ADVISOR TERMINAL -->
+        <div class="glass-panel advisor-hud">
+            <div class="panel-header">
+                <span>INTEL_STREAM [ACTIVE]</span>
+                <span style="color: var(--riot-red);">PRIORITY_CRITICAL</span>
+            </div>
+            <div class="intelligence-stream" id="advisor-stream">
+                <div><span class="stream-tag">[LINK]</span> Establishing Neural Handshake...</div>
+                <div id="extraction-status"></div>
+                <div class="recommendation-box" style="display: none;" id="reco-box">
+                    <div
+                        style="font-weight: 900; font-size: 0.7rem; color: var(--neural-blue); margin-bottom: 10px; letter-spacing: 2px;">
+                        TACTICAL_INSTRUCTION</div>
+                    <p id="personalized-advice" style="font-size: 1rem; font-weight: 600; line-height: 1.4;">
+                        Extracting real-time habits...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: TACTICAL MAP ANALYSIS -->
+        <div class="glass-panel viz-hud">
+            <div class="panel-header">
+                <span>COORDINATE_GRID_MAPPING</span>
+                <span>CLUSTER_DENSITY: 6,000+</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: calc(100% - 40px);">
+                <div class="map-frame" style="display: flex; flex-direction: column;">
+                    <img src="tactical_kill_heatmap.png" alt="Heatmap" style="flex: 1; min-height: 0;">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 0.6rem; margin-top: 8px; color: var(--tactical-cyan);">
+                        [KILL_DENSITY_CV_STREAM]</div>
+                </div>
+                <div class="map-frame" style="display: flex; flex-direction: column;">
+                    <img src="round_1_trajectories.png" alt="Trajectories" style="flex: 1; min-height: 0;">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 0.6rem; margin-top: 8px; color: var(--tactical-cyan);">
+                        [PLAYER_PATHING_SYNC]</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: GAP METRICS -->
+        <div class="glass-panel metric-hud">
+            <div class="panel-header">PERFORMANCE_BENCHMARKS</div>
+            <div class="hud-stat">
+                <span class="stat-label">ROTATION_LATENCY</span>
+                <div class="stat-value">34.2s <span style="font-size: 1rem; opacity: 0.3;">/ 20.0s PRO</span></div>
+                <div class="benchmark-bar">
+                    <div class="bar-fill" style="width: 58%;"></div>
+                </div>
+            </div>
+            <div class="hud-stat" style="border-color: var(--tactical-cyan);">
+                <span class="stat-label">WIN_RATE_STABILITY</span>
+                <div class="stat-value" style="color: var(--tactical-cyan);">62.5%</div>
+                <div class="benchmark-bar">
+                    <div class="bar-fill" style="width: 82%; background: var(--neural-blue);"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: KNOWLEDGE BASE -->
+        <div class="glass-panel">
+            <div class="panel-header">KNOWLEDGE_ENTITY_INDEX</div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem;">
+                <div style="margin-bottom: 10px; color: var(--tactical-cyan);">[SRC_ID: 8vTSQTCANWc] - Ascent Guide
+                </div>
+                <p style="opacity: 0.7;">Extracted: Mid Control, Rotating-Chain, 20s-Rule.</p>
+                <a href="#"
+                    style="color: var(--riot-red); text-decoration: none; margin-top: 8px; display: inline-block;">VIEW_SOURCE_VOD
+                    //</a>
+            </div>
+        </div>
+
+        <footer
+            style="grid-column: 1 / -1; text-align: center; padding-top: 40px; font-family: var(--font-mono); font-size: 0.6rem; opacity: 0.3; letter-spacing: 5px;">
+            AURORA_PROJECT // DECISION_INTELLIGENCE_FOR_PRO_ESPORTS // 2026
+        </footer>
+    </main>
+
+    <script>
+        const RIOT_AUTH_URL = "https://auth.riotgames.com/authorize?client_id=AURORA-SIM&redirect_uri=aurora://callback&response_type=code&scope=openid+riotid";
+
+        function startAuth() {
+            const portal = document.getElementById('auth-portal');
+            portal.style.opacity = '0';
+
+            // SIMULATE EXTERNAL REDIRECT
+            console.log("Redirecting to: " + RIOT_AUTH_URL);
+
+            setTimeout(() => {
+                portal.style.display = 'none';
+                document.getElementById('riot-sim').style.display = 'flex';
+                document.getElementById('auth-message').innerText = "Establishing Secure Riot Handshake...";
+                document.getElementById('login-fields').style.display = 'block';
+            }, 800);
+        }
+
+        function simulateHandshake() {
+            document.getElementById('login-fields').style.display = 'none';
+            document.getElementById('loading-state').style.display = 'block';
+            document.getElementById('auth-message').innerText = "Exchanging OAuth Code for Identity Token...";
+
+            setTimeout(() => {
+                finalizeAuth();
+            }, 2500);
+        }
+
+        function finalizeAuth() {
+            const riot = document.getElementById('riot-sim');
+            riot.style.opacity = '0';
+
+            // MOCK RETURNED IDENTITY FROM "TOKEN"
+            const identities = [
+                { name: "TenZ", tag: "#VGO" },
+                { name: "Aspas", tag: "#LOUD" },
+                { name: "Sacy", tag: "#WIN" },
+                { name: "RadiantPlayer", tag: "#TOP1" }
+            ];
+            const identity = identities[Math.floor(Math.random() * identities.length)];
+
+            setTimeout(() => {
+                riot.style.display = 'none';
+                document.body.classList.add('authenticated');
+                document.getElementById('final-username').innerText = identity.name + identity.tag;
+                startExtractionSequence(identity.name);
+            }, 600);
+        }
+
+        function startExtractionSequence(extractedName) {
+            const status = document.getElementById('extraction-status');
+            status.innerHTML = ""; // Clear
+
+            // Check if backend is in production mode (Simulated via a check to the engine logic)
+            const isProduction = true; // This would normally be a fetch to /status or similar
+
+            const lines = [
+                "[TOKEN] Validating JWT Signature...",
+                "[IDENTITY] Claims verified: " + extractedName + " detected.",
+                isProduction ? "[LINK] PRODUCTION_API_KEY DETECTED. Establishing live cloud sync..." : "[LINK] No Production Key. Running in High-Fidelity Simulation.",
+                "[CV] Syncing personal data clusters...",
+                "[SUCCESS] Authorized for Decision Intelligence."
+            ];
+
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < lines.length) {
+                    const div = document.createElement('div');
+                    div.innerHTML = `<span class="stream-tag">${lines[i].split(' ')[0]}</span> ${lines[i].substring(lines[i].indexOf(' ') + 1)}`;
+                    status.appendChild(div);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('reco-box').style.display = 'block';
+                    document.getElementById('personalized-advice').innerHTML = `
+                        <b>PROFILE:</b> ${extractedName} archetype detected. 
+                        <b>SITUATION:</b> Your match history indicates elite-level placement but high trade-reliance.
+                        <b>GAP:</b> Post-entry latency is +4s vs Pro Mean. Implement 'Waterfall' rotations on Ascent A-Site.
+                    `;
+                }
+            }, 900);
+        }
+    </script>
+
+</body>
+
+</html>
