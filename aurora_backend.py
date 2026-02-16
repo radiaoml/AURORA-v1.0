@@ -40,10 +40,32 @@ async def analyze_vod(request: AnalysisRequest):
         # 3. Call the Multimodal Brain (Gemini 1.5 Pro)
         critique = engine.get_multimodal_critique(frames, source_meta=source_meta)
         
+        # 4. Neural Spatial Sync: Fetch coordinates based on detected context
+        # In production, this would query a real database or the .csv
+        spatial_payload = {
+            "map_id": "ASCENT",
+            "heatmap_url": "tactical_kill_heatmap.png",
+            "trajectories_url": "round_1_trajectories.png",
+            "live_coords": [
+                {"agent": "Jett", "x": 1250, "y": 800, "event": "Entry"},
+                {"agent": "Omen", "y": 450, "x": 900, "event": "Smoke"}
+            ]
+        }
+        
+        # Override based on detected map (Simulation of dynamic lookup)
+        if isinstance(critique, dict):
+            detected_map = critique.get("detected_map", "Unknown").upper()
+            if "BIND" in detected_map:
+                spatial_payload["map_id"] = "BIND"
+                spatial_payload["heatmap_url"] = "bind_heatmap_proto.png" # Assuming these exist or will be generated
+            elif "HAVEN" in detected_map:
+                spatial_payload["map_id"] = "HAVEN"
+        
         return {
             "status": "SUCCESS",
             "source_id": request.source,
-            "analysis": critique
+            "analysis": critique,
+            "spatial_data": spatial_payload
         }
     except Exception as e:
         print(f"[ERROR] {str(e)}")

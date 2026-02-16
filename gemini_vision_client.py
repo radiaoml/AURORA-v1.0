@@ -37,12 +37,14 @@ class GeminiVisionClient:
             prompt = f"""
             Analyze these frames from a Valorant gameplay match (Source: {source_info}). 
             Evaluate the following metrics:
-            1. Entry Timing: Was the entry synchronized with initiator utility?
-            2. Team Formation: Is the teammate spacing optimal for trades?
-            3. Spike Planting: Is the plant location strategically sound?
+            1. Map Identification: Which map is being played? (Ascent, Bind, Haven, etc.)
+            2. Match Context: Identify the current round number if visible on the HUD.
+            3. Entry Timing: Was the entry synchronized with initiator utility?
+            4. Team Formation: Is the teammate spacing optimal for trades?
+            5. Spike Planting: Is the plant location strategically sound?
             
-            Provide a professional critique in JSON format with keys: 
-            entry_rating, timing_gap, formation_issue, planting_critique, tactical_suggestion.
+            Provide a professional critique in JSON format with these exact keys: 
+            detected_map, detected_round, entry_rating, timing_gap, formation_issue, planting_critique, tactical_suggestion.
             """
 
             response = self.model.generate_content([prompt, *images])
@@ -64,6 +66,8 @@ class GeminiVisionClient:
         if "YT_" in source_info or "cloud" in source_info.lower():
             # Archetype: Pro High-Level Meta
             return {
+                "detected_map": "Ascent",
+                "detected_round": "04",
                 "entry_rating": "A-",
                 "timing_gap": "+0.4s (Elite synchronization)",
                 "formation_issue": "Flawless 'Diamond' formation detected.",
@@ -73,6 +77,8 @@ class GeminiVisionClient:
         elif "Ace" in source_info or "Clutch" in source_info:
             # Archetype: Individual Heroics / Trade Isolation
             return {
+                "detected_map": "Bind",
+                "detected_round": "12",
                 "entry_rating": "B",
                 "timing_gap": "Variable (Heroic individual timing)",
                 "formation_issue": "Isolated from team; High individual performance found.",
@@ -82,6 +88,8 @@ class GeminiVisionClient:
         else:
             # Archetype: Strategic Gaps (Standard Learning Mode)
             return {
+                "detected_map": "Haven",
+                "detected_round": "07",
                 "entry_rating": "D",
                 "timing_gap": "+2.8s (Delayed entry relative to smokes)",
                 "formation_issue": "Fragmented; Teammates isolated behind site-entrance.",
