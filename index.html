@@ -566,52 +566,45 @@
     </main>
 
     <script>
-        const RIOT_AUTH_URL = "https://auth.riotgames.com/authorize?client_id=AURORA-SIM&redirect_uri=aurora://callback&response_type=code&scope=openid+riotid";
+        // Check for Auth Success on Load (From RSO Callback)
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('auth_success')) {
+                const riotId = params.get('riot_id');
+                const tag = params.get('tag');
+                finalizeProAuth(riotId, tag);
+            }
+        };
 
         function startAuth() {
             const portal = document.getElementById('auth-portal');
             portal.style.opacity = '0';
 
-            // SIMULATE EXTERNAL REDIRECT
-            console.log("Redirecting to: " + RIOT_AUTH_URL);
+            // REDIRECT TO PRODUCTION RSO GATEWAY
+            console.log("[AUTH] Handover to Riot Games Portal...");
+            renderStatusMessage("Establishing Secure Riot Handshake...");
 
             setTimeout(() => {
-                portal.style.display = 'none';
-                document.getElementById('riot-sim').style.display = 'flex';
-                document.getElementById('auth-message').innerText = "Establishing Secure Riot Handshake...";
-                document.getElementById('login-fields').style.display = 'block';
+                window.location.href = "http://localhost:8000/auth/login";
             }, 800);
         }
 
-        function simulateHandshake() {
-            document.getElementById('login-fields').style.display = 'none';
-            document.getElementById('loading-state').style.display = 'block';
-            document.getElementById('auth-message').innerText = "Exchanging OAuth Code for Identity Token...";
-
-            setTimeout(() => {
-                finalizeAuth();
-            }, 2500);
+        function finalizeProAuth(name, tag) {
+            document.getElementById('auth-portal').style.display = 'none';
+            document.body.classList.add('authenticated');
+            document.getElementById('final-username').innerText = `${name}#${tag}`;
+            startExtractionSequence(name);
         }
 
-        function finalizeAuth() {
-            const riot = document.getElementById('riot-sim');
-            riot.style.opacity = '0';
-
-            // MOCK RETURNED IDENTITY FROM "TOKEN"
-            const identities = [
-                { name: "TenZ", tag: "#VGO" },
-                { name: "Aspas", tag: "#LOUD" },
-                { name: "Sacy", tag: "#WIN" },
-                { name: "RadiantPlayer", tag: "#TOP1" }
-            ];
-            const identity = identities[Math.floor(Math.random() * identities.length)];
-
-            setTimeout(() => {
-                riot.style.display = 'none';
-                document.body.classList.add('authenticated');
-                document.getElementById('final-username').innerText = identity.name + identity.tag;
-                startExtractionSequence(identity.name);
-            }, 600);
+        function renderStatusMessage(msg) {
+            const portal = document.querySelector('.neural-link-card');
+            const status = document.createElement('div');
+            status.style.marginTop = "20px";
+            status.style.fontFamily = "var(--font-mono)";
+            status.style.fontSize = "0.7rem";
+            status.style.color = "var(--neural-blue)";
+            status.innerText = `[HANDSHAKE] ${msg}`;
+            portal.appendChild(status);
         }
 
         function startExtractionSequence(extractedName) {

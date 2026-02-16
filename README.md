@@ -20,10 +20,11 @@ AURORA has transitioned from a static data visualizer to a live neural ecosystem
 ### Prerequisites
 - Python 3.10+
 - Google Generative AI API Key (`GEMINI_API_KEY`)
+- Riot Games Developer Credentials (`RIOT_CLIENT_ID`, `RIOT_CLIENT_SECRET`)
 
 ### Installation
 ```bash
-pip install fastapi uvicorn google-generativeai opencv-python pydantic matplotlib pandas seaborn
+pip install fastapi uvicorn google-generativeai opencv-python pydantic matplotlib pandas seaborn httpx
 ```
 
 ### Deployment

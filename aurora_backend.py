@@ -1,27 +1,74 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-import uvicorn
-import os
-from video_analyzer import TacticalVisionEngine
-
-app = FastAPI(title="AURORA Neural Backend")
-
-# Enable CORS for the local HUD
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-class AnalysisRequest(BaseModel):
-    source: str
-    type: str  # 'cloud_stream', 'local_path', or 'local_upload'
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import RedirectResponse
+import httpx
 
 @app.get("/")
 async def root():
-    return {"status": "AURORA_BACKEND_ONLINE", "version": "1.0.0"}
+    return {"status": "AURORA_BACKEND_ONLINE", "version": "1.1.0_RSO"}
+
+# RSO CONFIGURATION (Production placeholders)
+RIOT_RSO_AUTHORIZE_URL = "https://auth.riotgames.com/authorize"
+RIOT_RSO_TOKEN_URL = "https://auth.riotgames.com/token"
+RIOT_USERINFO_URL = "https://americas.api.riotgames.com/riot/account/v1/accounts/me" # Or similar RSO endpoint
+REDIRECT_URI = "http://localhost:8000/auth/callback"
+
+@app.get("/auth/login")
+async def auth_login():
+    """Redirects to the official Riot Games Sign On portal."""
+    client_id = os.getenv("RIOT_CLIENT_ID")
+    if not client_id:
+        # Fallback for demo if no real client id is set
+        print("[WARNING] RIOT_CLIENT_ID not found. Redirecting to mock auth for demo.")
+        return RedirectResponse(url="http://localhost:5500/index.html?demo_auth=true")
+
+    auth_url = (
+        f"{RIOT_RSO_AUTHORIZE_URL}?client_id={client_id}"
+        f"&redirect_uri={REDIRECT_URI}&response_type=code&scope=openid+riotid"
+    )
+    return RedirectResponse(url=auth_url)
+
+@app.get("/auth/callback")
+async def auth_callback(code: str):
+    """Handles the redirect from Riot and exchanges the code for tokens."""
+    client_id = os.getenv("RIOT_CLIENT_ID")
+    client_secret = os.getenv("RIOT_CLIENT_SECRET")
+    
+    if not client_id or not client_secret:
+        # For demo purposes, we'll redirect back with a mock success if no keys are found
+        # In production, this would be a 401.
+        return RedirectResponse(url="http://localhost:5500/index.html?auth_success=true&riot_id=RadiantPlayer&tag=TOP1")
+
+    async with httpx.AsyncClient() as client:
+        # Exchange Code for Access Token
+        token_resp = await client.post(
+            RIOT_RSO_TOKEN_URL,
+            data={
+                "grant_type": "authorization_code",
+                "code": code,
+                "redirect_uri": REDIRECT_URI,
+                "client_id": client_id,
+                "client_secret": client_secret,
+            },
+        )
+        
+        if token_resp.status_code != 200:
+            raise HTTPException(status_code=400, detail="Failed to exchange RSO code.")
+        
+        tokens = token_resp.json()
+        access_token = tokens.get("access_token")
+
+        # Get User Info (Riot ID / Tag)
+        user_resp = await client.get(
+            RIOT_USERINFO_URL,
+            headers={"Authorization": f"Bearer {access_token}"}
+        )
+        user_data = user_resp.json()
+        
+        riot_id = user_data.get("gameName", "Unknown")
+        tag = user_data.get("tagLine", "000")
+
+    # Redirect back to the HUD with the identity
+    return RedirectResponse(url=f"http://localhost:5500/index.html?auth_success=true&riot_id={riot_id}&tag={tag}")
 
 import json
 import time
