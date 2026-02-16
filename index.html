@@ -532,10 +532,12 @@
                 <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
                     <div id="vod-upload-zone"
                         style="border: 2px dashed var(--border); height: 100px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.02);"
-                        onclick="simulateVodUpload()">
+                        onclick="document.getElementById('hidden-vod-input').click()">
                         <div style="font-size: 1.2rem; margin-bottom: 5px;">📤</div>
                         <div style="font-size: 0.6rem; font-family: var(--font-mono); color: #94a3b8;">UPLOAD_LOCAL_FILE
                         </div>
+                        <input type="file" id="hidden-vod-input" accept="video/*" style="display: none;"
+                            onchange="handleFileSelect(event)">
                     </div>
                     <div style="display: flex; gap: 5px;">
                         <input type="text" id="vod-link-input" class="riot-input"
@@ -645,9 +647,37 @@
             }, 900);
         }
 
-        function simulateVodUpload() {
-            processVideoIngestion("local_upload", "UPLOAD_SESSION_08X");
+        function handleFileSelect(event) {
+            const file = event.target.files ? event.target.files[0] : event.dataTransfer.files[0];
+            if (!file) return;
+
+            console.log("[UPLOAD] Selected file: " + file.name + " (" + (file.size / 1024 / 1024).toFixed(2) + " MB)");
+            processVideoIngestion("local_upload", file.name);
         }
+
+        // Drag & Drop Handling
+        setTimeout(() => {
+            const uploadZone = document.getElementById('vod-upload-zone');
+            if (!uploadZone) return;
+
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.style.borderColor = "var(--tactical-cyan)";
+                uploadZone.style.background = "rgba(0, 245, 212, 0.05)";
+            });
+
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.style.borderColor = "var(--border)";
+                uploadZone.style.background = "rgba(255,255,255,0.02)";
+            });
+
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.style.borderColor = "var(--border)";
+                uploadZone.style.background = "rgba(255,255,255,0.02)";
+                handleFileSelect(e);
+            });
+        }, 1000);
 
         function ingestVideoLink() {
             const val = document.getElementById('vod-link-input').value;
@@ -737,6 +767,11 @@
                         } else {
                             clearInterval(vInterval);
                             renderFooter(`NEURAL_SCAN_SUCCESS // Response received from Live Brain.`);
+
+                            // NEURAL SPATIAL SYNC: Update tactical maps
+                            if (data.spatial_data) {
+                                updateTacticalMaps(data.spatial_data);
+                            }
                         }
                     }, 1200);
 
@@ -757,6 +792,28 @@
                     critique.appendChild(footer);
                     results.scrollTop = results.scrollHeight;
                 }
+            }
+
+            function updateTacticalMaps(data) {
+                console.log("[SYNC] Updating maps for context: " + data.map_id);
+                const vizHud = document.querySelector('.viz-hud');
+                const images = vizHud.querySelectorAll('img');
+
+                // Add cinematic flash
+                vizHud.style.boxShadow = "inset 0 0 50px var(--neural-blue)";
+                vizHud.style.borderColor = "var(--neural-blue)";
+
+                setTimeout(() => {
+                    vizHud.style.boxShadow = "none";
+                    vizHud.style.borderColor = "var(--border)";
+
+                    if (images[0]) images[0].src = data.heatmap_url;
+                    if (images[1]) images[1].src = data.trajectories_url;
+
+                    // Update indices
+                    const index = vizHud.querySelectorAll('.panel-header span');
+                    if (index[0]) index[0].innerText = `COORDINATE_GRID_MAPPING // ${data.map_id}`;
+                }, 300);
             }
         }
     </script>
