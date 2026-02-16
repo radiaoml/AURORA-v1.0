@@ -42,9 +42,11 @@ class GeminiVisionClient:
             3. Entry Timing: Was the entry synchronized with initiator utility?
             4. Team Formation: Is the teammate spacing optimal for trades?
             5. Spike Planting: Is the plant location strategically sound?
+            6. Rotation Latency: How long did it take the team to rotate after contact? (e.g., "3.2s")
+            7. Win Rate Prediction: Based on this tactic, what is the estimated win rate for the round? (e.g., "75%")
             
             Provide a professional critique in JSON format with these exact keys: 
-            detected_map, detected_round, entry_rating, timing_gap, formation_issue, planting_critique, tactical_suggestion.
+            detected_map, detected_round, entry_rating, timing_gap, formation_issue, planting_critique, rotation_latency, win_rate_prediction, tactical_suggestion.
             """
 
             response = self.model.generate_content([prompt, *images])
@@ -72,6 +74,8 @@ class GeminiVisionClient:
                 "timing_gap": "+0.4s (Elite synchronization)",
                 "formation_issue": "Flawless 'Diamond' formation detected.",
                 "planting_critique": "Optimal Spike placement for 'Post-Plant Long'.",
+                "rotation_latency": "1.8s (Elite-level reaction)",
+                "win_rate_prediction": "88%",
                 "tactical_suggestion": "Excellent map control. Consider 'False A' rotation next round."
             }
         elif "Ace" in source_info or "Clutch" in source_info:
@@ -83,6 +87,8 @@ class GeminiVisionClient:
                 "timing_gap": "Variable (Heroic individual timing)",
                 "formation_issue": "Isolated from team; High individual performance found.",
                 "planting_critique": "Aggressive plant; Dependent on individual aim.",
+                "rotation_latency": "4.1s (Delayed due to individual engagements)",
+                "win_rate_prediction": "62%",
                 "tactical_suggestion": "Great clutch, but average team spacing is low. Focus on trade-potential."
             }
         else:
@@ -94,6 +100,8 @@ class GeminiVisionClient:
                 "timing_gap": "+2.8s (Delayed entry relative to smokes)",
                 "formation_issue": "Fragmented; Teammates isolated behind site-entrance.",
                 "planting_critique": "Vulnerable plant detected. No cover utility detected.",
+                "rotation_latency": "6.5s (Critical delay in map-repositioning)",
+                "win_rate_prediction": "31%",
                 "tactical_suggestion": "Sync entry with Initiator utility. Hold smokes until cross-site logic clears."
             }
 
