@@ -37,7 +37,7 @@ class GeminiVisionClient:
             prompt = f"""
             You are analyzing frames from a Valorant competitive gameplay match (Source: {source_info}).
             
-            CRITICAL TASK: Identify which Valorant map is being played from these frames.
+            CRITICAL TASK 1: Identify which Valorant map is being played from these frames.
             
             The 12 competitive maps are:
             - ASCENT (Italy, Venice-inspired, open mid, A-site has wine/garden)
@@ -59,6 +59,33 @@ class GeminiVisionClient:
             - Site layouts visible in the minimap
             - Environmental lighting and theme
             
+            CRITICAL TASK 2: Extract SPATIAL GAMEPLAY DATA from the frames.
+            
+            Analyze the minimap (top-left corner) and gameplay footage to extract:
+            
+            1. KILL LOCATIONS: For each kill/death event visible:
+               - Approximate map coordinates (0-1000 scale, where 0,0 is bottom-left, 1000,1000 is top-right)
+               - Area name (e.g., "A-site", "B-long", "Mid", "Spawn")
+               - If you can't see exact coordinates, estimate based on the area
+            
+            2. PLAYER POSITIONS: Sample 5-10 player positions throughout the visible gameplay:
+               - Coordinates (x, y) on 0-1000 scale
+               - Timestamp indicator (early/mid/late in the round)
+               - Agent name if visible
+            
+            3. MOVEMENT PATHS: Identify 3-5 major movement corridors used:
+               - Start position (x, y)
+               - End position (x, y)
+               - Path type (entry, rotation, flank, retreat)
+            
+            COORDINATE SYSTEM GUIDE:
+            - Use the minimap as reference
+            - Bottom-left corner of map = (0, 0)
+            - Top-right corner of map = (1000, 1000)
+            - A-site typically around (200-400, 600-800) depending on map
+            - B-site typically around (600-800, 200-400) depending on map
+            - Mid typically around (400-600, 400-600)
+            
             Also analyze these tactical metrics:
             1. Match Context: Current round number if visible on HUD
             2. Entry Timing: Was entry synchronized with initiator utility?
@@ -71,6 +98,18 @@ class GeminiVisionClient:
             {{
                 "detected_map": "MAP_NAME_IN_UPPERCASE",
                 "map_confidence": "high/medium/low",
+                "kill_locations": [
+                    {{"x": 450, "y": 650, "area": "A-site"}},
+                    {{"x": 520, "y": 380, "area": "Mid"}}
+                ],
+                "player_positions": [
+                    {{"x": 300, "y": 400, "timestamp": "early", "agent": "Jett"}},
+                    {{"x": 500, "y": 700, "timestamp": "mid", "agent": "Omen"}}
+                ],
+                "movement_paths": [
+                    {{"start_x": 200, "start_y": 300, "end_x": 450, "end_y": 650, "type": "entry"}},
+                    {{"start_x": 600, "start_y": 400, "end_x": 300, "end_y": 700, "type": "rotation"}}
+                ],
                 "detected_round": "round number or unknown",
                 "entry_rating": "A+/A/A-/B+/B/B-/C+/C/D",
                 "timing_gap": "description with seconds",
@@ -80,6 +119,8 @@ class GeminiVisionClient:
                 "win_rate_prediction": "percentage",
                 "tactical_suggestion": "professional critique"
             }}
+            
+            IMPORTANT: If you cannot extract exact coordinates, provide your best estimate based on the area names and typical map layouts.
             """
 
             response = self.model.generate_content([prompt, *images])

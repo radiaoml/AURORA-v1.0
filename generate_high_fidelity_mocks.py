@@ -4,7 +4,7 @@ import seaborn as sns
 import numpy as np
 import os
 
-def generate_pro_viz(map_name, heatmap_path, path_path, blueprint_path=None):
+def generate_pro_viz(map_name, heatmap_path, path_path, blueprint_path=None, spatial_data=None):
     # Set dark style
     plt.style.use('dark_background')
     
@@ -29,9 +29,24 @@ def generate_pro_viz(map_name, heatmap_path, path_path, blueprint_path=None):
     if bg_img is not None:
         ax.imshow(bg_img, extent=[0, 1000, 0, 1000], alpha=0.9, zorder=0)
     
-    # Clusters shifted for "Tactical areas"
-    x = np.concatenate([np.random.normal(loc, 80, 100) for loc in [300, 500, 700]])
-    y = np.concatenate([np.random.normal(loc, 120, 100) for loc in [400, 700, 200]])
+    # Use REAL spatial data if available, otherwise fallback to mock
+    if spatial_data and "kill_locations" in spatial_data and len(spatial_data["kill_locations"]) > 0:
+        print(f"[VIZ] Using REAL kill location data: {len(spatial_data['kill_locations'])} kills detected")
+        kill_coords = spatial_data["kill_locations"]
+        x = [k["x"] for k in kill_coords]
+        y = [k["y"] for k in kill_coords]
+        
+        # Add player positions to the heatmap for more density
+        if "player_positions" in spatial_data and len(spatial_data["player_positions"]) > 0:
+            print(f"[VIZ] Adding {len(spatial_data['player_positions'])} player positions to heatmap")
+            player_coords = spatial_data["player_positions"]
+            x.extend([p["x"] for p in player_coords])
+            y.extend([p["y"] for p in player_coords])
+    else:
+        print(f"[VIZ] No real spatial data available, using mock data")
+        # Fallback to mock data
+        x = np.concatenate([np.random.normal(loc, 80, 100) for loc in [300, 500, 700]])
+        y = np.concatenate([np.random.normal(loc, 120, 100) for loc in [400, 700, 200]])
     
     sns.kdeplot(
         x=x, y=y, 
@@ -59,16 +74,40 @@ def generate_pro_viz(map_name, heatmap_path, path_path, blueprint_path=None):
     if bg_img is not None:
         ax.imshow(bg_img, extent=[0, 1000, 0, 1000], alpha=0.9, zorder=0)
     
-    # Generate pathing webs
-    for _ in range(40):
-        start_x, start_y = np.random.randint(200, 800), np.random.randint(200, 800)
-        end_x, end_y = start_x + np.random.normal(0, 150), start_y + np.random.normal(0, 150)
+    # Use REAL movement paths if available
+    if spatial_data and "movement_paths" in spatial_data and len(spatial_data["movement_paths"]) > 0:
+        print(f"[VIZ] Using REAL movement path data: {len(spatial_data['movement_paths'])} paths detected")
+        paths = spatial_data["movement_paths"]
         
-        color = '#ff4655' if np.random.rand() > 0.5 else '#00f5d4'
-        ax.plot([start_x, end_x], [start_y, end_y], color=color, alpha=0.6, linewidth=1.5, zorder=1)
-        
-        if np.random.rand() > 0.7:
-            ax.scatter([start_x], [start_y], color=color, s=4, alpha=0.8, zorder=2)
+        for path in paths:
+            start_x, start_y = path["start_x"], path["start_y"]
+            end_x, end_y = path["end_x"], path["end_y"]
+            path_type = path.get("type", "unknown")
+            
+            # Color based on path type
+            if path_type == "entry":
+                color = '#ff4655'  # Red for aggressive entry
+            elif path_type == "rotation":
+                color = '#ffa500'  # Orange for rotations
+            elif path_type == "flank":
+                color = '#9d4edd'  # Purple for flanks
+            else:
+                color = '#00f5d4'  # Cyan for other movements
+            
+            ax.plot([start_x, end_x], [start_y, end_y], color=color, alpha=0.7, linewidth=2, zorder=1)
+            ax.scatter([start_x], [start_y], color=color, s=8, alpha=0.9, zorder=2)
+    else:
+        print(f"[VIZ] No real movement path data, using mock trajectories")
+        # Fallback to mock pathing webs
+        for _ in range(40):
+            start_x, start_y = np.random.randint(200, 800), np.random.randint(200, 800)
+            end_x, end_y = start_x + np.random.normal(0, 150), start_y + np.random.normal(0, 150)
+            
+            color = '#ff4655' if np.random.rand() > 0.5 else '#00f5d4'
+            ax.plot([start_x, end_x], [start_y, end_y], color=color, alpha=0.6, linewidth=1.5, zorder=1)
+            
+            if np.random.rand() > 0.7:
+                ax.scatter([start_x], [start_y], color=color, s=4, alpha=0.8, zorder=2)
 
     ax.set_xlim(0, 1000)
     ax.set_ylim(0, 1000)

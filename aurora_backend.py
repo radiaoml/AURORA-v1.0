@@ -65,6 +65,23 @@ async def analyze_vod(request: AnalysisRequest):
         heatmap_name = f"analysis_heatmap_{ts}.png"
         pathing_name = f"analysis_pathing_{ts}.png"
         
+        # Extract spatial data from Gemini analysis
+        spatial_data = {}
+        if isinstance(critique, dict):
+            spatial_data = {
+                "kill_locations": critique.get("kill_locations", []),
+                "player_positions": critique.get("player_positions", []),
+                "movement_paths": critique.get("movement_paths", [])
+            }
+            
+            # Log what spatial data we received
+            if spatial_data["kill_locations"]:
+                print(f"[BACKEND] Received {len(spatial_data['kill_locations'])} kill locations from Gemini")
+            if spatial_data["player_positions"]:
+                print(f"[BACKEND] Received {len(spatial_data['player_positions'])} player positions from Gemini")
+            if spatial_data["movement_paths"]:
+                print(f"[BACKEND] Received {len(spatial_data['movement_paths'])} movement paths from Gemini")
+        
         spatial_payload = {
             "map_id": detected_map,
             "heatmap_url": heatmap_name,
@@ -75,7 +92,7 @@ async def analyze_vod(request: AnalysisRequest):
             ]
         }
 
-        # Trigger High-Fidelity Blueprint Projection with detected map
+        # Trigger High-Fidelity Blueprint Projection with detected map and REAL spatial data
         try:
             BLUEPRINT_MAP = {
                 "ASCENT": "blueprints/official/ascent_minimap.png",
@@ -102,7 +119,8 @@ async def analyze_vod(request: AnalysisRequest):
                 detected_map, 
                 heatmap_name, 
                 pathing_name,
-                blueprint_path=blueprint_path
+                blueprint_path=blueprint_path,
+                spatial_data=spatial_data  # Pass REAL gameplay data to visualization
             )
             print(f"[BACKEND] Projected Intelligence synchronization active for {detected_map}")
         except Exception as e:
