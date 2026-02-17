@@ -65,9 +65,6 @@ async def analyze_vod(request: AnalysisRequest):
         heatmap_name = f"analysis_heatmap_{ts}.png"
         pathing_name = f"analysis_pathing_{ts}.png"
         
-        print(f"[BACKEND] Generating live tactical viz for {detected_map}...")
-        generate_pro_viz(detected_map, heatmap_name, pathing_name)
-        
         spatial_payload = {
             "map_id": detected_map,
             "heatmap_url": heatmap_name,
@@ -78,7 +75,7 @@ async def analyze_vod(request: AnalysisRequest):
             ]
         }
 
-        # Trigger High-Fidelity Blueprint Projection
+        # Trigger High-Fidelity Blueprint Projection with detected map
         try:
             BLUEPRINT_MAP = {
                 "ASCENT": "blueprints/official/ascent_minimap.png",
@@ -94,17 +91,20 @@ async def analyze_vod(request: AnalysisRequest):
                 "ABYSS": "blueprints/official/abyss_minimap.png",
                 "DISTRICT": "blueprints/official/district_minimap.png"
             }
-            blueprint_path = BLUEPRINT_MAP.get(spatial_payload["map_id"])
+            blueprint_path = BLUEPRINT_MAP.get(detected_map)
+            
             if blueprint_path and not os.path.exists(blueprint_path):
+                print(f"[WARN] Blueprint not found for {detected_map} at {blueprint_path}")
                 blueprint_path = None # Fallback to no-blueprint if file doesn't exist yet
 
+            print(f"[BACKEND] Generating live tactical viz for {detected_map} with blueprint: {blueprint_path}")
             generate_pro_viz(
-                spatial_payload["map_id"], 
-                spatial_payload["heatmap_url"], 
-                spatial_payload["trajectories_url"],
+                detected_map, 
+                heatmap_name, 
+                pathing_name,
                 blueprint_path=blueprint_path
             )
-            print(f"[BACKEND] Projected Intelligence synchronization active for {spatial_payload['map_id']}")
+            print(f"[BACKEND] Projected Intelligence synchronization active for {detected_map}")
         except Exception as e:
             print(f"[ERROR] Visualization Projection Failed: {e}")
         
