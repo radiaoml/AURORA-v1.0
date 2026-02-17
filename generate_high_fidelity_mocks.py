@@ -85,9 +85,9 @@ def generate_pro_viz(map_name, heatmap_path, path_path, blueprint_path=None):
 
 if __name__ == "__main__":
     # Test paths
-    BLUEPRINT_DIR = "blueprints"
-    ascent_bp = os.path.join(BLUEPRINT_DIR, "ascent_blueprint.png")
+    BLUEPRINT_DIR = "blueprints/official"
+    ascent_bp = os.path.join(BLUEPRINT_DIR, "ascent_minimap.png")
     
     generate_pro_viz("ASCENT", "ascent_heatmap_pro.png", "ascent_pathing_pro.png", blueprint_path=ascent_bp)
-    generate_pro_viz("BIND", "bind_heatmap_pro.png", "bind_pathing_pro.png")
-    generate_pro_viz("HAVEN", "haven_heatmap_pro.png", "haven_pathing_pro.png")
+    generate_pro_viz("BIND", "bind_heatmap_pro.png", "bind_pathing_pro.png", blueprint_path=os.path.join(BLUEPRINT_DIR, "bind_minimap.png"))
+    generate_pro_viz("HAVEN", "haven_heatmap_pro.png", "haven_pathing_pro.png", blueprint_path=os.path.join(BLUEPRINT_DIR, "haven_minimap.png"))

@@ -81,18 +81,18 @@ async def analyze_vod(request: AnalysisRequest):
         # Trigger High-Fidelity Blueprint Projection
         try:
             BLUEPRINT_MAP = {
-                "ASCENT": "blueprints/ascent_blueprint.png",
-                "BIND": "blueprints/bind_blueprint.png",
-                "HAVEN": "blueprints/haven_blueprint.png",
-                "SPLIT": "blueprints/split_blueprint.png",
-                "ICEBOX": "blueprints/icebox_blueprint.png",
-                "BREEZE": "blueprints/breeze_blueprint.png",
-                "FRACTURE": "blueprints/fracture_blueprint.png",
-                "PEARL": "blueprints/pearl_blueprint.png",
-                "LOTUS": "blueprints/lotus_blueprint.png",
-                "SUNSET": "blueprints/sunset_blueprint.png",
-                "ABYSS": "blueprints/abyss_blueprint.png",
-                "DISTRICT": "blueprints/district_blueprint.png"
+                "ASCENT": "blueprints/official/ascent_minimap.png",
+                "BIND": "blueprints/official/bind_minimap.png",
+                "HAVEN": "blueprints/official/haven_minimap.png",
+                "SPLIT": "blueprints/official/split_minimap.png",
+                "ICEBOX": "blueprints/official/icebox_minimap.png",
+                "BREEZE": "blueprints/official/breeze_minimap.png",
+                "FRACTURE": "blueprints/official/fracture_minimap.png",
+                "PEARL": "blueprints/official/pearl_minimap.png",
+                "LOTUS": "blueprints/official/lotus_minimap.png",
+                "SUNSET": "blueprints/official/sunset_minimap.png",
+                "ABYSS": "blueprints/official/abyss_minimap.png",
+                "DISTRICT": "blueprints/official/district_minimap.png"
             }
             blueprint_path = BLUEPRINT_MAP.get(spatial_payload["map_id"])
             if blueprint_path and not os.path.exists(blueprint_path):
