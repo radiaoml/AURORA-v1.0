@@ -36,13 +36,20 @@ def create_schematic(map_name, output_path, sites):
 if __name__ == "__main__":
     os.makedirs("blueprints", exist_ok=True)
     
-    create_schematic("BIND", "blueprints/bind_blueprint.png", {
-        "A": (700, 300),
-        "B": (300, 700)
-    })
+    MAP_DATA = {
+        "ASCENT": {"A": (700, 300), "B": (300, 700)},
+        "BIND": {"A": (700, 300), "B": (300, 700)},
+        "HAVEN": {"A": (800, 300), "B": (500, 500), "C": (200, 700)},
+        "SPLIT": {"A": (750, 350), "B": (250, 650)},
+        "ICEBOX": {"A": (300, 200), "B": (700, 800)},
+        "BREEZE": {"A": (800, 400), "B": (200, 600)},
+        "FRACTURE": {"A": (700, 200), "B": (700, 800)},
+        "PEARL": {"A": (200, 300), "B": (800, 700)},
+        "LOTUS": {"A": (850, 300), "B": (500, 400), "C": (150, 700)},
+        "SUNSET": {"A": (750, 250), "B": (250, 750)},
+        "ABYSS": {"A": (800, 200), "B": (200, 800)},
+        "DISTRICT": {"MID": (500, 500)}
+    }
     
-    create_schematic("HAVEN", "blueprints/haven_blueprint.png", {
-        "A": (800, 300),
-        "B": (500, 500),
-        "C": (200, 700)
-    })
+    for map_name, sites in MAP_DATA.items():
+        create_schematic(map_name, f"blueprints/{map_name.lower()}_blueprint.png", sites)
