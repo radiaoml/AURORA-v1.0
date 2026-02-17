@@ -35,27 +35,91 @@ class GeminiVisionClient:
                     images.append(img)
             
             prompt = f"""
-            Analyze these frames from a Valorant gameplay match (Source: {source_info}). 
-            Evaluate the following metrics:
-            1. Map Identification: Which map is being played? (Ascent, Bind, Haven, etc.)
-            2. Match Context: Identify the current round number if visible on the HUD.
-            3. Entry Timing: Was the entry synchronized with initiator utility?
-            4. Team Formation: Is the teammate spacing optimal for trades?
-            5. Spike Planting: Is the plant location strategically sound?
-            6. Rotation Latency: How long did it take the team to rotate after contact? (e.g., "3.2s")
-            7. Win Rate Prediction: Based on this tactic, what is the estimated win rate for the round? (e.g., "75%")
+            You are analyzing frames from a Valorant competitive gameplay match (Source: {source_info}).
             
-            Provide a professional critique in JSON format with these exact keys: 
-            detected_map, detected_round, entry_rating, timing_gap, formation_issue, planting_critique, rotation_latency, win_rate_prediction, tactical_suggestion.
+            CRITICAL TASK: Identify which Valorant map is being played from these frames.
+            
+            The 12 competitive maps are:
+            - ASCENT (Italy, Venice-inspired, open mid, A-site has wine/garden)
+            - BIND (Morocco, teleporters, hookah/showers)
+            - HAVEN (Bhutan, 3 sites: A/B/C, garage, long C)
+            - SPLIT (Japan/Tokyo, vertical map, ropes, mid mail)
+            - ICEBOX (Arctic, vertical, yellow containers, kitchen)
+            - BREEZE (Caribbean island, wide open, pyramids on A)
+            - FRACTURE (New Mexico, H-shaped, attackers spawn both sides)
+            - PEARL (Lisbon/Portugal, art gallery, mid plaza)
+            - LOTUS (India, 3 sites: A/B/C, rotating doors)
+            - SUNSET (Los Angeles, sunset lighting, market on B)
+            - ABYSS (Norway, no boundaries/death drops, castle aesthetic)
+            - DISTRICT (Team Deathmatch map, urban setting)
+            
+            Look for distinctive visual features:
+            - Architecture style and color palette
+            - Unique landmarks (teleporters, ropes, rotating doors, etc.)
+            - Site layouts visible in the minimap
+            - Environmental lighting and theme
+            
+            Also analyze these tactical metrics:
+            1. Match Context: Current round number if visible on HUD
+            2. Entry Timing: Was entry synchronized with initiator utility?
+            3. Team Formation: Is teammate spacing optimal for trades?
+            4. Spike Planting: Is plant location strategically sound?
+            5. Rotation Latency: How long did team rotate after contact?
+            6. Win Rate Prediction: Estimated win rate for this round based on tactics
+            
+            Return ONLY valid JSON with these exact keys (no markdown, no code blocks):
+            {{
+                "detected_map": "MAP_NAME_IN_UPPERCASE",
+                "map_confidence": "high/medium/low",
+                "detected_round": "round number or unknown",
+                "entry_rating": "A+/A/A-/B+/B/B-/C+/C/D",
+                "timing_gap": "description with seconds",
+                "formation_issue": "analysis of team spacing",
+                "planting_critique": "spike plant analysis",
+                "rotation_latency": "time in seconds",
+                "win_rate_prediction": "percentage",
+                "tactical_suggestion": "professional critique"
+            }}
             """
 
             response = self.model.generate_content([prompt, *images])
             
             # Clean up uploaded files (Production best practice)
             # for img in images: genai.delete_file(img.name)
-
-            return response.text # Assuming JSON response from prompt instructions
             
+            # Parse JSON response
+            import json
+            try:
+                # Remove markdown code blocks if present
+                response_text = response.text.strip()
+                if response_text.startswith("```"):
+                    # Extract JSON from code block
+                    response_text = response_text.split("```")[1]
+                    if response_text.startswith("json"):
+                        response_text = response_text[4:]
+                    response_text = response_text.strip()
+                
+                analysis = json.loads(response_text)
+                
+                # Ensure map name is uppercase and valid
+                detected_map = analysis.get("detected_map", "UNKNOWN").upper()
+                valid_maps = ["ASCENT", "BIND", "HAVEN", "SPLIT", "ICEBOX", "BREEZE", 
+                             "FRACTURE", "PEARL", "LOTUS", "SUNSET", "ABYSS", "DISTRICT"]
+                
+                if detected_map not in valid_maps:
+                    print(f"[WARN] Invalid map detected: {detected_map}, defaulting to ASCENT")
+                    analysis["detected_map"] = "ASCENT"
+                else:
+                    analysis["detected_map"] = detected_map
+                
+                print(f"[VISION] Map detected: {analysis['detected_map']} (confidence: {analysis.get('map_confidence', 'unknown')})")
+                return analysis
+                
+            except json.JSONDecodeError as e:
+                print(f"[ERROR] Failed to parse JSON response: {e}")
+                print(f"[DEBUG] Raw response: {response.text[:500]}")
+                return self._get_dynamic_mock_analysis(source_info)
+
         except Exception as e:
             print(f"[NEURAL_ERROR] {str(e)}")
             return self._get_dynamic_mock_analysis(source_info)
@@ -64,11 +128,26 @@ class GeminiVisionClient:
         """Generates varied tactical critiques based on the VOD source archetype."""
         time.sleep(2)
         
+        print("[WARN] Using mock analysis fallback. Map detection may be inaccurate.")
+        print("[INFO] For accurate map detection, ensure GEMINI_API_KEY is set and frames are being analyzed.")
+        
+        # Try to extract map from filename if possible
+        detected_map = "UNKNOWN"
+        source_upper = source_info.upper()
+        
+        # Simple filename parsing
+        for map_name in ["ASCENT", "BIND", "HAVEN", "SPLIT", "ICEBOX", "BREEZE", 
+                         "FRACTURE", "PEARL", "LOTUS", "SUNSET", "ABYSS", "DISTRICT"]:
+            if map_name in source_upper:
+                detected_map = map_name
+                break
+        
         # Determine archetype from source string (Simulation)
         if "YT_" in source_info or "cloud" in source_info.lower():
             # Archetype: Pro High-Level Meta
             return {
-                "detected_map": "Ascent",
+                "detected_map": detected_map if detected_map != "UNKNOWN" else "ASCENT",
+                "map_confidence": "low (mock data)",
                 "detected_round": "04",
                 "entry_rating": "A-",
                 "timing_gap": "+0.4s (Elite synchronization)",
@@ -81,7 +160,8 @@ class GeminiVisionClient:
         elif "Ace" in source_info or "Clutch" in source_info:
             # Archetype: Individual Heroics / Trade Isolation
             return {
-                "detected_map": "Bind",
+                "detected_map": detected_map if detected_map != "UNKNOWN" else "BIND",
+                "map_confidence": "low (mock data)",
                 "detected_round": "12",
                 "entry_rating": "B",
                 "timing_gap": "Variable (Heroic individual timing)",
@@ -94,7 +174,8 @@ class GeminiVisionClient:
         else:
             # Archetype: Strategic Gaps (Standard Learning Mode)
             return {
-                "detected_map": "Haven",
+                "detected_map": detected_map if detected_map != "UNKNOWN" else "HAVEN",
+                "map_confidence": "low (mock data)",
                 "detected_round": "07",
                 "entry_rating": "D",
                 "timing_gap": "+2.8s (Delayed entry relative to smokes)",
