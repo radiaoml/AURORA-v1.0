@@ -77,6 +77,27 @@ async def analyze_vod(request: AnalysisRequest):
                 {"agent": "Omen", "y": 450, "x": 900, "event": "Smoke"}
             ]
         }
+
+        # Trigger High-Fidelity Blueprint Projection
+        try:
+            BLUEPRINT_MAP = {
+                "ASCENT": "blueprints/ascent_blueprint.png",
+                "BIND": "blueprints/bind_blueprint.png",
+                "HAVEN": "blueprints/haven_blueprint.png"
+            }
+            blueprint_path = BLUEPRINT_MAP.get(spatial_payload["map_id"])
+            if blueprint_path and not os.path.exists(blueprint_path):
+                blueprint_path = None # Fallback to no-blueprint if file doesn't exist yet
+
+            generate_pro_viz(
+                spatial_payload["map_id"], 
+                spatial_payload["heatmap_url"], 
+                spatial_payload["trajectories_url"],
+                blueprint_path=blueprint_path
+            )
+            print(f"[BACKEND] Projected Intelligence synchronization active for {spatial_payload['map_id']}")
+        except Exception as e:
+            print(f"[ERROR] Visualization Projection Failed: {e}")
         
         return {
             "status": "SUCCESS",
