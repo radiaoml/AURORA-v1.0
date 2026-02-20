@@ -1,9 +1,13 @@
+import warnings
+warnings.filterwarnings("ignore")
 import google.generativeai as genai
 import cv2
 import os
 import json
 import time
 from gemini_vision_client import GeminiVisionClient
+
+import yt_dlp
 
 class TacticalVisionEngine:
     def __init__(self, source):
@@ -21,24 +25,65 @@ class TacticalVisionEngine:
         # Meta-extraction for Dynamic Reasoning
         source_meta = self.source if not self.is_url else f"YT_{self.source}"
         
+        video_path = self.source
+        
         if self.is_url:
-            print("[INFO] Initiating stream bypass for YouTube source...")
-            # Simulation of downloading/streaming frames from URL
-            time.sleep(1)
-            return ["frames_buffer/cloud_frame_1.jpg", "frames_buffer/cloud_frame_2.jpg"], source_meta
+            print(f"[INFO] DOWNLOADING YouTube video from: {self.source}")
+            print("[INFO] This may take a few seconds...")
             
-        vidcap = cv2.VideoCapture(self.source)
+            # Download video using yt-dlp
+            ydl_opts = {
+                'format': 'best[height<=720][ext=mp4]/best[ext=mp4]', # Prefer 720p mp4 to avoid massive files and ffmpeg merging
+                'outtmpl': 'frames_buffer/temp_vod.%(ext)s',
+                'quiet': False, # ENABLE OUTPUT to see what's happening
+                'no_warnings': False,
+                'force_overwrites': True
+            }
+            
+            try:
+                import yt_dlp
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([self.source])
+                video_path = f"{self.output_dir}/temp_vod.mp4"
+                print(f"[SUCCESS] Video downloaded to {video_path}")
+            except Exception as e:
+                print(f"\n[ERROR] YOUTUBE DOWNLOAD FAILED: {e}")
+                print("[ERROR] Please ensure ffmpeg is installed if merging is required.")
+                print(f"[ERROR] Falling back to mock data.\n")
+                return [], source_meta
+
+        # Standard OpenCV Extraction (works for both local files and downloaded videos)
+        if not os.path.exists(video_path):
+             print(f"[ERROR] Video file not found: {video_path}")
+             return [], source_meta
+             
+        vidcap = cv2.VideoCapture(video_path)
+        if not vidcap.isOpened():
+             print(f"[ERROR] Failed to open video: {video_path}")
+             return [], source_meta
+
         success, image = vidcap.read()
         count = 0
         extracted = []
         
+        # Calculate frame skip interval based on FPS
+        fps = vidcap.get(cv2.CAP_PROP_FPS) or 30
+        frame_interval = int(fps / fps_sample) if fps_sample > 0 else 30
+        
         while success:
-            if count % 30 == 0: # Sample every 1 second (assuming 30fps)
-                frame_name = f"{self.output_dir}/frame_{count}.jpg"
+            if count % frame_interval == 0: 
+                frame_name = f"{self.output_dir}/frame_{len(extracted)}.jpg"
                 cv2.imwrite(frame_name, image)
                 extracted.append(frame_name)
+                
+                # Limit to 10 frames to avoid overloading Gemini API and speed up processing
+                if len(extracted) >= 10:
+                    break
+                    
             success, image = vidcap.read()
             count += 1
+            
+        vidcap.release()
             
         print(f"[SUCCESS] Extracted {len(extracted)} tactical snapshots for analysis.")
         return extracted, source_meta
