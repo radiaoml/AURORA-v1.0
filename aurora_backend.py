@@ -4,6 +4,7 @@ from pydantic import BaseModel
 import uvicorn
 import os
 from video_analyzer import TacticalVisionEngine
+from local_video_analyzer import LocalVideoAnalyzer
 
 app = FastAPI(title="AURORA Neural Backend")
 
@@ -32,28 +33,72 @@ async def analyze_vod(request: AnalysisRequest):
     """
     Real-time endpoint that triggers the Vision Engine and Gemini LLM.
     """
+    """
+    Real-time endpoint that triggers the Vision Engine and Gemini LLM.
+    """
     try:
         print(f"[BACKEND] Received analysis request for: {request.source}")
         
-        # 1. Initialize the Engine
-        engine = TacticalVisionEngine(request.source)
+        # DEMO MODE: Bypass engine and return high-fidelity mock data
+        if request.type == "demo":
+            print("[BACKEND] ACTIVATING DEMO MODE: Generating High-Fidelity Capture...")
+            time.sleep(2) # Simulate processing
+            
+            # Rich Spatial Data (Mock)
+            demo_critique = {
+                "detected_map": "ASCENT",
+                "map_confidence": "high",
+                "detected_round": "07 (Buy Phase)",
+                "entry_rating": "S (Radiant Tier)",
+                "timing_gap": "+0.05s (Frame Perfect)",
+                "formation_issue": "None. Perfect 'Phalanx' formation.",
+                "planting_critique": "God-tier plant for 'Heaven' execution.",
+                "rotation_latency": "0.4s (Instant)",
+                "win_rate_prediction": "99.9%",
+                "tactical_suggestion": "Flawless execution detected. Maintain pressure on Mid-Link.",
+                "kill_locations": [
+                    {"x": 650, "y": 350, "area": "A Main"}, # Attackers
+                    {"x": 620, "y": 400, "area": "A Main"},
+                    {"x": 350, "y": 300, "area": "Pizza"}, # Mid
+                    {"x": 300, "y": 700, "area": "B Main"},
+                    {"x": 320, "y": 680, "area": "B Main"}
+                ],
+                "player_positions": [
+                    {"x": 750, "y": 250, "agent": "Jett"},
+                    {"x": 700, "y": 300, "agent": "Sova"},
+                    {"x": 200, "y": 800, "agent": "Killjoy"},
+                    {"x": 450, "y": 450, "agent": "Omen"}
+                ],
+                "movement_paths": [
+                    {"start_x": 800, "start_y": 100, "end_x": 600, "end_y": 400, "type": "entry"}, # A Push
+                    {"start_x": 500, "start_y": 500, "end_x": 300, "end_y": 300, "type": "rotation"} # Mid Rotate
+                ],
+                "detected_agents": ["JETT", "SOVA", "KILLJOY", "OMEN"]
+            }
+            
+            # Use demo critique for visualization
+            raw_critique = demo_critique
+            critique = demo_critique
+            
+            # Skip engine
+            frames = [] 
+            engine = None
+        else:
+            # 1. Initialize the Local Analysis Engine
+            local_analyzer = LocalVideoAnalyzer()
+            
+            # 2. Extract Frames (using existing TacticalVisionEngine for frame extraction)
+            temp_engine = TacticalVisionEngine(request.source)
+            frames, source_meta = temp_engine.extract_tactical_frames()
+            
+            # 3. Use Local Intelligence Engine for analysis
+            raw_critique = local_analyzer.analyze_frames(frames)
         
-        # 2. Extract Frames
-        frames, source_meta = engine.extract_tactical_frames()
-        
-        # 3. Call the Multimodal Brain (Gemini 1.5 Pro)
-        raw_critique = engine.get_multimodal_critique(frames, source_meta=source_meta)
-        
-        # Parse the JSON if it's a string
+        # Local analyzer returns dict directly, no parsing needed
         critique = raw_critique
-        if isinstance(raw_critique, str):
-            try:
-                # Remove markdown code blocks if Gemini includes them
-                json_str = raw_critique.replace("```json", "").replace("```", "").strip()
-                critique = json.loads(json_str)
-            except:
-                print("[WARNING] Failed to parse Gemini response as JSON.")
-                critique = {"raw": raw_critique}
+        if not isinstance(raw_critique, dict):
+            print("[WARNING] Local analyzer returned unexpected format.")
+            critique = {"error": "Invalid analysis format"}
 
         # 4. Neural Spatial Sync: Generate CUSTOM graphics for this analysis
         detected_map = "ASCENT"
@@ -71,7 +116,8 @@ async def analyze_vod(request: AnalysisRequest):
             spatial_data = {
                 "kill_locations": critique.get("kill_locations", []),
                 "player_positions": critique.get("player_positions", []),
-                "movement_paths": critique.get("movement_paths", [])
+                "movement_paths": critique.get("movement_paths", []),
+                "detected_agents": critique.get("detected_agents", [])
             }
             
             # Log what spatial data we received
@@ -81,15 +127,32 @@ async def analyze_vod(request: AnalysisRequest):
                 print(f"[BACKEND] Received {len(spatial_data['player_positions'])} player positions from Gemini")
             if spatial_data["movement_paths"]:
                 print(f"[BACKEND] Received {len(spatial_data['movement_paths'])} movement paths from Gemini")
+            if spatial_data["detected_agents"]:
+                print(f"[BACKEND] Detected Agents: {spatial_data['detected_agents']}")
         
+        # Transform player_positions into live_coords for the HUD
+        live_coords = []
+        if spatial_data.get("player_positions"):
+            for pos in spatial_data["player_positions"]:
+                live_coords.append({
+                    "agent": pos.get("agent", "Unknown"),
+                    "x": pos.get("x", 0),
+                    "y": pos.get("y", 0),
+                    "event": pos.get("timestamp", "Live")
+                })
+        else:
+            # Fallback to mock if no positions detected
+            live_coords = [
+                {"agent": "Jett", "x": 1250, "y": 800, "event": "Entry"},
+                {"agent": "Omen", "y": 450, "x": 900, "event": "Smoke"}
+            ]
+
         spatial_payload = {
             "map_id": detected_map,
             "heatmap_url": heatmap_name,
             "trajectories_url": pathing_name,
-            "live_coords": [
-                {"agent": "Jett", "x": 1250, "y": 800, "event": "Entry"},
-                {"agent": "Omen", "y": 450, "x": 900, "event": "Smoke"}
-            ]
+            "detected_agents": spatial_data.get("detected_agents", []),
+            "live_coords": live_coords
         }
 
         # Trigger High-Fidelity Blueprint Projection with detected map and REAL spatial data
