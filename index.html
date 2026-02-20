@@ -685,7 +685,8 @@
             if (!val) return;
 
             const type = val.includes('youtube.com') || val.includes('youtu.be') ? "cloud_stream" : "local_path";
-            const sourceId = type === "cloud_stream" ? "YT_" + (val.split('v=')[1]?.substring(0, 8) || "LIVE") : "PATH_RESOLVED";
+            // CRITICAL FIX: Pass the FULL URL for cloud streams so backend can download it
+            const sourceId = type === "cloud_stream" ? val : "PATH_RESOLVED";
 
             processVideoIngestion(type, sourceId);
         }
@@ -700,9 +701,9 @@
             const sourceTag = type === "cloud_stream" ? "[CLOUD]" : "[LOCAL]";
             const initialLines = [
                 `${sourceTag} Initiating VOD handshake with ${id}...`,
-                "[NEURAL] Establishing multimodal socket pipeline...",
+                "[AI_MODEL] Establishing neural network pipeline...",
                 "[VISION] Extracting tactical frame clusters (30fps -> 2fps)...",
-                "[BRAIN] Handing off visual context to Gemini 1.5 Pro..."
+                "[BRAIN] Handing off visual context to trained Valorant AI..."
             ];
 
             let i = 0;
@@ -745,14 +746,17 @@
                         }
                     }
 
+                    // Display full analysis including map and agents
                     const findings = [
+                        `<b>MAP_DETECTED:</b> ${analysis.detected_map || "UNKNOWN"}`,
+                        `<b>AGENTS_FOUND:</b> ${(analysis.detected_agents || []).join(', ') || "None detected"}`,
                         `<b>ENTRY_RATING:</b> ${analysis.entry_rating || "B-"}`,
                         `<b>TIMING_GAP:</b> ${analysis.timing_gap || "Neutral"}`,
                         `<b>FORMATION_ISSUE:</b> ${analysis.formation_issue || "None"}`,
                         `<b>PLANTING_LOGIC:</b> ${analysis.planting_critique || "Standard"}`,
                         `<b>ROTATION_LATENCY:</b> ${analysis.rotation_latency || "0.0s"}`,
                         `<b>WIN_RATE_PRED:</b> ${analysis.win_rate_prediction || "50%"}`,
-                        `<b>ADVICE:</b> ${analysis.tactical_suggestion || "No deviations."}`
+                        `<b>AI_ANALYSIS:</b> ${analysis.tactical_suggestion || "No deviations."}`
                     ];
 
                     let j = 0;
