@@ -746,7 +746,7 @@
                         }
                     }
 
-                    // Display full analysis including map and agents
+                    // Display enhanced analysis with multi-agent insights
                     const findings = [
                         `<b>MAP_DETECTED:</b> ${analysis.detected_map || "UNKNOWN"}`,
                         `<b>AGENTS_FOUND:</b> ${(analysis.detected_agents || []).join(', ') || "None detected"}`,
@@ -758,6 +758,34 @@
                         `<b>WIN_RATE_PRED:</b> ${analysis.win_rate_prediction || "50%"}`,
                         `<b>AI_ANALYSIS:</b> ${analysis.tactical_suggestion || "No deviations."}`
                     ];
+
+                    // Add multi-agent insights if available
+                    if (analysis.agent_analysis) {
+                        const kpis = analysis.agent_analysis.kpis || {};
+                        findings.push(`<b>OVR_SCORE:</b> ${kpis.ovr_score?.toFixed(1) || "N/A"}`);
+                        findings.push(`<b>TACTICAL_EFFICIENCY:</b> ${kpis.tactical_efficiency?.toFixed(1) || "N/A"}%`);
+                        findings.push(`<b>AGENT_SYNERGY:</b> ${kpis.agent_synergy?.toFixed(1) || "N/A"}%`);
+                    }
+
+                    if (analysis.coach_recommendations) {
+                        const confidence = analysis.coach_recommendations.confidence_score;
+                        findings.push(`<b>COACH_CONFIDENCE:</b> ${confidence?.toFixed(1) || "N/A"}%`);
+                        
+                        const topStrategy = analysis.coach_recommendations.strategy_recommendations?.recommendations?.[0];
+                        if (topStrategy) {
+                            findings.push(`<b>TOP_STRATEGY:</b> ${topStrategy.strategy_name || "N/A"}`);
+                        }
+                    }
+
+                    if (analysis.oracle_predictions) {
+                        const winProb = analysis.oracle_predictions.predictions?.win_probability;
+                        findings.push(`<b>WIN_PROBABILITY:</b> ${winProb?.toFixed(1) || "N/A"}%`);
+                        
+                        const riskLevel = analysis.oracle_predictions.risk_assessment?.overall_risk_level;
+                        if (riskLevel) {
+                            findings.push(`<b>RISK_LEVEL:</b> ${riskLevel}`);
+                        }
+                    }
 
                     let j = 0;
                     const vInterval = setInterval(() => {
