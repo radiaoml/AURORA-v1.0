@@ -7,6 +7,7 @@ from video_analyzer import TacticalVisionEngine
 from local_video_analyzer import LocalVideoAnalyzer
 from aurora_agents import process_video_analysis
 from aurora_advanced_agents import run_advanced_analysis
+from n8n_integration import setup_n8n_routes
 
 app = FastAPI(title="AURORA Neural Backend")
 
@@ -227,6 +228,9 @@ async def analyze_vod(request: AnalysisRequest):
     except Exception as e:
         print(f"[ERROR] {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# Setup n8n integration routes
+setup_n8n_routes(app)
 
 if __name__ == "__main__":
     # In production, run with uvicorn aurora_backend:app --reload

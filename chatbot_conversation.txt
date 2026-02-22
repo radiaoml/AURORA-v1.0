@@ -1,0 +1,51 @@
+Pour extraire les données de Valorant dans le cadre du projet Aurora, le rapport mentionne l'utilisation de méthodes complémentaires pour contourner les limitations techniques habituelles.
+
+Voici comment vous pouvez commencer, selon la stratégie technique décrite dans le document :
+
+1. Utilisation des API de Riot Games
+C'est la méthode standard, bien que le rapport souligne une forte dépendance et une vulnérabilité face aux changements de politique de l'éditeur.
++1
+
+Objectif : Récupérer les données de jeu "brutes" (statistiques, résultats de matchs).
+
+
+Limitation : Ces API sont souvent restrictives et fournissent principalement des données descriptives (score, KDA) plutôt que tactiques.
++1
+
+2. Extraction par "Computer Vision" (Vision par Ordinateur)
+Pour obtenir une analyse plus profonde que celle des API, Aurora mise sur la Computer Vision.
++1
+
+
+Fonctionnement : Cette technologie permet d'analyser directement les flux vidéo (VOD) ou les contenus visuels du jeu sans dépendre exclusivement des API propriétaires.
+
+
+Avantage : Cela permet de détecter automatiquement des événements tactiques que les API ne capturent pas, comme les erreurs de positionnement ou les flux de mouvement spatiaux.
++1
+
+3. Reconstruction et Ingestion des Données
+Une fois les données extraites, le processus suit un pipeline technique précis :
+
+
+Pipeline ETL : Construction de pipelines robustes pour relier l'ingestion des données brutes aux analyses de l'IA.
+
+
+Reconstruction 2D (Tactical Replay) : Les données extraites servent à reconstruire dynamiquement la carte du match en 2D pour revoir les mouvements de tous les joueurs.
+
+
+Validation : Le projet vise un taux de précision de 95 % dans l'extraction des événements tactiques.
++1
+
+4. Outils de la Stack Technique
+Pour mettre en place cette extraction, l'équipe utilise les technologies suivantes:
+
+Python : Idéal pour les scripts d'extraction et les modèles de Computer Vision.
+
+Java / Spring Boot : Pour gérer le backend et le traitement des microservices.
+
+
+AWS : Pour l'infrastructure cloud capable de supporter l'analyse massive en temps réel.
++1
+
+
+Conseil pratique : Pour débuter, vous devriez vous concentrer sur le respect des conditions d'utilisation (ToS) de Riot Games tout en explorant des bibliothèques de Computer Vision (comme OpenCV en Python) pour analyser les replays vidéo, ce qui constitue la valeur ajoutée "prescriptive" du projet Aurora.
