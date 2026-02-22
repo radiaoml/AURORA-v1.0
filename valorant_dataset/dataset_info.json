@@ -1,0 +1,106 @@
+{
+  "name": "Valorant Tactical Dataset",
+  "version": "1.0",
+  "created": "2026-02-18T15:14:25.319384",
+  "description": "Dataset for Valorant tactical analysis using deep learning",
+  "categories": {
+    "image_path": "string",
+    "map": [
+      "ASCENT",
+      "BIND",
+      "HAVEN",
+      "SPLIT",
+      "ICEBOX",
+      "BREEZE",
+      "FRACTURE",
+      "PEARL",
+      "LOTUS",
+      "SUNSET"
+    ],
+    "agents_detected": [
+      "JETT",
+      "REYNA",
+      "RAZE",
+      "PHOENIX",
+      "NEON",
+      "YORU",
+      "OMEGA",
+      "SAGE",
+      "SKYE",
+      "KILLJOY",
+      "CYPER",
+      "CHAMBER",
+      "SOVA",
+      "BREACH",
+      "KAYO",
+      "FADE",
+      "VIPER",
+      "ASTRA",
+      "HARBOR",
+      "BRIMSTONE",
+      "OMEN",
+      "CLOUDE"
+    ],
+    "tactical_situation": [
+      "entry",
+      "post_plant",
+      "retake",
+      "eco",
+      "buy_round",
+      "force_buy",
+      "mid_control",
+      "flank"
+    ],
+    "formation": [
+      "tight",
+      "balanced",
+      "spread",
+      "scattered"
+    ],
+    "position_type": [
+      "aggressive",
+      "defensive",
+      "support",
+      "roaming",
+      "anchoring"
+    ],
+    "performance_metrics": {
+      "entry_rating": {
+        "min": 1,
+        "max": 5,
+        "type": "int"
+      },
+      "timing_gap": {
+        "min": 0.0,
+        "max": 5.0,
+        "type": "float"
+      },
+      "formation_score": {
+        "min": 0.0,
+        "max": 1.0,
+        "type": "float"
+      },
+      "planting_score": {
+        "min": 0.0,
+        "max": 1.0,
+        "type": "float"
+      },
+      "rotation_score": {
+        "min": 0.0,
+        "max": 1.0,
+        "type": "float"
+      },
+      "win_rate": {
+        "min": 0.0,
+        "max": 1.0,
+        "type": "float"
+      }
+    }
+  },
+  "total_samples": 1000,
+  "splits": {
+    "train": 700,
+    "val": 200,
+    "test": 100
+  }
+}

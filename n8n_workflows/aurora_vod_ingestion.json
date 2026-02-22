@@ -1,0 +1,274 @@
+{
+  "name": "AURORA VOD Ingestion",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "aurora-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-1",
+      "name": "AURORA Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "aurora-vod-ingestion"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ $json.event_type }}",
+              "rightValue": "youtube_video",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "Check Event Type",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data.video_url }}",
+        "options": {}
+      },
+      "id": "http-1",
+      "name": "Download VOD",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/n8n/webhook/ingest",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"video_url\": $json.data.video_url, \"source_type\": \"youtube\", \"priority\": \"normal\", \"metadata\": $json.data } }}",
+        "options": {}
+      },
+      "id": "http-2",
+      "name": "Send to AURORA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-2",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "completed",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-2",
+      "name": "Check Analysis Status",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/n8n/webhook/notify",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"recipient\": \"discord\", \"message\": \"VOD Analysis Complete: \" + $json.data.video_url, \"notification_type\": \"discord\", \"priority\": \"normal\" } }}",
+        "options": {}
+      },
+      "id": "http-3",
+      "name": "Send Discord Notification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.duckdb.org/v1/sql",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"sql\": \"INSERT INTO aurora_analytics VALUES ('\" + $json.workflow_id + \"', '\" + $json.video_url + \"', '\" + $json.status + \"', '\" + $now + \"')\" } }}",
+        "options": {}
+      },
+      "id": "http-4",
+      "name": "Store in Analytics DB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1120, 500]
+    },
+    {
+      "parameters": {
+        "interval": 3600000,
+        "unit": "hours"
+      },
+      "id": "cron-1",
+      "name": "Hourly Check",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [240, 100]
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/youtube/v3/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "part",
+              "value": "snippet"
+            },
+            {
+              "name": "channelId",
+              "value": "UCv5q8E3N0C4E9m3L7x5Q"
+            },
+            {
+              "name": "maxResults",
+              "value": "5"
+            },
+            {
+              "name": "order",
+              "value": "date"
+            },
+            {
+              "name": "key",
+              "value": "YOUR_YOUTUBE_API_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-5",
+      "name": "Check YouTube Channel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [460, 100]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process YouTube response and trigger webhook\nconst videos = [];\n\nif ($json.items) {\n  $json.items.forEach(item => {\n    if (item.id.kind === 'youtube#video') {\n      videos.push({\n        event_type: 'youtube_video',\n        data: {\n          video_id: item.id.videoId,\n          video_url: `https://www.youtube.com/watch?v=${item.id.videoId}`,\n          title: item.snippet.title,\n          published_at: item.snippet.publishedAt,\n          channel: item.snippet.channelTitle\n        }\n      });\n    }\n  });\n}\n\nreturn videos;"
+      },
+      "id": "code-1",
+      "name": "Process Videos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [680, 100]
+    }
+  ],
+  "connections": {
+    "Hourly Check": {
+      "main": [
+        [
+          {
+            "node": "Check YouTube Channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check YouTube Channel": {
+      "main": [
+        [
+          {
+            "node": "Process Videos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Videos": {
+      "main": [
+        [
+          {
+            "node": "AURORA Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AURORA Webhook": {
+      "main": [
+        [
+          {
+            "node": "Check Event Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Event Type": {
+      "main": [
+        [
+          {
+            "node": "Send to AURORA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to AURORA": {
+      "main": [
+        [
+          {
+            "node": "Check Analysis Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Analysis Status": {
+      "main": [
+        [
+          {
+            "node": "Send Discord Notification",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Store in Analytics DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}

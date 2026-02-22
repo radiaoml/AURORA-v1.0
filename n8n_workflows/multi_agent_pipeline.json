@@ -1,0 +1,284 @@
+{
+  "name": "AURORA Multi-Agent Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "aurora-analysis",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-2",
+      "name": "Analysis Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "aurora-multi-agent"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/n8n/webhook/ingest",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "http-1",
+      "name": "Start Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "processing",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "Check Processing",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Simulate multi-agent processing\nconst agents = ['CleanerBot', 'AnalystBot', 'CoachBot', 'OracleBot'];\nconst results = {};\n\nfor (const agent of agents) {\n  // Simulate agent processing time\n  await new Promise(resolve => setTimeout(resolve, 1000));\n  \n  results[agent] = {\n    status: 'completed',\n    confidence: Math.random() * 100,\n    processing_time: Math.random() * 5 + 1,\n    insights: `${agent} processing complete`\n  };\n}\n\nreturn {\n  workflow_id: $json.workflow_id,\n  status: 'completed',\n  agent_results: results,\n  completed_at: new Date().toISOString()\n};"
+      },
+      "id": "code-1",
+      "name": "Process Agents",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/n8n/webhook/analysis-status",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"analysis_id\": $json.workflow_id, \"status\": \"completed\", \"results\": $json.agent_results } }}",
+        "options": {}
+      },
+      "id": "http-2",
+      "name": "Update Analysis Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-2",
+              "leftValue": "={{ $json.agent_results.CoachBot.confidence }}",
+              "rightValue": "80",
+              "operator": {
+                "type": "number",
+                "operation": "larger"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-2",
+      "name": "High Confidence Check",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/n8n/webhook/notify",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"recipient\": \"discord\", \"message\": \"🎯 High-Confidence Analysis Complete!\\n\\nAgent Results:\\n\" + Object.entries($json.agent_results).map(([agent, result]) => `• ${agent}: ${result.confidence.toFixed(1)}% confidence`).join('\\n'), \"notification_type\": \"discord\", \"priority\": \"high\" } }}",
+        "options": {}
+      },
+      "id": "http-3",
+      "name": "Send High Priority Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1560, 100]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/n8n/webhook/notify",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"recipient\": \"email\", \"message\": \"Analysis Complete: \" + $json.workflow_id, \"notification_type\": \"email\", \"priority\": \"normal\" } }}",
+        "options": {}
+      },
+      "id": "http-4",
+      "name": "Send Email Report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.duckdb.org/v1/sql",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"sql\": \"INSERT INTO agent_performance VALUES ('\" + $json.workflow_id + \"', '\" + JSON.stringify($json.agent_results) + \"', '\" + $now + \"')\" } }}",
+        "options": {}
+      },
+      "id": "http-5",
+      "name": "Store Agent Performance",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1340, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate performance report\nconst results = $json.agent_results;\nconst report = {\n  workflow_id: $json.workflow_id,\n  total_agents: Object.keys(results).length,\n  average_confidence: Object.values(results).reduce((sum, r) => sum + r.confidence, 0) / Object.keys(results).length,\n  total_processing_time: Object.values(results).reduce((sum, r) => sum + r.processing_time, 0),\n  high_confidence_agents: Object.values(results).filter(r => r.confidence > 80).length,\n  completed_at: $json.completed_at\n};\n\nreturn report;"
+      },
+      "id": "code-2",
+      "name": "Generate Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [1780, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/n8n/webhook/notify",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"recipient\": \"slack\", \"message\": \"📊 Performance Report:\\n• Total Agents: \" + $json.total_agents + \"\\n• Avg Confidence: \" + $json.average_confidence.toFixed(1) + \"%\\n• High Confidence: \" + $json.high_confidence_agents + \"\\n• Processing Time: \" + $json.total_processing_time.toFixed(2) + \"s\", \"notification_type\": \"slack\", \"priority\": \"normal\" } }}",
+        "options": {}
+      },
+      "id": "http-6",
+      "name": "Send Slack Report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [2000, 300]
+    }
+  ],
+  "connections": {
+    "Analysis Trigger": {
+      "main": [
+        [
+          {
+            "node": "Start Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start Analysis": {
+      "main": [
+        [
+          {
+            "node": "Check Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Processing": {
+      "main": [
+        [
+          {
+            "node": "Process Agents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Agents": {
+      "main": [
+        [
+          {
+            "node": "Update Analysis Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Analysis Status": {
+      "main": [
+        [
+          {
+            "node": "High Confidence Check",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Store Agent Performance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "High Confidence Check": {
+      "main": [
+        [
+          {
+            "node": "Send High Priority Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Agent Performance": {
+      "main": [
+        [
+          {
+            "node": "Generate Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Report": {
+      "main": [
+        [
+          {
+            "node": "Send Email Report",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Slack Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}

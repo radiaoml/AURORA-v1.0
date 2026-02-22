@@ -1,0 +1,24 @@
+{
+    "vod_analytical_history": [
+        {
+            "timestamp": "2026-02-16T16:15:00Z",
+            "match_id": "VOD_SAMPLE_001",
+            "findings": {
+                "avg_entry_latency": "+2.1s",
+                "formation_consistency": "45% (Sub-optimal trade spacing)",
+                "recurring_gaps": [
+                    "Isolation on entry",
+                    "Planting without utility coverage"
+                ]
+            }
+        }
+    ],
+    "global_tactical_intelligence": {
+        "archetype": "Aggressive Entry",
+        "primary_visual_fix": "Initiate entry only after initiator utility bloom.",
+        "learned_patterns": [
+            "Tendency to push through smokes without flash sync.",
+            "Spike planting logic lacks post-plant defensive awareness."
+        ]
+    }
+}

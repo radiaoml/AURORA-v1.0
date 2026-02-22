@@ -1,0 +1,232 @@
+[
+  {
+    "id": "ascent_a_split",
+    "map": "ASCENT",
+    "situation": "entry",
+    "strategy": "A-Site Split Entry with Flash and Smoke Coordination",
+    "description": "Coordinate Jett flash with Omen smoke for mid control, then split A site",
+    "agents": [
+      "JETT",
+      "OMEN",
+      "SOVA",
+      "SAGE",
+      "REYNA"
+    ],
+    "success_rate": 78,
+    "pro_teams": [
+      "Sentinels",
+      "Fnatic",
+      "LOUD"
+    ],
+    "key_points": [
+      "Jett uses Updraft to gain height advantage",
+      "Omen smokes mid heaven and main",
+      "Sage wall blocks rotate",
+      "SOVA recon arrow confirms site clear",
+      "Reyna cleans up with dismiss"
+    ],
+    "timing_requirements": "< 2.0s entry",
+    "difficulty": "Advanced"
+  },
+  {
+    "id": "bind_post_plant",
+    "map": "BIND",
+    "situation": "post_plant",
+    "strategy": "B-Site Post-Plant with Crossfire Setup",
+    "description": "Establish crossfire positions after spike plant on B site",
+    "agents": [
+      "KILLJOY",
+      "CYPER",
+      "SOVA",
+      "PHOENIX",
+      "OMEN"
+    ],
+    "success_rate": 82,
+    "pro_teams": [
+      "100 Thieves",
+      "OpTic",
+      "Evil Geniuses"
+    ],
+    "key_points": [
+      "Killjoy turret watches default",
+      "Cyper tripwire blocks rotate",
+      "SOVA dart checks hookah",
+      "Phoenix flash for post-plant",
+      "Omen teleport for flank watch"
+    ],
+    "timing_requirements": "Immediate setup",
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "haven_mid_control",
+    "map": "HAVEN",
+    "situation": "mid_control",
+    "strategy": "Mid-Dominance with Sentinel Setup",
+    "description": "Control middle area with sentinel agents for map control",
+    "agents": [
+      "SAGE",
+      "KILLJOY",
+      "CYPER",
+      "SOVA",
+      "BREACH"
+    ],
+    "success_rate": 75,
+    "pro_teams": [
+      "Team Liquid",
+      "G2 Esports",
+      "NRG"
+    ],
+    "key_points": [
+      "Sage wall cuts rotations",
+      "Killjoy nest in mid garage",
+      "Cyper tripwire on C long",
+      "SOVA shock dart for info",
+      "Breach fault line for setup"
+    ],
+    "timing_requirements": "3-4s setup",
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "split_retake",
+    "map": "SPLIT",
+    "situation": "retake",
+    "strategy": "A-Site Retake with Utility Coordination",
+    "description": "Coordinated retake on A site with flash and stun utility",
+    "agents": [
+      "BREACH",
+      "SKYE",
+      "PHOENIX",
+      "OMEN",
+      "JETT"
+    ],
+    "success_rate": 71,
+    "pro_teams": [
+      "Cloud9",
+      "TSM",
+      "Version1"
+    ],
+    "key_points": [
+      "Breach fault line clears heaven",
+      "Skye flash initiates retake",
+      "Phoenix curve flash for entry",
+      "Omen smoke blocks defender vision",
+      "Jett dash for trade frag"
+    ],
+    "timing_requirements": "< 1.5s coordination",
+    "difficulty": "Advanced"
+  },
+  {
+    "id": "icebox_default",
+    "map": "ICEBOX",
+    "situation": "default",
+    "strategy": "Default Setup with Site Control",
+    "description": "Standard default setup with controlled site aggression",
+    "agents": [
+      "RAZE",
+      "SOVA",
+      "SAGE",
+      "OMEN",
+      "REYNA"
+    ],
+    "success_rate": 68,
+    "pro_teams": [
+      "VCT Teams"
+    ],
+    "key_points": [
+      "Raze satchel for site control",
+      "SOVA recon for information",
+      "Sage slow for entry denial",
+      "Omen smoke for map control",
+      "Reyna for aggressive picks"
+    ],
+    "timing_requirements": "Flexible",
+    "difficulty": "Beginner"
+  },
+  {
+    "id": "breeze_fast_break",
+    "map": "BREEZE",
+    "situation": "entry",
+    "strategy": "Fast A-Break with Operator Support",
+    "description": "Quick A site break with Chamber operator support",
+    "agents": [
+      "CHAMBER",
+      "JETT",
+      "KAY/O",
+      "SOVA",
+      "SAGE"
+    ],
+    "success_rate": 73,
+    "pro_teams": [
+      "DRX",
+      "Paper Rex",
+      "FURIA"
+    ],
+    "key_points": [
+      "Chamber operator watches heaven",
+      "Jett dash for site entry",
+      "KAY/O suppress for utility denial",
+      "SOVA dart for site check",
+      "Sage wall for post-plant"
+    ],
+    "timing_requirements": "< 2.5s",
+    "difficulty": "Advanced"
+  },
+  {
+    "id": "fracture_orchard",
+    "map": "FRACTURE",
+    "situation": "mid_control",
+    "strategy": "Orchard Control with Sentinel Setup",
+    "description": "Control orchard area with sentinel agents for B site preparation",
+    "agents": [
+      "KILLJOY",
+      "DEADLOCK",
+      "SOVA",
+      "OMEN",
+      "PHOENIX"
+    ],
+    "success_rate": 77,
+    "pro_teams": [
+      "Leviat\u00e1n",
+      "KR\u00dc Esports",
+      "LOUD"
+    ],
+    "key_points": [
+      "Killjoy nest in orchard",
+      "Deadlock wall cuts rotate",
+      "SOVA shock dart for info",
+      "Omen smoke for B site",
+      "Phoenix flash for orchard"
+    ],
+    "timing_requirements": "2-3s setup",
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "pearl_aggressive_mid",
+    "map": "PEARL",
+    "situation": "entry",
+    "strategy": "Aggressive Mid Control with Duelists",
+    "description": "Aggressive mid control with duelists for site split",
+    "agents": [
+      "NEON",
+      "REYNA",
+      "JETT",
+      "SOVA",
+      "OMEN"
+    ],
+    "success_rate": 70,
+    "pro_teams": [
+      "Fnatic",
+      "NRG",
+      "100 Thieves"
+    ],
+    "key_points": [
+      "Neon slide for mid control",
+      "Reyna aggressive picks",
+      "Jett dash for trades",
+      "SOVA recon for information",
+      "Omen smoke for site prep"
+    ],
+    "timing_requirements": "< 2.0s",
+    "difficulty": "Advanced"
+  }
+]

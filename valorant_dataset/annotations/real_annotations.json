@@ -1,0 +1,66 @@
+{
+  "valorant_dataset\\frames\\frame_0.jpg": {
+    "image_path": "valorant_dataset\\frames\\frame_0.jpg",
+    "frame_number": 0,
+    "map": "ASCENT",
+    "tactical_situation": "mid_control",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.5,
+      "formation_score": 0.7,
+      "planting_score": 0.8,
+      "rotation_score": 0.4,
+      "win_rate": 0.48
+    }
+  },
+  "valorant_dataset\\frames\\frame_1.jpg": {
+    "image_path": "valorant_dataset\\frames\\frame_1.jpg",
+    "frame_number": 1,
+    "map": "ASCENT",
+    "tactical_situation": "mid_control",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.5,
+      "formation_score": 0.7,
+      "planting_score": 0.8,
+      "rotation_score": 0.4,
+      "win_rate": 0.48
+    }
+  },
+  "valorant_dataset\\frames\\frame_2.jpg": {
+    "image_path": "valorant_dataset\\frames\\frame_2.jpg",
+    "frame_number": 2,
+    "map": "ASCENT",
+    "tactical_situation": "mid_control",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.5,
+      "formation_score": 0.7,
+      "planting_score": 0.8,
+      "rotation_score": 0.4,
+      "win_rate": 0.48
+    }
+  },
+  "valorant_dataset\\frames\\frame_3.jpg": {
+    "image_path": "valorant_dataset\\frames\\frame_3.jpg",
+    "frame_number": 3,
+    "map": "ASCENT",
+    "tactical_situation": "mid_control",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.5,
+      "formation_score": 0.7,
+      "planting_score": 0.8,
+      "rotation_score": 0.4,
+      "win_rate": 0.48
+    }
+  }
+}
