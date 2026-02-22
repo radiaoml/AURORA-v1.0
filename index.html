@@ -378,6 +378,375 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* ENHANCED METRICS STYLES */
+        .metric-card {
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.05), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--tactical-cyan), var(--neural-blue));
+        }
+
+        .premium-metric {
+            border-left: 3px solid var(--tactical-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.1);
+        }
+
+        .intelligence-metric {
+            border-left: 3px solid var(--neural-blue);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        .risk-metric {
+            border-left: 3px solid var(--riot-red);
+            box-shadow: 0 0 20px rgba(255, 70, 85, 0.1);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .metric-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #cbd5e1;
+        }
+
+        .metric-badge {
+            font-size: 0.5rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .ovr-badge {
+            background: var(--tactical-cyan);
+            color: #000;
+        }
+
+        .ai-badge {
+            background: var(--neural-blue);
+            color: #fff;
+        }
+
+        .risk-badge {
+            background: var(--riot-red);
+            color: #fff;
+        }
+
+        .oracle-badge {
+            background: linear-gradient(45deg, var(--neural-blue), var(--tactical-cyan));
+            color: #fff;
+        }
+
+        .metric-value-container {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--tactical-cyan);
+            font-family: var(--font-mono);
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+        }
+
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+        }
+
+        .trend-arrow {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .trend-value {
+            color: #10b981;
+            font-family: var(--font-mono);
+        }
+
+        .metric-subtitle {
+            font-size: 0.6rem;
+            color: var(--neural-blue);
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 15px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .breakdown-item {
+            text-align: center;
+        }
+
+        .breakdown-label {
+            display: block;
+            font-size: 0.5rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .breakdown-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--tactical-cyan);
+            font-family: var(--font-mono);
+        }
+
+        .agent-status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .agent-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+
+        .agent-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #dc2626;
+        }
+
+        .agent-indicator.active {
+            background: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .agent-name {
+            font-size: 0.6rem;
+            font-family: var(--font-mono);
+            color: #cbd5e1;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .compact-metric {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        .compact-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .compact-title {
+            font-size: 0.6rem;
+            font-family: var(--font-mono);
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .compact-rating {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--neural-blue);
+            padding: 2px 6px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 3px;
+        }
+
+        .compact-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            font-family: var(--font-mono);
+            margin-bottom: 8px;
+        }
+
+        .compact-bar {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .compact-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.6s ease;
+        }
+
+        .risk-analysis {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .risk-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .risk-label {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            font-family: var(--font-mono);
+        }
+
+        .risk-meter {
+            width: 80px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .risk-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+
+        .low-risk {
+            background: #10b981;
+        }
+
+        .medium-risk {
+            background: #f59e0b;
+        }
+
+        .high-risk {
+            background: #dc2626;
+        }
+
+        .improvement-panel {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .improvement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .improvement-count {
+            background: var(--tactical-cyan);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .improvement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .improvement-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+            border-left: 2px solid transparent;
+        }
+
+        .improvement-item.high-priority {
+            border-left-color: var(--riot-red);
+        }
+
+        .improvement-item.medium-priority {
+            border-left-color: #f59e0b;
+        }
+
+        .improvement-item.low-priority {
+            border-left-color: #10b981;
+        }
+
+        .priority-badge {
+            font-size: 0.5rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .high-priority .priority-badge {
+            background: var(--riot-red);
+            color: #fff;
+        }
+
+        .medium-priority .priority-badge {
+            background: #f59e0b;
+            color: #000;
+        }
+
+        .low-priority .priority-badge {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .improvement-text {
+            font-size: 0.7rem;
+            color: #cbd5e1;
+            font-family: var(--font-mono);
+            flex: 1;
+        }
     </style>
 </head>
 
@@ -490,36 +859,147 @@
             </div>
         </div>
 
-        <!-- PANEL: GAP METRICS -->
+        <!-- PANEL: ENHANCED PERFORMANCE BENCHMARKS -->
         <div class="glass-panel metric-hud">
-            <div class="panel-header">PERFORMANCE_BENCHMARKS</div>
-            <div class="hud-stat">
-                <span class="stat-label">ROTATION_LATENCY</span>
-                <div class="stat-value"><span id="rotation-latency-val">34.2s</span> <span
-                        style="font-size: 1rem; opacity: 0.3;">/ 20.0s PRO</span></div>
-                <div class="benchmark-bar">
-                    <div class="bar-fill" id="rotation-latency-bar" style="width: 58%;"></div>
+            <div class="panel-header">
+                <span>NEURAL_PERFORMANCE_ANALYTICS</span>
+                <span style="color: var(--tactical-cyan); font-size: 0.6rem;">LIVE_TRACKING_ACTIVE</span>
+            </div>
+            
+            <!-- OVR RATING CARD -->
+            <div class="metric-card premium-metric">
+                <div class="metric-header">
+                    <span class="metric-title">OVERALL_VALORANT_RATING</span>
+                    <span class="metric-badge ovr-badge">OVR</span>
+                </div>
+                <div class="metric-value-container">
+                    <span class="metric-value" id="ovr-rating-val">60.0</span>
+                    <div class="metric-trend" id="ovr-trend">
+                        <span class="trend-arrow">↑</span>
+                        <span class="trend-value">+2.3</span>
+                    </div>
+                </div>
+                <div class="metric-breakdown">
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Tactical</span>
+                        <span class="breakdown-value" id="tactical-breakdown">78.3%</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Synergy</span>
+                        <span class="breakdown-value" id="synergy-breakdown">77.0%</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Timing</span>
+                        <span class="breakdown-value" id="timing-breakdown">65.2%</span>
+                    </div>
                 </div>
             </div>
-            <div class="hud-stat" style="border-color: var(--tactical-cyan);">
-                <span class="stat-label">WIN_RATE_STABILITY</span>
-                <div class="stat-value" style="color: var(--tactical-cyan);" id="win-rate-val">62.5%</div>
-                <div class="benchmark-bar">
-                    <div class="bar-fill" id="win-rate-bar" style="width: 82%; background: var(--neural-blue);"></div>
-                </div>
-            </div>
-        </div>
 
-        <!-- PANEL: KNOWLEDGE BASE -->
-        <div class="glass-panel">
-            <div class="panel-header">KNOWLEDGE_ENTITY_INDEX</div>
-            <div style="font-family: var(--font-mono); font-size: 0.75rem;">
-                <div style="margin-bottom: 10px; color: var(--tactical-cyan);">[SRC_ID: 8vTSQTCANWc] - Ascent Guide
+            <!-- MULTI-AGENT INTELLIGENCE CARD -->
+            <div class="metric-card intelligence-metric">
+                <div class="metric-header">
+                    <span class="metric-title">AI_INTELLIGENCE_SCORE</span>
+                    <span class="metric-badge ai-badge">AI</span>
                 </div>
-                <p style="opacity: 0.7;">Extracted: Mid Control, Rotating-Chain, 20s-Rule.</p>
-                <a href="#"
-                    style="color: var(--riot-red); text-decoration: none; margin-top: 8px; display: inline-block;">VIEW_SOURCE_VOD
-                    //</a>
+                <div class="metric-value-container">
+                    <span class="metric-value" id="ai-intel-val">82.7</span>
+                    <div class="metric-subtitle">Multi-Agent Confidence</div>
+                </div>
+                <div class="agent-status-grid">
+                    <div class="agent-status">
+                        <span class="agent-indicator active"></span>
+                        <span class="agent-name">CleanerBot</span>
+                    </div>
+                    <div class="agent-status">
+                        <span class="agent-indicator active"></span>
+                        <span class="agent-name">AnalystBot</span>
+                    </div>
+                    <div class="agent-status">
+                        <span class="agent-indicator active"></span>
+                        <span class="agent-name">CoachBot</span>
+                    </div>
+                    <div class="agent-status">
+                        <span class="agent-indicator active"></span>
+                        <span class="agent-name">OracleBot</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADVANCED METRICS ROW -->
+            <div class="metrics-row">
+                <!-- ENTRY COORDINATION -->
+                <div class="compact-metric">
+                    <div class="compact-header">
+                        <span class="compact-title">ENTRY_COORDINATION</span>
+                        <span class="compact-rating" id="entry-rating-display">B-</span>
+                    </div>
+                    <div class="compact-value" id="entry-coordination-val">68.5%</div>
+                    <div class="compact-bar">
+                        <div class="compact-fill" id="entry-coordination-bar" style="width: 68.5%; background: linear-gradient(90deg, var(--neural-blue), var(--tactical-cyan));"></div>
+                    </div>
+                </div>
+
+                <!-- WIN PROBABILITY -->
+                <div class="compact-metric">
+                    <div class="compact-header">
+                        <span class="compact-title">WIN_PROBABILITY</span>
+                        <span class="compact-badge oracle-badge">ORACLE</span>
+                    </div>
+                    <div class="compact-value" id="win-probability-val">0.9%</div>
+                    <div class="compact-bar">
+                        <div class="compact-fill" id="win-probability-bar" style="width: 0.9%; background: var(--riot-red);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RISK ASSESSMENT CARD -->
+            <div class="metric-card risk-metric">
+                <div class="metric-header">
+                    <span class="metric-title">RISK_ASSESSMENT</span>
+                    <span class="metric-badge risk-badge" id="risk-level-badge">MEDIUM</span>
+                </div>
+                <div class="risk-analysis">
+                    <div class="risk-item">
+                        <span class="risk-label">Performance Risk</span>
+                        <div class="risk-meter">
+                            <div class="risk-fill medium-risk" id="performance-risk-meter"></div>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <span class="risk-label">Coordination Risk</span>
+                        <div class="risk-meter">
+                            <div class="risk-fill low-risk" id="coordination-risk-meter"></div>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <span class="risk-label">Strategy Risk</span>
+                        <div class="risk-meter">
+                            <div class="risk-fill medium-risk" id="strategy-risk-meter"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IMPROVEMENT RECOMMENDATIONS -->
+            <div class="improvement-panel">
+                <div class="improvement-header">
+                    <span>NEURAL_IMPROVEMENT_PROTOCOL</span>
+                    <span class="improvement-count" id="improvement-count">3</span>
+                </div>
+                <div class="improvement-list" id="improvement-list">
+                    <div class="improvement-item high-priority">
+                        <span class="priority-badge">HIGH</span>
+                        <span class="improvement-text">Improve entry timing coordination (+15% OVR potential)</span>
+                    </div>
+                    <div class="improvement-item medium-priority">
+                        <span class="priority-badge">MED</span>
+                        <span class="improvement-text">Optimize agent composition for better synergy</span>
+                    </div>
+                    <div class="improvement-item low-priority">
+                        <span class="priority-badge">LOW</span>
+                        <span class="improvement-text">Refine post-plant positioning strategies</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -835,25 +1315,132 @@
             function updateGlobalBenchmarks(analysis) {
                 console.log("[SYNC] Updating global performance benchmarks...");
 
-                // 1. Update Rotation Latency
-                const latVal = analysis.rotation_latency || "0.0s";
-                const latNum = parseFloat(latVal.replace(/[^\d.]/g, '')) || 0;
-                document.getElementById('rotation-latency-val').innerText = latVal;
-
-                // Assuming 40s is the "max" for the bar visualization, and 20s is pro
-                const latPercent = Math.min(100, Math.max(10, (1 - (latNum / 40)) * 100));
-                document.getElementById('rotation-latency-bar').style.width = latPercent + "%";
-
-                // 2. Update Win Rate Stability
-                const wrVal = analysis.win_rate_prediction || "50%";
-                const wrNum = parseFloat(wrVal.replace(/[^\d.]/g, '')) || 50;
-                document.getElementById('win-rate-val').innerText = wrVal;
-                document.getElementById('win-rate-bar').style.width = wrNum + "%";
-
+                // Enhanced Metrics Update
+                updateEnhancedMetrics(analysis);
+                
                 // Trigger a small visual pulse on update
                 const metricHud = document.querySelector('.metric-hud');
                 metricHud.style.boxShadow = "inset 0 0 30px rgba(0, 245, 212, 0.1)";
                 setTimeout(() => metricHud.style.boxShadow = "none", 500);
+            }
+
+            function updateEnhancedMetrics(analysis) {
+                // Update OVR Rating Card
+                const ovrScore = analysis.agent_analysis?.kpis?.ovr_score || 60.0;
+                document.getElementById('ovr-rating-val').innerText = ovrScore.toFixed(1);
+                
+                // Update OVR breakdown
+                const tacticalEff = analysis.agent_analysis?.kpis?.tactical_efficiency || 78.3;
+                const agentSynergy = analysis.agent_analysis?.kpis?.agent_synergy || 77.0;
+                const timingPerf = analysis.agent_analysis?.kpis?.timing_performance || 65.2;
+                
+                document.getElementById('tactical-breakdown').innerText = tacticalEff.toFixed(1) + '%';
+                document.getElementById('synergy-breakdown').innerText = agentSynergy.toFixed(1) + '%';
+                document.getElementById('timing-breakdown').innerText = timingPerf.toFixed(1) + '%';
+                
+                // Update AI Intelligence Score
+                const coachConfidence = analysis.coach_recommendations?.confidence_score || 82.7;
+                document.getElementById('ai-intel-val').innerText = coachConfidence.toFixed(1);
+                
+                // Update Entry Coordination
+                const entryRating = analysis.entry_rating || 'B-';
+                document.getElementById('entry-rating-display').innerText = entryRating;
+                const entryCoordination = calculateEntryCoordination(entryRating);
+                document.getElementById('entry-coordination-val').innerText = entryCoordination.toFixed(1) + '%';
+                document.getElementById('entry-coordination-bar').style.width = entryCoordination + '%';
+                
+                // Update Win Probability
+                const winProb = analysis.oracle_predictions?.predictions?.win_probability || 0.9;
+                document.getElementById('win-probability-val').innerText = winProb.toFixed(1) + '%';
+                document.getElementById('win-probability-bar').style.width = winProb + '%';
+                
+                // Update Risk Assessment
+                const riskLevel = analysis.oracle_predictions?.risk_assessment?.overall_risk_level || 'MEDIUM';
+                document.getElementById('risk-level-badge').innerText = riskLevel;
+                updateRiskMeters(riskLevel);
+                
+                // Update Improvement Recommendations
+                updateImprovementRecommendations(analysis);
+                
+                // Update OVR trend
+                updateOVRTrend(ovrScore);
+            }
+
+            function calculateEntryCoordination(entryRating) {
+                const ratings = { 'A+': 95, 'A': 90, 'A-': 85, 'B+': 80, 'B': 75, 'B-': 68.5, 'C+': 60, 'C': 50, 'C-': 40, 'D+': 30, 'D': 20, 'D-': 10, 'F': 5 };
+                return ratings[entryRating] || 50;
+            }
+
+            function updateRiskMeters(riskLevel) {
+                const riskSettings = {
+                    'LOW': { performance: 'low', coordination: 'low', strategy: 'low' },
+                    'MEDIUM': { performance: 'medium', coordination: 'low', strategy: 'medium' },
+                    'HIGH': { performance: 'high', coordination: 'medium', strategy: 'high' }
+                };
+                
+                const settings = riskSettings[riskLevel] || riskSettings['MEDIUM'];
+                
+                document.getElementById('performance-risk-meter').className = 'risk-fill ' + settings.performance + '-risk';
+                document.getElementById('coordination-risk-meter').className = 'risk-fill ' + settings.coordination + '-risk';
+                document.getElementById('strategy-risk-meter').className = 'risk-fill ' + settings.strategy + '-risk';
+            }
+
+            function updateImprovementRecommendations(analysis) {
+                const improvements = [];
+                
+                // Generate improvements based on analysis
+                if (analysis.agent_analysis?.kpis?.ovr_score < 70) {
+                    improvements.push({
+                        priority: 'HIGH',
+                        text: 'Improve entry timing coordination (+15% OVR potential)'
+                    });
+                }
+                
+                if (analysis.agent_analysis?.kpis?.agent_synergy < 80) {
+                    improvements.push({
+                        priority: 'MED',
+                        text: 'Optimize agent composition for better synergy'
+                    });
+                }
+                
+                if (analysis.oracle_predictions?.risk_assessment?.overall_risk_level === 'HIGH') {
+                    improvements.push({
+                        priority: 'HIGH',
+                        text: 'Address high-priority tactical risks immediately'
+                    });
+                }
+                
+                if (improvements.length === 0) {
+                    improvements.push({
+                        priority: 'LOW',
+                        text: 'Maintain current tactical performance level'
+                    });
+                }
+                
+                // Update DOM
+                const improvementList = document.getElementById('improvement-list');
+                improvementList.innerHTML = '';
+                
+                improvements.forEach((improvement, index) => {
+                    const div = document.createElement('div');
+                    div.className = `improvement-item ${improvement.priority.toLowerCase()}-priority`;
+                    div.innerHTML = `
+                        <span class="priority-badge">${improvement.priority}</span>
+                        <span class="improvement-text">${improvement.text}</span>
+                    `;
+                    improvementList.appendChild(div);
+                });
+                
+                document.getElementById('improvement-count').innerText = improvements.length;
+            }
+
+            function updateOVRTrend(currentOVR) {
+                // Simulate trend calculation (in real app, this would compare with historical data)
+                const trendValue = (Math.random() * 10 - 5).toFixed(1); // Random trend for demo
+                const trendArrow = trendValue > 0 ? '↑' : '↓';
+                
+                document.querySelector('.trend-arrow').innerText = trendArrow;
+                document.querySelector('.trend-value').innerText = Math.abs(trendValue);
             }
 
             function updateTacticalMaps(data) {
