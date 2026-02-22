@@ -5,6 +5,8 @@ import uvicorn
 import os
 from video_analyzer import TacticalVisionEngine
 from local_video_analyzer import LocalVideoAnalyzer
+from aurora_agents import process_video_analysis
+from aurora_advanced_agents import run_advanced_analysis
 
 app = FastAPI(title="AURORA Neural Backend")
 
@@ -94,41 +96,68 @@ async def analyze_vod(request: AnalysisRequest):
             # 3. Use Local Intelligence Engine for analysis
             raw_critique = local_analyzer.analyze_frames(frames)
         
-        # Local analyzer returns dict directly, no parsing needed
-        critique = raw_critique
-        if not isinstance(raw_critique, dict):
-            print("[WARNING] Local analyzer returned unexpected format.")
-            critique = {"error": "Invalid analysis format"}
-
         # 4. Neural Spatial Sync: Generate CUSTOM graphics for this analysis
         detected_map = "ASCENT"
-        if isinstance(critique, dict):
-            detected_map = critique.get("detected_map", "ASCENT").upper()
+        if isinstance(raw_critique, dict):
+            detected_map = raw_critique.get("detected_map", "ASCENT").upper()
 
         # Generate unique filenames to prevent caching and cross-talk
         ts = int(time.time())
         heatmap_name = f"analysis_heatmap_{ts}.png"
         pathing_name = f"analysis_pathing_{ts}.png"
         
-        # Extract spatial data from Gemini analysis
+        # Extract spatial data from analysis
         spatial_data = {}
-        if isinstance(critique, dict):
+        if isinstance(raw_critique, dict):
             spatial_data = {
-                "kill_locations": critique.get("kill_locations", []),
-                "player_positions": critique.get("player_positions", []),
-                "movement_paths": critique.get("movement_paths", []),
-                "detected_agents": critique.get("detected_agents", [])
+                "kill_locations": raw_critique.get("kill_locations", []),
+                "player_positions": raw_critique.get("player_positions", []),
+                "movement_paths": raw_critique.get("movement_paths", []),
+                "detected_agents": raw_critique.get("detected_agents", [])
+            }
+        
+        # 5. Multi-Agent Processing: Process through Aurora Agent System
+        if request.type != "demo" and isinstance(raw_critique, dict):
+            print("[BACKEND] Starting Aurora Multi-Agent Processing...")
+            
+            # Prepare data for multi-agent system
+            agent_input = {
+                "source_id": request.source,
+                "video_analysis": raw_critique,
+                "spatial_data": spatial_data,
+                "raw_frames": frames if 'frames' in locals() else []
             }
             
-            # Log what spatial data we received
-            if spatial_data["kill_locations"]:
-                print(f"[BACKEND] Received {len(spatial_data['kill_locations'])} kill locations from Gemini")
-            if spatial_data["player_positions"]:
-                print(f"[BACKEND] Received {len(spatial_data['player_positions'])} player positions from Gemini")
-            if spatial_data["movement_paths"]:
-                print(f"[BACKEND] Received {len(spatial_data['movement_paths'])} movement paths from Gemini")
-            if spatial_data["detected_agents"]:
-                print(f"[BACKEND] Detected Agents: {spatial_data['detected_agents']}")
+            # Run multi-agent pipeline
+            agent_results = process_video_analysis(agent_input)
+            
+            # Run advanced analysis (CoachBot + OracleBot)
+            advanced_results = run_advanced_analysis(
+                agent_results["cleaned_data"], 
+                agent_results["analysis_results"]
+            )
+            
+            # Update critique with agent insights
+            raw_critique.update({
+                "agent_analysis": agent_results["analysis_results"],
+                "coach_recommendations": advanced_results["coach_analysis"],
+                "oracle_predictions": advanced_results["oracle_predictions"]
+            })
+            
+            print("[BACKEND] Multi-Agent Processing Complete")
+        
+        # Use final critique for visualization
+        critique = raw_critique
+        
+        # Log what spatial data we received
+        if spatial_data["kill_locations"]:
+            print(f"[BACKEND] Received {len(spatial_data['kill_locations'])} kill locations from analysis")
+        if spatial_data["player_positions"]:
+            print(f"[BACKEND] Received {len(spatial_data['player_positions'])} player positions from analysis")
+        if spatial_data["movement_paths"]:
+            print(f"[BACKEND] Received {len(spatial_data['movement_paths'])} movement paths from analysis")
+        if spatial_data["detected_agents"]:
+            print(f"[BACKEND] Detected Agents: {spatial_data['detected_agents']}")
         
         # Transform player_positions into live_coords for the HUD
         live_coords = []
