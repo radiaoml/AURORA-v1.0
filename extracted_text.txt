@@ -1,0 +1,504 @@
+--- Page 1 ---
+  Analyse  du  marché  :  AURORA    
+“L'Intelligence  Décisionnelle  au  service  de  la  performance  
+eSport.”
+   
+       Réalisé  par  :   OMALEK  Radia  KHALID  Youssef  CHERQUI  Ahmed  Amine            
+ 
+
+
+--- Page 2 ---
+1.  Analyse  PESTEL  :  “micro  &  macro  environnement”   
+a.  Maroc  (Marché  Émergent)  ●  Politique  :  Volonté  de  l'État  de  devenir  un  hub  technologique  africain  (Plan  Maroc  
+Digital
+ 
+2030).
+ 
+Création
+ 
+de
+ 
+fédérations
+ 
+qui
+ 
+structurent
+ 
+les
+ 
+tournois,
+ 
+facilitant
+ 
+l'accès
+ 
+aux
+ 
+données
+ 
+de
+ 
+matchs
+ 
+officiels.
+ ●  Économique  :  Coûts  de  développement  (R&D)  3  à  4  fois  inférieurs  à  l'Europe.  
+Émergence
+ 
+d'une
+ 
+classe
+ 
+moyenne
+ 
+de
+ 
+"gamers"
+ 
+prête
+ 
+à
+ 
+dépenser
+ 
+pour
+ 
+du
+ 
+coaching.
+ ●  Social  :  Le  jeu  vidéo  est  le  1er  loisir  des  15-25  ans.  Valorant  domine  le  segment  FPS  
+devant
+ 
+CS2.
+ 
+Forte
+ 
+culture
+ 
+de
+ 
+"clan"
+ 
+(teams
+ 
+de
+ 
+quartiers/villes).
+ ●  Technologique  :  Pénétration  internet  >80%  ;  Déploiement  massif  de  la  fibre  optique  et  
+préparation
+ 
+de
+ 
+la
+ 
+5G
+ 
+pour
+ 
+réduire
+ 
+la
+ 
+latence.
+ ●  Légal  :  Loi  sur  la  protection  des  données  (CNDP)  alignée  sur  les  standards  européens,  
+facilitant
+ 
+l'exportation
+ 
+du
+ 
+logiciel.
+ 
+b.  International  (Marché  Mature)  ●  Politique  :  Soutien  massif  en  Asie  (Corée/Chine)  et  aux  USA.  L'e-sport  est  reconnu  
+comme
+ 
+sport
+ 
+officiel
+ 
+dans
+ 
+plusieurs
+ 
+pays.
+ ●  Économique  :  Marché  de  la  data  e-sportive  estimé  à  $1.2  Milliards  avec  un  taux  de  
+croissance
+ 
+annuel
+ 
+de
+ 
+18%
+.
+ ●  Social  :  "Esportainment"  :  les  spectateurs  veulent  des  statistiques  en  direct  pendant  les  
+streams
+ 
+(overlays
+ 
+prédictifs).
+ ●  Technologique  :  Avancées  majeures  en  Computer  Vision  permettant  d'extraire  de  la  
+data
+ 
+à
+ 
+partir
+ 
+de
+ 
+simples
+ 
+vidéos
+ 
+(VODs).
+ ●  Légal  :  Régulations  strictes  sur  les  paris  (Betting)  nécessitant  des  algorithmes  de  
+prédiction
+ 
+certifiés
+ 
+et
+ 
+transparents.
+ 
+ 
+              
+
+--- Page 3 ---
+2.  Analyse  SWOT   FORCES  (Internal)  FAIBLESSES  (Internal)  
+•  Algorithme  propriétaire  de  prédiction  spatiale.  
+•  Coût  opérationnel  réduit  (Base  au  Maroc).  
+•  Focus  exclusif  sur  Valorant  (Spécialisation).  
+•  Dépendance  aux  changements  d'API  de  Riot  Games.  
+•  Besoin  de  serveurs  haute  performance  pour  l'IA.  
+•  Équipe  encore  réduite  face  aux  géants  US.  
+OPPORTUNITÉS  (External)  MENACES  (External)  
+•  Marché  MENA  non  exploité  par  les  leaders  actuels.  
+•  Intégration  possible  avec  les  sites  de  paris  e-sport.  
+•  Vente  de  rapports  tactiques  aux  équipes  VCT.  
+•  Arrivée  d'un  mode  "Replay"  officiel  intégré  par  Riot.  
+•  Concurrence  de  l'IA  générative  de  Microsoft/Google.  
+•  Volatilité  de  la  méta  (nouveaux  agents  qui  cassent  les  modèles).  
+ 
+     
+
+--- Page 4 ---
+3.  Segmentation,  Ciblage  &  Positionnement  (STP)   
+a.  Segmentation  du  marché  1.  Le  Compétiteur  Individuel  (The  Grinder)  :  Joueur  classé  Gold/Diamond  voulant  
+atteindre
+ 
+Immortal.
+ 
+Cherche
+ 
+l'auto-correction.
+ 2.  La  Structure  E-sport  (The  Org)  :  Clubs  pro  ou  semi-pro  (ex:  Fox  Gaming  au  Maroc,  
+Fnatic
+ 
+à
+ 
+l'international).
+ 
+Cherche
+ 
+l'analyse
+ 
+adverse
+ 
+(scouting).
+ 3.  L'Écosystème  Média  (The  Broadcaster)  :  Streamers  et  organisateurs  de  tournois.  
+Cherchent
+ 
+des
+ 
+stats
+ 
+"wow"
+ 
+pour
+ 
+animer
+ 
+le
+ 
+live.
+ 
+b.  Ciblage  (Targeting)  ●  Cible  Prioritaire  (Maroc)  :  Les  Académies  et  Clubs  locaux .  Le  but  est  de  devenir  
+l'outil
+ 
+standard
+ 
+de
+ 
+formation.
+ ●  Cible  Prioritaire  (International)  :  Le  B2C  (Joueurs  individuels)  via  abonnement  
+SaaS,
+ 
+car
+ 
+c'est
+ 
+là
+ 
+que
+ 
+se
+ 
+trouve
+ 
+le
+ 
+volume
+ 
+financier.
+ 
+c.  Positionnement  ●  Slogan  :  "Predict  the  Round,  Master  the  Map."  ●  Valeur  ajoutée  :  Contrairement  aux  concurrents  qui  listent  des  morts,  ton  outil  explique  
+les
+ 
+flux
+ 
+de
+ 
+mouvement
+ 
+(rotations
+ 
+manquées,
+ 
+zones
+ 
+de
+ 
+contrôle
+ 
+perdues).
+ 
+  
+4.  Analyse  Concurrentielle  (Deep  Dive)  
+Concurrent  Stratégie  Part  de  Marché  
+Ta  Différence  
+Blitz.gg  Automatisation  /  Overlay  
+Massive  (Casual)  
+Blitz  donne  des  “ builds ”,  tu  donnes  des  stratégies .  
+Mobalytics  Coaching  /  Analyse  Élevée  (Hardcore)  
+Ils  analysent  le  " Skill ",  tu  analyses  la  tactique  d'équipe .  
+Stat-Vans  Data  brute  Niche  (Pro)  Ils  vendent  des  “ chiffres ”,  tu  vends  des  prédictions  visuelles .  
+
+--- Page 5 ---
+5.  Mix  Marketing  (4P)  :  Détails  Opérationnels   Produit  (Product)  ●  Analyse  Post-Match  :  Reconstruction  2D  de  la  map  avec  détection  des  "erreurs  
+fatales".
+ ●  Prédiction  en  direct  :  Probabilité  de  victoire  calculée  à  chaque  seconde  du  round.  ●  Heatmaps  tactiques  :  Zones  où  l'adversaire  a  tendance  à  utiliser  ses  utilitaires  
+(Smokes,
+ 
+Flashes).
+ 
+ 
+Prix  (Pricing)  
+a.  Version  Free  :  "L'Appel  du  Grinder"  
+Cible  :  Joueurs  occasionnels  et  débutants  (Iron  à  Gold).  
+●  Fonctionnalités  :  ○  Accès  à  l'historique  complet  des  matchs  (Stats  KDA,  ADR  classiques).  ○  Le  "Daily  Insight"  :  1  analyse  tactique  IA  offerte  par  24h  (visualisation  2D  d'un  
+round
+ 
+clé).
+ ○  Comparaison  basique  avec  les  moyennes  des  joueurs  de  même  rang.  ●  Objectif  :  Rétention  et  acquisition  virale.  L'utilisateur  "goûte"  à  la  puissance  de  la  
+prédiction
+ 
+et
+ 
+veut
+ 
+plus
+ 
+d'analyses
+ 
+pour
+ 
+ses
+ 
+autres
+ 
+matchs.
+ 
+b.  Offre  Premium  :  "Tactical  Edge"  ($5.99  /  ~60  MAD  par  mois)  
+Cible  :  Joueurs  compétitifs  (Platinum  à  Radiant)  et  créateurs  de  contenu.  
+●  Fonctionnalités  Spécifiques  :  ○  Analyses  illimitées  :  Chaque  round  de  chaque  match  est  décortiqué  par  l'IA.  ○  Module  "Scouting"  :  Analyse  les  20  derniers  matchs  de  tes  futurs  adversaires  
+(en
+ 
+entrant
+ 
+leur
+ 
+pseudo)
+ 
+pour
+ 
+détecter
+ 
+leurs
+ 
+habitudes
+ 
+:
+ 
+Où
+ 
+posent-ils
+ 
+le
+ 
+spike
+ 
+?
+ 
+Quel
+ 
+site
+ 
+attaquent-ils
+ 
+en
+ 
+round
+ 
+éco
+ 
+?
+ ○  Prédiction  de  Méta  :  Accès  aux  tendances  mondiales  des  compositions  
+d'agents
+ 
+avant
+ 
+qu'elles
+ 
+ne
+ 
+deviennent
+ 
+populaires.
+ ○  Cloud  Save  :  Sauvegarde  et  partage  de  tes  "Tactical  Clips"  pour  tes  réseaux  
+sociaux.
+ 
+ 
+ 
+
+--- Page 6 ---
+c.  Offre  Pro  B2B  :  "Org  Suite"  ($149.00  /  ~1500  MAD  par  mois)  
+Cible  :  Structures  e-sport  (ex:  Fox  Gaming,  Vitality  Academy),  Centres  de  formation  (Gaming  
+Centers).
+ 
+●  Fonctionnalités  Spécifiques  :  ○  Multi-accès  :  1  licence  pour  le  Head  Coach  +  5  ou  6  licences  joueurs  liées.  ○  Outils  de  Collaboration  :  Le  coach  peut  annoter  la  carte  2D  en  temps  réel  et  
+envoyer
+ 
+des
+ 
+"devoirs
+ 
+tactiques"
+ 
+directement
+ 
+sur
+ 
+le
+ 
+dashboard
+ 
+des
+ 
+joueurs.
+ ○  VOD  Review  Assist  :  L'IA  synchronise  les  statistiques  avec  la  vidéo  du  match  
+pour
+ 
+un
+ 
+gain
+ 
+de
+ 
+temps
+ 
+massif
+ 
+lors
+ 
+des
+ 
+débriefings.
+ ○  API  Access  (Optionnel)  :  Exportation  des  données  brutes  pour  les  analystes  de  
+données
+ 
+internes
+ 
+de
+ 
+l'équipe.
+ 
+ 
+Place  (Distribution)  
+●  Digital  :  Site  web  +  Extension  desktop  +  Application  mobile.  ●  Local  :  Bornes  de  démonstration  dans  les  grands  évènements  (ex:  Comic  Con  Africa,  
+tournois
+ 
+locaux).
+ 
+ Promotion  ●  Marketing  de  contenu  :  Analyse  des  matchs  pro  VCT  sur  TikTok/Twitter  pour  
+démontrer
+ 
+la
+ 
+précision
+ 
+de
+ 
+l'IA.
+ ●  Contenu  Éducatif  :  Série  de  vidéos  "Pourquoi  avez-vous  perdu  ce  round  ?"  sur  
+TikTok/Reels
+ 
+montrant
+ 
+la
+ 
+puissance
+ 
+de
+ 
+ton
+ 
+IA.
+ ●  Marketing  d'influence  :  Partenariats  avec  des  streamers  "analystes"  (ex:  des  anciens  
+pros
+ 
+ou
+ 
+coachs
+ 
+reconnus)
+ 
+qui
+ 
+utilisent
+ 
+l'outil
+ 
+en
+ 
+live
+ 
+pour
+ 
+analyser
+ 
+leurs
+ 
+propres
+ 
+games.
+ ●  SEO  de  niche  :  Cibler  les  mots-clés  comme  "Valorant  tactical  coaching",  "how  to  read  
+rotations
+ 
+Valorant",
+ 
+"predicting
+ 
+enemy
+ 
+executes".
+ 
+ 
+

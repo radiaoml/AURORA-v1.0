@@ -1,0 +1,52 @@
+[
+    {
+        "id": "8vTSQTCANWc",
+        "title": "Woohoojin: There are No Secrets. Here's How to Win (Ascent)",
+        "url": "https://www.youtube.com/watch?v=8vTSQTCANWc",
+        "tactical_value": 98,
+        "key_takeaways": [
+            "Advanced Killjoy setups to lock down Ascent sites.",
+            "Mid-round decision making based on defender rotations.",
+            "How to punish overly aggressive site pushes."
+        ],
+        "keywords": [
+            "Ascent",
+            "Killjoy",
+            "Decision Making",
+            "VOD Review"
+        ]
+    },
+    {
+        "id": "schjOxr9hiE",
+        "title": "Woohoojin: The ULTIMATE BIND GUIDE",
+        "url": "https://www.youtube.com/watch?v=schjOxr9hiE",
+        "tactical_value": 96,
+        "key_takeaways": [
+            "Controlling Showers and Hookah is non-negotiable.",
+            "Utilizing B-Site teleporters for offensive fakes.",
+            "Defensive rules for weak-side anchoring."
+        ],
+        "keywords": [
+            "Bind",
+            "Map Control",
+            "Teleporters",
+            "Anchoring"
+        ]
+    },
+    {
+        "id": "Z4wK6y_h7aE",
+        "title": "Woohoojin: Radiant Intuition - When to Rotate",
+        "url": "https://www.youtube.com/watch?v=Z4wK6y_h7aE",
+        "tactical_value": 99,
+        "key_takeaways": [
+            "Visualizing the defender 'chain' to find openings.",
+            "The 20-second rotation rule for optimal offensive flow.",
+            "Identifying when an early pick should trigger a full rotate."
+        ],
+        "keywords": [
+            "Rotations",
+            "Radiant Intuition",
+            "Decision Science"
+        ]
+    }
+]

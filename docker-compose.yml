@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: aurora-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=aurora
+      - N8N_BASIC_AUTH_PASSWORD=tactical_intel_2026
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=UTC
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+      - ./n8n_workflows:/home/node/.n8n/workflows
+    networks:
+      - aurora-network
+    depends_on:
+      - aurora-backend
+
+  aurora-backend:
+    build: .
+    container_name: aurora-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - PYTHONPATH=/app
+    volumes:
+      - ./aurora_datawarehouse.db:/app/aurora_datawarehouse.db
+      - ./tactical_knowledge_base.json:/app/tactical_knowledge_base.json
+      - ./aurora_strategies.json:/app/aurora_strategies.json
+      - ./frames_buffer:/app/frames_buffer
+    networks:
+      - aurora-network
+    command: python aurora_backend.py
+
+  duckdb:
+    image: duckdb/duckdb:latest
+    container_name: aurora-duckdb
+    restart: unless-stopped
+    ports:
+      - "8123:8123"
+    volumes:
+      - ./analytics_data:/data
+      - ./duckdb_scripts:/scripts
+    networks:
+      - aurora-network
+    command: duckdb /data/aurora_analytics.duckdb --http
+
+  redis:
+    image: redis:7-alpine
+    container_name: aurora-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+    networks:
+      - aurora-network
+    command: redis-server --appendonly yes
+
+networks:
+  aurora-network:
+    driver: bridge
+
+volumes:
+  n8n_data:
+  aurora_analytics:
+  frames_buffer:
+  redis_data:

@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURORA // TACTICAL INTELLIGENCE HUD</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --riot-red: #ff4655;
+            --tactical-cyan: #00f5d4;
+            --neural-blue: #3b82f6;
+            --glass: rgba(15, 23, 42, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --font-main: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-deep);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(255, 70, 85, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.02));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* AUTH PORTAL: NEURAL LINK */
+        #auth-portal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: clip-path 1.2s cubic-bezier(0.87, 0, 0.13, 1);
+        }
+
+        #auth-portal.cleared {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        }
+
+        .neural-link-card {
+            width: 520px;
+            padding: 50px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 100px rgba(255, 70, 85, 0.1);
+        }
+
+        .neural-link-card::before,
+        .neural-link-card::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--riot-red);
+            border-style: solid;
+        }
+
+        .neural-link-card::before {
+            top: -5px;
+            left: -5px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .neural-link-card::after {
+            bottom: -5px;
+            right: -5px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .auth-core {
+            width: 60px;
+            height: 60px;
+            background: var(--riot-red);
+            margin: 0 auto 20px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+                box-shadow: 0 0 30px var(--riot-red);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        .input-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .riot-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 12px 20px;
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            flex: 2;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .riot-input:focus {
+            border-color: var(--riot-red);
+        }
+
+        .tag-input {
+            flex: 1;
+        }
+
+        .riot-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--riot-red);
+            color: white;
+            border: none;
+            font-family: var(--font-main);
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 20px;
+            clip-path: polygon(5% 0, 100% 0, 100% 80%, 95% 100%, 0 100%, 0 20%);
+            transition: 0.3s;
+        }
+
+        .riot-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* MAIN HUD LAYOUT */
+        main {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            grid-template-rows: auto 1fr 1fr;
+            gap: 20px;
+            padding: 40px;
+            max-width: 1800px;
+            margin: 0 auto;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        body.authenticated main {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .hud-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hud-subtitle {
+            font-size: 0.7rem;
+            color: var(--neural-blue);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* HUD COMPONENTS */
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #475569;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 8px;
+        }
+
+        /* ADVISOR HUD (CENTERPIECE) */
+        .advisor-hud {
+            grid-row: 2 / 4;
+            border-top: 4px solid var(--riot-red) !important;
+            background: linear-gradient(180deg, rgba(255, 70, 85, 0.05) 0%, transparent 100%);
+        }
+
+        .intelligence-stream {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .stream-tag {
+            color: var(--riot-red);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .recommendation-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--neural-blue);
+            box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.15);
+        }
+
+        /* DATA VIZ HUD */
+        .viz-hud {
+            grid-column: 2 / 4;
+        }
+
+        .map-frame {
+            position: relative;
+            margin-top: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .map-frame::before {
+            content: "LIVE_COORD_STREAM_ACTV";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--tactical-cyan);
+            animation: blink 1s infinite;
+        }
+
+        .viz-hud img {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* METRIC HUD */
+        .metric-hud {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hud-stat {
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 2px solid var(--neural-blue);
+            padding: 15px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--neural-blue);
+        }
+
+        .benchmark-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--tactical-cyan);
+            box-shadow: 0 0 100px var(--tactical-cyan);
+        }
+
+        /* PLAYER PROFILE */
+        .hud-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--font-mono);
+        }
+
+        .rank-diamond {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--neural-blue), var(--tactical-cyan));
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        /* RIOT SIM INTERSTITIAL */
+        #riot-sim {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 10001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--riot-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ENHANCED METRICS STYLES */
+        .metric-card {
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.05), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--tactical-cyan), var(--neural-blue));
+        }
+
+        .premium-metric {
+            border-left: 3px solid var(--tactical-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.1);
+        }
+
+        .intelligence-metric {
+            border-left: 3px solid var(--neural-blue);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        .risk-metric {
+            border-left: 3px solid var(--riot-red);
+            box-shadow: 0 0 20px rgba(255, 70, 85, 0.1);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .metric-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #cbd5e1;
+        }
+
+        .metric-badge {
+            font-size: 0.5rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .ovr-badge {
+            background: var(--tactical-cyan);
+            color: #000;
+        }
+
+        .ai-badge {
+            background: var(--neural-blue);
+            color: #fff;
+        }
+
+        .risk-badge {
+            background: var(--riot-red);
+            color: #fff;
+        }
+
+        .oracle-badge {
+            background: linear-gradient(45deg, var(--neural-blue), var(--tactical-cyan));
+            color: #fff;
+        }
+
+        .metric-value-container {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--tactical-cyan);
+            font-family: var(--font-mono);
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+        }
+
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+        }
+
+        .trend-arrow {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .trend-value {
+            color: #10b981;
+            font-family: var(--font-mono);
+        }
+
+        .metric-subtitle {
+            font-size: 0.6rem;
+            color: var(--neural-blue);
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 15px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .breakdown-item {
+            text-align: center;
+        }
+
+        .breakdown-label {
+            display: block;
+            font-size: 0.5rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .breakdown-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--tactical-cyan);
+            font-family: var(--font-mono);
+        }
+
+        .agent-status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .agent-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+
+        .agent-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #dc2626;
+        }
+
+        .agent-indicator.active {
+            background: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .agent-name {
+            font-size: 0.6rem;
+            font-family: var(--font-mono);
+            color: #cbd5e1;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .compact-metric {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        .compact-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .compact-title {
+            font-size: 0.6rem;
+            font-family: var(--font-mono);
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .compact-rating {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--neural-blue);
+            padding: 2px 6px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 3px;
+        }
+
+        .compact-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            font-family: var(--font-mono);
+            margin-bottom: 8px;
+        }
+
+        .compact-bar {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .compact-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.6s ease;
+        }
+
+        .risk-analysis {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .risk-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .risk-label {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            font-family: var(--font-mono);
+        }
+
+        .risk-meter {
+            width: 80px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .risk-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+
+        .low-risk {
+            background: #10b981;
+        }
+
+        .medium-risk {
+            background: #f59e0b;
+        }
+
+        .high-risk {
+            background: #dc2626;
+        }
+
+        .improvement-panel {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .improvement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .improvement-count {
+            background: var(--tactical-cyan);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .improvement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .improvement-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+            border-left: 2px solid transparent;
+        }
+
+        .improvement-item.high-priority {
+            border-left-color: var(--riot-red);
+        }
+
+        .improvement-item.medium-priority {
+            border-left-color: #f59e0b;
+        }
+
+        .improvement-item.low-priority {
+            border-left-color: #10b981;
+        }
+
+        .priority-badge {
+            font-size: 0.5rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .high-priority .priority-badge {
+            background: var(--riot-red);
+            color: #fff;
+        }
+
+        .medium-priority .priority-badge {
+            background: #f59e0b;
+            color: #000;
+        }
+
+        .low-priority .priority-badge {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .improvement-text {
+            font-size: 0.7rem;
+            color: #cbd5e1;
+            font-family: var(--font-mono);
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- STAGE 1: THE NEURAL LINK GATEWAY -->
+    <div id="auth-portal">
+        <div class="neural-link-card">
+            <div class="auth-core"></div>
+            <h1 style="font-weight: 300; letter-spacing: 10px; font-size: 2.5rem; margin-bottom: 10px;">AURORA</h1>
+            <p class="hud-subtitle">Decision Intelligence System</p>
+
+            <div class="input-group">
+                <input type="text" id="riot-id-input" class="riot-input" placeholder="Riot ID (e.g. RadiantPlayer)">
+                <input type="text" id="tag-input" class="riot-input tag-input" placeholder="#TOP1">
+            </div>
+
+            <button class="riot-btn" onclick="startAuth()">Sign in with Riot ID</button>
+            <div style="margin-top: 30px; font-family: var(--font-mono); font-size: 0.6rem; color: #475569;">
+                SECURED BY RIOT IDENTITY V2.1 // 256-BIT ENCRYPTION
+            </div>
+        </div>
+    </div>
+
+    <!-- STAGE 2: RIOT LOGIN INTERSTITIAL -->
+    <div id="riot-sim">
+        <div
+            style="text-align: center; width: 450px; padding: 50px; border: 1px solid #ddd; box-shadow: 0 10px 50px rgba(0,0,0,0.1); border-radius: 4px;">
+            <div
+                style="font-weight: 900; font-size: 1.5rem; color: var(--riot-red); margin-bottom: 30px; letter-spacing: 5px;">
+                RIOT GAMES</div>
+            <p id="auth-message" style="font-size: 1rem; color: #111; margin-bottom: 25px;">Authenticating <b
+                    id="display-id">Player</b>...</p>
+
+            <div id="login-fields">
+                <div
+                    style="background: #eee; height: 50px; margin-bottom: 10px; border-radius: 4px; display: flex; align-items: center; padding: 0 15px; color: #777;">
+                    Username</div>
+                <div
+                    style="background: #eee; height: 50px; margin-bottom: 30px; border-radius: 4px; display: flex; align-items: center; padding: 0 15px; color: #777;">
+                    Password</div>
+                <button class="riot-btn" style="clip-path: none; margin: 0; border-radius: 4px;"
+                    onclick="simulateHandshake()">Sign In</button>
+            </div>
+
+            <div id="loading-state" style="display: none;">
+                <div class="spinner"></div>
+                <p style="color: #555; font-size: 0.9rem; font-family: monospace;">REDIRECTING TO APP SOURCE...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAGE 3: THE DASHBOARD HUD -->
+    <main id="hud-main">
+        <header>
+            <div class="hud-title">
+                <span style="color: var(--riot-red); opacity: 0.8;">◤</span>
+                AURORA_INTEL_HUB
+                <span class="hud-subtitle" style="margin-left: 10px;">Ver. 2.6.Personalized</span>
+            </div>
+            <div class="hud-profile">
+                <div style="text-align: right;">
+                    <div id="final-username" style="font-weight: 900; color: #fff;">RadiantPlayer#TOP1</div>
+                    <div style="font-size: 0.6rem; color: var(--neural-blue); letter-spacing: 2px;">ASCENDANT_RANK_III
+                    </div>
+                </div>
+                <div class="rank-diamond"></div>
+            </div>
+        </header>
+
+        <!-- PANEL: ADVISOR TERMINAL -->
+        <div class="glass-panel advisor-hud">
+            <div class="panel-header">
+                <span>INTEL_STREAM [ACTIVE]</span>
+                <span style="color: var(--riot-red);">PRIORITY_CRITICAL</span>
+            </div>
+            <div class="intelligence-stream" id="advisor-stream">
+                <div><span class="stream-tag">[LINK]</span> Establishing Neural Handshake...</div>
+                <div id="extraction-status"></div>
+                <div class="recommendation-box" style="display: none;" id="reco-box">
+                    <div
+                        style="font-weight: 900; font-size: 0.7rem; color: var(--neural-blue); margin-bottom: 10px; letter-spacing: 2px;">
+                        TACTICAL_INSTRUCTION</div>
+                    <p id="personalized-advice" style="font-size: 1rem; font-weight: 600; line-height: 1.4;">
+                        Extracting real-time habits...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: TACTICAL MAP ANALYSIS -->
+        <div class="glass-panel viz-hud">
+            <div class="panel-header">
+                <span>COORDINATE_GRID_MAPPING</span>
+                <span>CLUSTER_DENSITY: 6,000+</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: calc(100% - 40px);">
+                <div class="map-frame" style="display: flex; flex-direction: column;">
+                    <img src="tactical_kill_heatmap.png" alt="Heatmap" style="flex: 1; min-height: 0;">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 0.6rem; margin-top: 8px; color: var(--tactical-cyan);">
+                        [KILL_DENSITY_CV_STREAM]</div>
+                </div>
+                <div class="map-frame" style="display: flex; flex-direction: column;">
+                    <img src="round_1_trajectories.png" alt="Trajectories" style="flex: 1; min-height: 0;">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 0.6rem; margin-top: 8px; color: var(--tactical-cyan);">
+                        [PLAYER_PATHING_SYNC]</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: ENHANCED PERFORMANCE BENCHMARKS -->
+        <div class="glass-panel metric-hud">
+            <div class="panel-header">
+                <span>NEURAL_PERFORMANCE_ANALYTICS</span>
+                <span style="color: var(--tactical-cyan); font-size: 0.6rem;">LIVE_TRACKING_ACTIVE</span>
+            </div>
+            
+            <!-- OVR RATING CARD -->
+            <div class="metric-card premium-metric">
+                <div class="metric-header">
+                    <span class="metric-title">OVERALL_VALORANT_RATING</span>
+                    <span class="metric-badge ovr-badge">OVR</span>
+                </div>
+                <div class="metric-value-container">
+                    <span class="metric-value" id="ovr-rating-val">60.0</span>
+                    <div class="metric-trend" id="ovr-trend">
+                        <span class="trend-arrow">↑</span>
+                        <span class="trend-value">+2.3</span>
+                    </div>
+                </div>
+                <div class="metric-breakdown">
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Tactical</span>
+                        <span class="breakdown-value" id="tactical-breakdown">78.3%</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Synergy</span>
+                        <span class="breakdown-value" id="synergy-breakdown">77.0%</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Timing</span>
+                        <span class="breakdown-value" id="timing-breakdown">65.2%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MULTI-AGENT INTELLIGENCE CARD -->
+            <div class="metric-card intelligence-metric">
+                <div class="metric-header">
+                    <span class="metric-title">AI_INTELLIGENCE_SCORE</span>
+                    <span class="metric-badge ai-badge">AI</span>
+                </div>
+                <div class="metric-value-container">
+                    <span class="metric-value" id="ai-intel-val">82.7</span>
+                    <div class="metric-subtitle">Multi-Agent Confidence</div>
+                </div>
+                <div class="agent-status-grid">
+                    <div class="agent-status">
+                        <span class="agent-indicator active"></span>
+                        <span class="agent-name">CleanerBot</span>
+                    </div>
+                    <div class="agent-status">
+                        <span class="agent-indicator active"></span>
+                        <span class="agent-name">AnalystBot</span>
+                    </div>
+                    <div class="agent-status">
+                        <span class="agent-indicator active"></span>
+                        <span class="agent-name">CoachBot</span>
+                    </div>
+                    <div class="agent-status">
+                        <span class="agent-indicator active"></span>
+                        <span class="agent-name">OracleBot</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADVANCED METRICS ROW -->
+            <div class="metrics-row">
+                <!-- ENTRY COORDINATION -->
+                <div class="compact-metric">
+                    <div class="compact-header">
+                        <span class="compact-title">ENTRY_COORDINATION</span>
+                        <span class="compact-rating" id="entry-rating-display">B-</span>
+                    </div>
+                    <div class="compact-value" id="entry-coordination-val">68.5%</div>
+                    <div class="compact-bar">
+                        <div class="compact-fill" id="entry-coordination-bar" style="width: 68.5%; background: linear-gradient(90deg, var(--neural-blue), var(--tactical-cyan));"></div>
+                    </div>
+                </div>
+
+                <!-- WIN PROBABILITY -->
+                <div class="compact-metric">
+                    <div class="compact-header">
+                        <span class="compact-title">WIN_PROBABILITY</span>
+                        <span class="compact-badge oracle-badge">ORACLE</span>
+                    </div>
+                    <div class="compact-value" id="win-probability-val">0.9%</div>
+                    <div class="compact-bar">
+                        <div class="compact-fill" id="win-probability-bar" style="width: 0.9%; background: var(--riot-red);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RISK ASSESSMENT CARD -->
+            <div class="metric-card risk-metric">
+                <div class="metric-header">
+                    <span class="metric-title">RISK_ASSESSMENT</span>
+                    <span class="metric-badge risk-badge" id="risk-level-badge">MEDIUM</span>
+                </div>
+                <div class="risk-analysis">
+                    <div class="risk-item">
+                        <span class="risk-label">Performance Risk</span>
+                        <div class="risk-meter">
+                            <div class="risk-fill medium-risk" id="performance-risk-meter"></div>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <span class="risk-label">Coordination Risk</span>
+                        <div class="risk-meter">
+                            <div class="risk-fill low-risk" id="coordination-risk-meter"></div>
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <span class="risk-label">Strategy Risk</span>
+                        <div class="risk-meter">
+                            <div class="risk-fill medium-risk" id="strategy-risk-meter"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IMPROVEMENT RECOMMENDATIONS -->
+            <div class="improvement-panel">
+                <div class="improvement-header">
+                    <span>NEURAL_IMPROVEMENT_PROTOCOL</span>
+                    <span class="improvement-count" id="improvement-count">3</span>
+                </div>
+                <div class="improvement-list" id="improvement-list">
+                    <div class="improvement-item high-priority">
+                        <span class="priority-badge">HIGH</span>
+                        <span class="improvement-text">Improve entry timing coordination (+15% OVR potential)</span>
+                    </div>
+                    <div class="improvement-item medium-priority">
+                        <span class="priority-badge">MED</span>
+                        <span class="improvement-text">Optimize agent composition for better synergy</span>
+                    </div>
+                    <div class="improvement-item low-priority">
+                        <span class="priority-badge">LOW</span>
+                        <span class="improvement-text">Refine post-plant positioning strategies</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: TACTICAL VISION (NEW) -->
+        <div class="glass-panel" style="grid-column: 2 / 4;">
+            <div class="panel-header">
+                <span>TACTICAL_VISION_TERMINAL</span>
+                <span style="color: var(--tactical-cyan);">VOD_AI_ANALYSIS_MOD_v1.1</span>
+            </div>
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+                    <div id="vod-upload-zone"
+                        style="border: 2px dashed var(--border); height: 100px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.02);"
+                        onclick="document.getElementById('hidden-vod-input').click()">
+                        <div style="font-size: 1.2rem; margin-bottom: 5px;">📤</div>
+                        <div style="font-size: 0.6rem; font-family: var(--font-mono); color: #94a3b8;">UPLOAD_LOCAL_FILE
+                        </div>
+                        <input type="file" id="hidden-vod-input" accept="video/*" style="display: none;"
+                            onchange="handleFileSelect(event)">
+                    </div>
+                    <div style="display: flex; gap: 5px;">
+                        <input type="text" id="vod-link-input" class="riot-input"
+                            placeholder="YouTube Link or C:\Path..."
+                            style="font-size: 0.7rem; padding: 8px 12px; flex: 1; outline: none; border: 1px solid var(--border); background: rgba(0,0,0,0.3); color: white;">
+                        <button class="riot-btn"
+                            style="margin: 0; width: 70px; font-size: 0.6rem; padding: 0; clip-path: none; height: 32px;"
+                            onclick="ingestVideoLink()">ANALYZE</button>
+                    </div>
+                </div>
+                <div id="vision-results"
+                    style="flex: 1.5; font-family: var(--font-mono); font-size: 0.75rem; border-left: 1px solid var(--border); padding-left: 20px; display: none; height: 140px; overflow-y: auto;">
+                    <div style="color: var(--tactical-cyan); margin-bottom: 8px;">[VISION_SCAN_COMPLETE]</div>
+                    <div id="vision-critique" style="line-height: 1.4; color: #cbd5e1;">
+                        Initializing neural VOD scan...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer
+            style="grid-column: 1 / -1; text-align: center; padding-top: 40px; font-family: var(--font-mono); font-size: 0.6rem; opacity: 0.3; letter-spacing: 5px;">
+            AURORA_PROJECT // DECISION_INTELLIGENCE_FOR_PRO_ESPORTS // 2026
+        </footer>
+    </main>
+
+    <script>
+        const RIOT_AUTH_URL = "https://auth.riotgames.com/authorize?client_id=AURORA-SIM&redirect_uri=aurora://callback&response_type=code&scope=openid+riotid";
+
+        function startAuth() {
+            const portal = document.getElementById('auth-portal');
+            portal.style.opacity = '0';
+
+            // SIMULATE EXTERNAL REDIRECT
+            console.log("Redirecting to: " + RIOT_AUTH_URL);
+
+            setTimeout(() => {
+                portal.style.display = 'none';
+                document.getElementById('riot-sim').style.display = 'flex';
+                document.getElementById('auth-message').innerText = "Establishing Secure Riot Handshake...";
+                document.getElementById('login-fields').style.display = 'block';
+            }, 800);
+        }
+
+        function simulateHandshake() {
+            document.getElementById('login-fields').style.display = 'none';
+            document.getElementById('loading-state').style.display = 'block';
+            document.getElementById('auth-message').innerText = "Exchanging OAuth Code for Identity Token...";
+
+            setTimeout(() => {
+                finalizeAuth();
+            }, 2500);
+        }
+
+        function finalizeAuth() {
+            const riot = document.getElementById('riot-sim');
+            riot.style.opacity = '0';
+
+            // MOCK RETURNED IDENTITY FROM "TOKEN"
+            const identities = [
+                { name: "TenZ", tag: "#VGO" },
+                { name: "Aspas", tag: "#LOUD" },
+                { name: "Sacy", tag: "#WIN" },
+                { name: "RadiantPlayer", tag: "#TOP1" }
+            ];
+            const identity = identities[Math.floor(Math.random() * identities.length)];
+
+            setTimeout(() => {
+                riot.style.display = 'none';
+                document.body.classList.add('authenticated');
+                document.getElementById('final-username').innerText = identity.name + identity.tag;
+                startExtractionSequence(identity.name);
+            }, 600);
+        }
+
+        function startExtractionSequence(extractedName) {
+            const status = document.getElementById('extraction-status');
+            status.innerHTML = ""; // Clear
+
+            // Check if backend is in production mode (Simulated via a check to the engine logic)
+            const isProduction = true; // This would normally be a fetch to /status or similar
+
+            const lines = [
+                "[TOKEN] Validating JWT Signature...",
+                "[IDENTITY] Claims verified: " + extractedName + " detected.",
+                isProduction ? "[LINK] PRODUCTION_API_KEY DETECTED. Establishing live cloud sync..." : "[LINK] No Production Key. Running in High-Fidelity Simulation.",
+                "[CV] Syncing personal data clusters...",
+                "[SUCCESS] Authorized for Decision Intelligence."
+            ];
+
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < lines.length) {
+                    const div = document.createElement('div');
+                    div.innerHTML = `<span class="stream-tag">${lines[i].split(' ')[0]}</span> ${lines[i].substring(lines[i].indexOf(' ') + 1)}`;
+                    status.appendChild(div);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('reco-box').style.display = 'block';
+                    document.getElementById('personalized-advice').innerHTML = `
+                        <b>PROFILE:</b> ${extractedName} archetype detected. 
+                        <b>SITUATION:</b> Your match history indicates elite-level placement but high trade-reliance.
+                        <b>GAP:</b> Post-entry latency is +4s vs Pro Mean. Implement 'Waterfall' rotations on Ascent A-Site.
+                    `;
+                }
+            }, 900);
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files ? event.target.files[0] : event.dataTransfer.files[0];
+            if (!file) return;
+
+            console.log("[UPLOAD] Selected file: " + file.name + " (" + (file.size / 1024 / 1024).toFixed(2) + " MB)");
+            processVideoIngestion("local_upload", file.name);
+        }
+
+        // Drag & Drop Handling
+        setTimeout(() => {
+            const uploadZone = document.getElementById('vod-upload-zone');
+            if (!uploadZone) return;
+
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.style.borderColor = "var(--tactical-cyan)";
+                uploadZone.style.background = "rgba(0, 245, 212, 0.05)";
+            });
+
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.style.borderColor = "var(--border)";
+                uploadZone.style.background = "rgba(255,255,255,0.02)";
+            });
+
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.style.borderColor = "var(--border)";
+                uploadZone.style.background = "rgba(255,255,255,0.02)";
+                handleFileSelect(e);
+            });
+        }, 1000);
+
+        function ingestVideoLink() {
+            const val = document.getElementById('vod-link-input').value;
+            if (!val) return;
+
+            const type = val.includes('youtube.com') || val.includes('youtu.be') ? "cloud_stream" : "local_path";
+            // CRITICAL FIX: Pass the FULL URL for cloud streams so backend can download it
+            const sourceId = type === "cloud_stream" ? val : "PATH_RESOLVED";
+
+            processVideoIngestion(type, sourceId);
+        }
+
+        function processVideoIngestion(type, id) {
+            const results = document.getElementById('vision-results');
+            const critique = document.getElementById('vision-critique');
+
+            critique.innerHTML = ""; // Reset
+            results.style.display = 'block';
+
+            const sourceTag = type === "cloud_stream" ? "[CLOUD]" : "[LOCAL]";
+            const initialLines = [
+                `${sourceTag} Initiating VOD handshake with ${id}...`,
+                "[AI_MODEL] Establishing neural network pipeline...",
+                "[VISION] Extracting tactical frame clusters (30fps -> 2fps)...",
+                "[BRAIN] Handing off visual context to trained Valorant AI..."
+            ];
+
+            let i = 0;
+            const handshakeInterval = setInterval(() => {
+                if (i < initialLines.length) {
+                    const line = document.createElement('div');
+                    line.style.color = i === 0 ? "var(--neural-blue)" : "rgba(255,255,255,0.5)";
+                    line.style.fontSize = "0.65rem";
+                    line.style.marginBottom = "5px";
+                    line.innerHTML = initialLines[i];
+                    critique.appendChild(line);
+                    i++;
+                } else {
+                    clearInterval(handshakeInterval);
+                    startNeuralReasoning();
+                }
+            }, 800);
+
+            async function startNeuralReasoning() {
+                try {
+                    const response = await fetch("http://localhost:8000/analyze-vod", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ source: id, type: type })
+                    });
+
+                    if (!response.ok) throw new Error("NEURAL_BACKEND_OFFLINE");
+
+                    const data = await response.json();
+                    let analysis = data.analysis;
+
+                    // If backend returns a string (JSON from Gemini), parse it
+                    if (typeof analysis === 'string') {
+                        try {
+                            // Trim MD backticks if present
+                            analysis = analysis.replace(/```json|```/g, '').trim();
+                            analysis = JSON.parse(analysis);
+                        } catch (e) {
+                            console.warn("Could not parse brain response as JSON, using raw.");
+                        }
+                    }
+
+                    // Display enhanced analysis with multi-agent insights
+                    const findings = [
+                        `<b>MAP_DETECTED:</b> ${analysis.detected_map || "UNKNOWN"}`,
+                        `<b>AGENTS_FOUND:</b> ${(analysis.detected_agents || []).join(', ') || "None detected"}`,
+                        `<b>ENTRY_RATING:</b> ${analysis.entry_rating || "B-"}`,
+                        `<b>TIMING_GAP:</b> ${analysis.timing_gap || "Neutral"}`,
+                        `<b>FORMATION_ISSUE:</b> ${analysis.formation_issue || "None"}`,
+                        `<b>PLANTING_LOGIC:</b> ${analysis.planting_critique || "Standard"}`,
+                        `<b>ROTATION_LATENCY:</b> ${analysis.rotation_latency || "0.0s"}`,
+                        `<b>WIN_RATE_PRED:</b> ${analysis.win_rate_prediction || "50%"}`,
+                        `<b>AI_ANALYSIS:</b> ${analysis.tactical_suggestion || "No deviations."}`
+                    ];
+
+                    // Add multi-agent insights if available
+                    if (analysis.agent_analysis) {
+                        const kpis = analysis.agent_analysis.kpis || {};
+                        findings.push(`<b>OVR_SCORE:</b> ${kpis.ovr_score?.toFixed(1) || "N/A"}`);
+                        findings.push(`<b>TACTICAL_EFFICIENCY:</b> ${kpis.tactical_efficiency?.toFixed(1) || "N/A"}%`);
+                        findings.push(`<b>AGENT_SYNERGY:</b> ${kpis.agent_synergy?.toFixed(1) || "N/A"}%`);
+                    }
+
+                    if (analysis.coach_recommendations) {
+                        const confidence = analysis.coach_recommendations.confidence_score;
+                        findings.push(`<b>COACH_CONFIDENCE:</b> ${confidence?.toFixed(1) || "N/A"}%`);
+                        
+                        const topStrategy = analysis.coach_recommendations.strategy_recommendations?.recommendations?.[0];
+                        if (topStrategy) {
+                            findings.push(`<b>TOP_STRATEGY:</b> ${topStrategy.strategy_name || "N/A"}`);
+                        }
+                    }
+
+                    if (analysis.oracle_predictions) {
+                        const winProb = analysis.oracle_predictions.predictions?.win_probability;
+                        findings.push(`<b>WIN_PROBABILITY:</b> ${winProb?.toFixed(1) || "N/A"}%`);
+                        
+                        const riskLevel = analysis.oracle_predictions.risk_assessment?.overall_risk_level;
+                        if (riskLevel) {
+                            findings.push(`<b>RISK_LEVEL:</b> ${riskLevel}`);
+                        }
+                    }
+
+                    let j = 0;
+                    const vInterval = setInterval(() => {
+                        if (j < findings.length) {
+                            const p = document.createElement('p');
+                            p.style.marginBottom = "8px";
+                            p.style.opacity = "0";
+                            p.style.transition = "opacity 0.5s";
+                            p.innerHTML = `<span style="color:var(--riot-red); font-weight:bold;">[!]</span> ${findings[j]}`;
+                            critique.appendChild(p);
+                            setTimeout(() => p.style.opacity = "1", 50);
+                            j++;
+                            results.scrollTop = results.scrollHeight;
+                        } else {
+                            clearInterval(vInterval);
+                            renderFooter(`NEURAL_SCAN_SUCCESS // Response received from Live Brain.`);
+
+                            // NEURAL SPATIAL SYNC: Update tactical maps
+                            if (data.spatial_data) {
+                                updateTacticalMaps(data.spatial_data);
+                            }
+
+                            // PERFORMANCE SYNC: Update global benchmarks
+                            updateGlobalBenchmarks(analysis);
+                        }
+                    }, 1200);
+
+                } catch (err) {
+                    const errorMsg = err.message === 'NEURAL_BACKEND_OFFLINE'
+                        ? "NEURAL_BACKEND_OFFLINE. Ensure backend is running."
+                        : "INTERNAL_BRAIN_ERROR. The Neural Engine encountered a tactical hurdle.";
+                    renderFooter(`[ERROR] ${errorMsg}`, "var(--riot-red)");
+                }
+
+                function renderFooter(msg, color) {
+                    const footer = document.createElement('div');
+                    footer.style.marginTop = "15px";
+                    footer.style.color = color || "var(--tactical-cyan)";
+                    footer.style.borderTop = "1px solid var(--border)";
+                    footer.style.paddingTop = "8px";
+                    footer.innerHTML = msg;
+                    critique.appendChild(footer);
+                    results.scrollTop = results.scrollHeight;
+                }
+            }
+
+            function updateGlobalBenchmarks(analysis) {
+                console.log("[SYNC] Updating global performance benchmarks...");
+
+                // Enhanced Metrics Update
+                updateEnhancedMetrics(analysis);
+                
+                // Trigger a small visual pulse on update
+                const metricHud = document.querySelector('.metric-hud');
+                metricHud.style.boxShadow = "inset 0 0 30px rgba(0, 245, 212, 0.1)";
+                setTimeout(() => metricHud.style.boxShadow = "none", 500);
+            }
+
+            function updateEnhancedMetrics(analysis) {
+                // Update OVR Rating Card
+                const ovrScore = analysis.agent_analysis?.kpis?.ovr_score || 60.0;
+                document.getElementById('ovr-rating-val').innerText = ovrScore.toFixed(1);
+                
+                // Update OVR breakdown
+                const tacticalEff = analysis.agent_analysis?.kpis?.tactical_efficiency || 78.3;
+                const agentSynergy = analysis.agent_analysis?.kpis?.agent_synergy || 77.0;
+                const timingPerf = analysis.agent_analysis?.kpis?.timing_performance || 65.2;
+                
+                document.getElementById('tactical-breakdown').innerText = tacticalEff.toFixed(1) + '%';
+                document.getElementById('synergy-breakdown').innerText = agentSynergy.toFixed(1) + '%';
+                document.getElementById('timing-breakdown').innerText = timingPerf.toFixed(1) + '%';
+                
+                // Update AI Intelligence Score
+                const coachConfidence = analysis.coach_recommendations?.confidence_score || 82.7;
+                document.getElementById('ai-intel-val').innerText = coachConfidence.toFixed(1);
+                
+                // Update Entry Coordination
+                const entryRating = analysis.entry_rating || 'B-';
+                document.getElementById('entry-rating-display').innerText = entryRating;
+                const entryCoordination = calculateEntryCoordination(entryRating);
+                document.getElementById('entry-coordination-val').innerText = entryCoordination.toFixed(1) + '%';
+                document.getElementById('entry-coordination-bar').style.width = entryCoordination + '%';
+                
+                // Update Win Probability
+                const winProb = analysis.oracle_predictions?.predictions?.win_probability || 0.9;
+                document.getElementById('win-probability-val').innerText = winProb.toFixed(1) + '%';
+                document.getElementById('win-probability-bar').style.width = winProb + '%';
+                
+                // Update Risk Assessment
+                const riskLevel = analysis.oracle_predictions?.risk_assessment?.overall_risk_level || 'MEDIUM';
+                document.getElementById('risk-level-badge').innerText = riskLevel;
+                updateRiskMeters(riskLevel);
+                
+                // Update Improvement Recommendations
+                updateImprovementRecommendations(analysis);
+                
+                // Update OVR trend
+                updateOVRTrend(ovrScore);
+            }
+
+            function calculateEntryCoordination(entryRating) {
+                const ratings = { 'A+': 95, 'A': 90, 'A-': 85, 'B+': 80, 'B': 75, 'B-': 68.5, 'C+': 60, 'C': 50, 'C-': 40, 'D+': 30, 'D': 20, 'D-': 10, 'F': 5 };
+                return ratings[entryRating] || 50;
+            }
+
+            function updateRiskMeters(riskLevel) {
+                const riskSettings = {
+                    'LOW': { performance: 'low', coordination: 'low', strategy: 'low' },
+                    'MEDIUM': { performance: 'medium', coordination: 'low', strategy: 'medium' },
+                    'HIGH': { performance: 'high', coordination: 'medium', strategy: 'high' }
+                };
+                
+                const settings = riskSettings[riskLevel] || riskSettings['MEDIUM'];
+                
+                document.getElementById('performance-risk-meter').className = 'risk-fill ' + settings.performance + '-risk';
+                document.getElementById('coordination-risk-meter').className = 'risk-fill ' + settings.coordination + '-risk';
+                document.getElementById('strategy-risk-meter').className = 'risk-fill ' + settings.strategy + '-risk';
+            }
+
+            function updateImprovementRecommendations(analysis) {
+                const improvements = [];
+                
+                // Generate improvements based on analysis
+                if (analysis.agent_analysis?.kpis?.ovr_score < 70) {
+                    improvements.push({
+                        priority: 'HIGH',
+                        text: 'Improve entry timing coordination (+15% OVR potential)'
+                    });
+                }
+                
+                if (analysis.agent_analysis?.kpis?.agent_synergy < 80) {
+                    improvements.push({
+                        priority: 'MED',
+                        text: 'Optimize agent composition for better synergy'
+                    });
+                }
+                
+                if (analysis.oracle_predictions?.risk_assessment?.overall_risk_level === 'HIGH') {
+                    improvements.push({
+                        priority: 'HIGH',
+                        text: 'Address high-priority tactical risks immediately'
+                    });
+                }
+                
+                if (improvements.length === 0) {
+                    improvements.push({
+                        priority: 'LOW',
+                        text: 'Maintain current tactical performance level'
+                    });
+                }
+                
+                // Update DOM
+                const improvementList = document.getElementById('improvement-list');
+                improvementList.innerHTML = '';
+                
+                improvements.forEach((improvement, index) => {
+                    const div = document.createElement('div');
+                    div.className = `improvement-item ${improvement.priority.toLowerCase()}-priority`;
+                    div.innerHTML = `
+                        <span class="priority-badge">${improvement.priority}</span>
+                        <span class="improvement-text">${improvement.text}</span>
+                    `;
+                    improvementList.appendChild(div);
+                });
+                
+                document.getElementById('improvement-count').innerText = improvements.length;
+            }
+
+            function updateOVRTrend(currentOVR) {
+                // Simulate trend calculation (in real app, this would compare with historical data)
+                const trendValue = (Math.random() * 10 - 5).toFixed(1); // Random trend for demo
+                const trendArrow = trendValue > 0 ? '↑' : '↓';
+                
+                document.querySelector('.trend-arrow').innerText = trendArrow;
+                document.querySelector('.trend-value').innerText = Math.abs(trendValue);
+            }
+
+            function updateTacticalMaps(data) {
+                console.log("[SYNC] Updating maps for context: " + data.map_id);
+                const vizHud = document.querySelector('.viz-hud');
+                const images = vizHud.querySelectorAll('img');
+
+                // Add cinematic flash
+                vizHud.style.boxShadow = "inset 0 0 50px var(--neural-blue)";
+                vizHud.style.borderColor = "var(--neural-blue)";
+
+                setTimeout(() => {
+                    vizHud.style.boxShadow = "none";
+                    vizHud.style.borderColor = "var(--border)";
+
+                    const timestamp = new Date().getTime();
+                    if (images[0]) images[0].src = data.heatmap_url + "?t=" + timestamp;
+                    if (images[1]) images[1].src = data.trajectories_url + "?t=" + timestamp;
+
+                    // Update indices
+                    const index = vizHud.querySelectorAll('.panel-header span');
+                    if (index[0]) index[0].innerText = `COORDINATE_GRID_MAPPING // ${data.map_id}`;
+                }, 300);
+            }
+        }
+    </script>
+    <script src="intelligence_frontend.js"></script>
+    <script src="valorant_scraper_frontend.js"></script>
+    <script src="aurora_tactical_frontend.js"></script>
+</body>
+
+</html>

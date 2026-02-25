@@ -1,0 +1,59 @@
+{
+    "identity": {
+        "riot_id": "RadiantPlayer",
+        "tagline": "TOP1",
+        "puuid": "user_b460ec7325772ff1",
+        "rank": "Ascendant 3",
+        "region": "NA"
+    },
+    "performance": {
+        "total_games": 24,
+        "win_rate": "62.5%",
+        "mvp_count": 8,
+        "avg_combat_score": 245
+    },
+    "style": {
+        "dominant_archetype": "Aggressive Entry",
+        "archetype_confidence": "88%",
+        "traits": [
+            "High First Blood rate",
+            "Aggressive space creator",
+            "Latent Rotation Speed"
+        ]
+    },
+    "recommendations": [
+        {
+            "type": "IDENTITY_INSIGHT",
+            "situation": "Playstyle Optimization",
+            "observation": "Authenticated Archetype: Aggressive Entry (8 MVPs)",
+            "recommendation": "You excel at space creation. However, the data shows your team loses 70% of rounds where you don't survive to the plant. Focus on 'Trade-Safety' pathing.",
+            "severity": "OPTIMAL"
+        },
+        {
+            "type": "COMPARATIVE_GAP",
+            "situation": "Macro Movement",
+            "observation": "Identity-specific Insight (Aggressive Entry): Your entry is sharp, but your macro rotations are 14.2s behind Radiant pace.",
+            "recommendation": "Radiant Entry Fraggers rotate through Spawn at 20s. You are currently taking 34.2s.",
+            "severity": "HIGH"
+        },
+        {
+            "type": "OPPONENT_HABIT",
+            "situation": "Enemy Site Setup",
+            "observation": "Opponent demonstrates 'Standard Defensive Spread' (49% consistency).",
+            "recommendation": "Use 'Under-Heaven' smokes and delay your hit to force them off the high ground.",
+            "severity": "CRITICAL"
+        }
+    ],
+    "benchmarks": {
+        "metric": "Rotation Speed",
+        "player_value": "34.2s",
+        "pro_benchmark": "20.0s",
+        "gap_severity": "HIGH",
+        "insight": "Identity-specific Insight (Aggressive Entry): Your entry is sharp, but your macro rotations are 14.2s behind Radiant pace."
+    },
+    "opponent_habits": {
+        "habit": "Standard Defensive Spread",
+        "consistency": "49%",
+        "counter": "Use 'Under-Heaven' smokes and delay your hit to force them off the high ground."
+    }
+}

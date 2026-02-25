@@ -1,0 +1,3202 @@
+{
+  "auto_sample_0": {
+    "map": "HAVEN",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.1,
+      "formation_score": 0.87,
+      "planting_score": 0.82,
+      "rotation_score": 0.49,
+      "win_rate": 0.67
+    },
+    "image_path": "frames/auto_frame_000000.jpg",
+    "frame_number": 0
+  },
+  "auto_sample_1": {
+    "map": "BIND",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.0,
+      "formation_score": 0.62,
+      "planting_score": 0.75,
+      "rotation_score": 0.59,
+      "win_rate": 0.6
+    },
+    "image_path": "frames/auto_frame_000001.jpg",
+    "frame_number": 1
+  },
+  "auto_sample_2": {
+    "map": "SPLIT",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 0.8,
+      "formation_score": 0.59,
+      "planting_score": 0.8,
+      "rotation_score": 0.74,
+      "win_rate": 0.68
+    },
+    "image_path": "frames/auto_frame_000002.jpg",
+    "frame_number": 2
+  },
+  "auto_sample_3": {
+    "map": "LOTUS",
+    "tactical_situation": "force_buy",
+    "formation": "scattered",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.3,
+      "formation_score": 0.42,
+      "planting_score": 0.69,
+      "rotation_score": 0.73,
+      "win_rate": 0.5
+    },
+    "image_path": "frames/auto_frame_000003.jpg",
+    "frame_number": 3
+  },
+  "auto_sample_4": {
+    "map": "LOTUS",
+    "tactical_situation": "mid_control",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.0,
+      "formation_score": 0.66,
+      "planting_score": 0.7,
+      "rotation_score": 0.45,
+      "win_rate": 0.57
+    },
+    "image_path": "frames/auto_frame_000004.jpg",
+    "frame_number": 4
+  },
+  "auto_sample_5": {
+    "map": "BREEZE",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.7,
+      "formation_score": 0.83,
+      "planting_score": 0.57,
+      "rotation_score": 0.53,
+      "win_rate": 0.63
+    },
+    "image_path": "frames/auto_frame_000005.jpg",
+    "frame_number": 5
+  },
+  "auto_sample_6": {
+    "map": "SPLIT",
+    "tactical_situation": "retake",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.8,
+      "formation_score": 0.69,
+      "planting_score": 0.83,
+      "rotation_score": 0.75,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000006.jpg",
+    "frame_number": 6
+  },
+  "auto_sample_7": {
+    "map": "FRACTURE",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 3.4,
+      "formation_score": 0.79,
+      "planting_score": 0.9,
+      "rotation_score": 0.45,
+      "win_rate": 0.44
+    },
+    "image_path": "frames/auto_frame_000007.jpg",
+    "frame_number": 7
+  },
+  "auto_sample_8": {
+    "map": "PEARL",
+    "tactical_situation": "post_plant",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.7,
+      "formation_score": 0.79,
+      "planting_score": 0.75,
+      "rotation_score": 0.66,
+      "win_rate": 0.6
+    },
+    "image_path": "frames/auto_frame_000008.jpg",
+    "frame_number": 8
+  },
+  "auto_sample_9": {
+    "map": "SUNSET",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.3,
+      "formation_score": 0.46,
+      "planting_score": 0.56,
+      "rotation_score": 0.67,
+      "win_rate": 0.6
+    },
+    "image_path": "frames/auto_frame_000009.jpg",
+    "frame_number": 9
+  },
+  "auto_sample_10": {
+    "map": "LOTUS",
+    "tactical_situation": "eco",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.1,
+      "formation_score": 0.5,
+      "planting_score": 0.56,
+      "rotation_score": 0.56,
+      "win_rate": 0.44
+    },
+    "image_path": "frames/auto_frame_000010.jpg",
+    "frame_number": 10
+  },
+  "auto_sample_11": {
+    "map": "SUNSET",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 3.3,
+      "formation_score": 0.54,
+      "planting_score": 0.58,
+      "rotation_score": 0.51,
+      "win_rate": 0.79
+    },
+    "image_path": "frames/auto_frame_000011.jpg",
+    "frame_number": 11
+  },
+  "auto_sample_12": {
+    "map": "BREEZE",
+    "tactical_situation": "mid_control",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.7,
+      "formation_score": 0.65,
+      "planting_score": 0.89,
+      "rotation_score": 0.76,
+      "win_rate": 0.55
+    },
+    "image_path": "frames/auto_frame_000012.jpg",
+    "frame_number": 12
+  },
+  "auto_sample_13": {
+    "map": "ICEBOX",
+    "tactical_situation": "entry",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.2,
+      "formation_score": 0.5,
+      "planting_score": 0.88,
+      "rotation_score": 0.65,
+      "win_rate": 0.58
+    },
+    "image_path": "frames/auto_frame_000013.jpg",
+    "frame_number": 13
+  },
+  "auto_sample_14": {
+    "map": "SPLIT",
+    "tactical_situation": "eco",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 1.1,
+      "formation_score": 0.75,
+      "planting_score": 0.78,
+      "rotation_score": 0.63,
+      "win_rate": 0.48
+    },
+    "image_path": "frames/auto_frame_000014.jpg",
+    "frame_number": 14
+  },
+  "auto_sample_15": {
+    "map": "HAVEN",
+    "tactical_situation": "retake",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 3.2,
+      "formation_score": 0.83,
+      "planting_score": 0.56,
+      "rotation_score": 0.55,
+      "win_rate": 0.44
+    },
+    "image_path": "frames/auto_frame_000015.jpg",
+    "frame_number": 15
+  },
+  "auto_sample_16": {
+    "map": "SPLIT",
+    "tactical_situation": "mid_control",
+    "formation": "tight",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.9,
+      "formation_score": 0.49,
+      "planting_score": 0.68,
+      "rotation_score": 0.74,
+      "win_rate": 0.57
+    },
+    "image_path": "frames/auto_frame_000016.jpg",
+    "frame_number": 16
+  },
+  "auto_sample_17": {
+    "map": "BIND",
+    "tactical_situation": "retake",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.0,
+      "formation_score": 0.88,
+      "planting_score": 0.66,
+      "rotation_score": 0.63,
+      "win_rate": 0.59
+    },
+    "image_path": "frames/auto_frame_000017.jpg",
+    "frame_number": 17
+  },
+  "auto_sample_18": {
+    "map": "ICEBOX",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.4,
+      "formation_score": 0.59,
+      "planting_score": 0.87,
+      "rotation_score": 0.69,
+      "win_rate": 0.41
+    },
+    "image_path": "frames/auto_frame_000018.jpg",
+    "frame_number": 18
+  },
+  "auto_sample_19": {
+    "map": "SPLIT",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.4,
+      "formation_score": 0.51,
+      "planting_score": 0.66,
+      "rotation_score": 0.4,
+      "win_rate": 0.84
+    },
+    "image_path": "frames/auto_frame_000019.jpg",
+    "frame_number": 19
+  },
+  "auto_sample_20": {
+    "map": "ICEBOX",
+    "tactical_situation": "force_buy",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 0.9,
+      "formation_score": 0.41,
+      "planting_score": 0.79,
+      "rotation_score": 0.77,
+      "win_rate": 0.5
+    },
+    "image_path": "frames/auto_frame_000020.jpg",
+    "frame_number": 20
+  },
+  "auto_sample_21": {
+    "map": "PEARL",
+    "tactical_situation": "eco",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.5,
+      "formation_score": 0.41,
+      "planting_score": 0.51,
+      "rotation_score": 0.53,
+      "win_rate": 0.42
+    },
+    "image_path": "frames/auto_frame_000021.jpg",
+    "frame_number": 21
+  },
+  "auto_sample_22": {
+    "map": "BIND",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.5,
+      "formation_score": 0.84,
+      "planting_score": 0.5,
+      "rotation_score": 0.75,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000022.jpg",
+    "frame_number": 22
+  },
+  "auto_sample_23": {
+    "map": "LOTUS",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.3,
+      "formation_score": 0.87,
+      "planting_score": 0.75,
+      "rotation_score": 0.52,
+      "win_rate": 0.79
+    },
+    "image_path": "frames/auto_frame_000023.jpg",
+    "frame_number": 23
+  },
+  "auto_sample_24": {
+    "map": "SUNSET",
+    "tactical_situation": "eco",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.4,
+      "formation_score": 0.68,
+      "planting_score": 0.79,
+      "rotation_score": 0.66,
+      "win_rate": 0.84
+    },
+    "image_path": "frames/auto_frame_000024.jpg",
+    "frame_number": 24
+  },
+  "auto_sample_25": {
+    "map": "LOTUS",
+    "tactical_situation": "entry",
+    "formation": "scattered",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 1.1,
+      "formation_score": 0.43,
+      "planting_score": 0.87,
+      "rotation_score": 0.75,
+      "win_rate": 0.8
+    },
+    "image_path": "frames/auto_frame_000025.jpg",
+    "frame_number": 25
+  },
+  "auto_sample_26": {
+    "map": "BREEZE",
+    "tactical_situation": "retake",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.7,
+      "formation_score": 0.84,
+      "planting_score": 0.7,
+      "rotation_score": 0.46,
+      "win_rate": 0.7
+    },
+    "image_path": "frames/auto_frame_000026.jpg",
+    "frame_number": 26
+  },
+  "auto_sample_27": {
+    "map": "HAVEN",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.7,
+      "formation_score": 0.85,
+      "planting_score": 0.58,
+      "rotation_score": 0.79,
+      "win_rate": 0.45
+    },
+    "image_path": "frames/auto_frame_000027.jpg",
+    "frame_number": 27
+  },
+  "auto_sample_28": {
+    "map": "LOTUS",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.6,
+      "formation_score": 0.42,
+      "planting_score": 0.85,
+      "rotation_score": 0.45,
+      "win_rate": 0.41
+    },
+    "image_path": "frames/auto_frame_000028.jpg",
+    "frame_number": 28
+  },
+  "auto_sample_29": {
+    "map": "SUNSET",
+    "tactical_situation": "mid_control",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.0,
+      "formation_score": 0.72,
+      "planting_score": 0.79,
+      "rotation_score": 0.5,
+      "win_rate": 0.83
+    },
+    "image_path": "frames/auto_frame_000029.jpg",
+    "frame_number": 29
+  },
+  "auto_sample_30": {
+    "map": "SUNSET",
+    "tactical_situation": "force_buy",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.0,
+      "formation_score": 0.61,
+      "planting_score": 0.71,
+      "rotation_score": 0.75,
+      "win_rate": 0.79
+    },
+    "image_path": "frames/auto_frame_000030.jpg",
+    "frame_number": 30
+  },
+  "auto_sample_31": {
+    "map": "SUNSET",
+    "tactical_situation": "flank",
+    "formation": "tight",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.0,
+      "formation_score": 0.43,
+      "planting_score": 0.51,
+      "rotation_score": 0.58,
+      "win_rate": 0.52
+    },
+    "image_path": "frames/auto_frame_000031.jpg",
+    "frame_number": 31
+  },
+  "auto_sample_32": {
+    "map": "ICEBOX",
+    "tactical_situation": "buy_round",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.6,
+      "formation_score": 0.46,
+      "planting_score": 0.75,
+      "rotation_score": 0.63,
+      "win_rate": 0.52
+    },
+    "image_path": "frames/auto_frame_000032.jpg",
+    "frame_number": 32
+  },
+  "auto_sample_33": {
+    "map": "BIND",
+    "tactical_situation": "buy_round",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.0,
+      "formation_score": 0.45,
+      "planting_score": 0.87,
+      "rotation_score": 0.69,
+      "win_rate": 0.41
+    },
+    "image_path": "frames/auto_frame_000033.jpg",
+    "frame_number": 33
+  },
+  "auto_sample_34": {
+    "map": "ASCENT",
+    "tactical_situation": "force_buy",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.3,
+      "formation_score": 0.59,
+      "planting_score": 0.61,
+      "rotation_score": 0.59,
+      "win_rate": 0.78
+    },
+    "image_path": "frames/auto_frame_000034.jpg",
+    "frame_number": 34
+  },
+  "auto_sample_35": {
+    "map": "PEARL",
+    "tactical_situation": "force_buy",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.8,
+      "formation_score": 0.73,
+      "planting_score": 0.85,
+      "rotation_score": 0.57,
+      "win_rate": 0.49
+    },
+    "image_path": "frames/auto_frame_000035.jpg",
+    "frame_number": 35
+  },
+  "auto_sample_36": {
+    "map": "BIND",
+    "tactical_situation": "force_buy",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.0,
+      "formation_score": 0.68,
+      "planting_score": 0.56,
+      "rotation_score": 0.75,
+      "win_rate": 0.56
+    },
+    "image_path": "frames/auto_frame_000036.jpg",
+    "frame_number": 36
+  },
+  "auto_sample_37": {
+    "map": "BREEZE",
+    "tactical_situation": "mid_control",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 0.6,
+      "formation_score": 0.6,
+      "planting_score": 0.67,
+      "rotation_score": 0.5,
+      "win_rate": 0.61
+    },
+    "image_path": "frames/auto_frame_000037.jpg",
+    "frame_number": 37
+  },
+  "auto_sample_38": {
+    "map": "PEARL",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.4,
+      "formation_score": 0.7,
+      "planting_score": 0.6,
+      "rotation_score": 0.59,
+      "win_rate": 0.74
+    },
+    "image_path": "frames/auto_frame_000038.jpg",
+    "frame_number": 38
+  },
+  "auto_sample_39": {
+    "map": "PEARL",
+    "tactical_situation": "post_plant",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.7,
+      "formation_score": 0.59,
+      "planting_score": 0.51,
+      "rotation_score": 0.72,
+      "win_rate": 0.46
+    },
+    "image_path": "frames/auto_frame_000039.jpg",
+    "frame_number": 39
+  },
+  "auto_sample_40": {
+    "map": "BREEZE",
+    "tactical_situation": "retake",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.2,
+      "formation_score": 0.77,
+      "planting_score": 0.9,
+      "rotation_score": 0.59,
+      "win_rate": 0.83
+    },
+    "image_path": "frames/auto_frame_000040.jpg",
+    "frame_number": 40
+  },
+  "auto_sample_41": {
+    "map": "PEARL",
+    "tactical_situation": "force_buy",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.1,
+      "formation_score": 0.56,
+      "planting_score": 0.72,
+      "rotation_score": 0.69,
+      "win_rate": 0.41
+    },
+    "image_path": "frames/auto_frame_000041.jpg",
+    "frame_number": 41
+  },
+  "auto_sample_42": {
+    "map": "BREEZE",
+    "tactical_situation": "force_buy",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.5,
+      "formation_score": 0.58,
+      "planting_score": 0.5,
+      "rotation_score": 0.52,
+      "win_rate": 0.71
+    },
+    "image_path": "frames/auto_frame_000042.jpg",
+    "frame_number": 42
+  },
+  "auto_sample_43": {
+    "map": "BIND",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.2,
+      "formation_score": 0.69,
+      "planting_score": 0.71,
+      "rotation_score": 0.69,
+      "win_rate": 0.81
+    },
+    "image_path": "frames/auto_frame_000043.jpg",
+    "frame_number": 43
+  },
+  "auto_sample_44": {
+    "map": "BIND",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.9,
+      "formation_score": 0.66,
+      "planting_score": 0.69,
+      "rotation_score": 0.64,
+      "win_rate": 0.85
+    },
+    "image_path": "frames/auto_frame_000044.jpg",
+    "frame_number": 44
+  },
+  "auto_sample_45": {
+    "map": "PEARL",
+    "tactical_situation": "eco",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 0.5,
+      "formation_score": 0.76,
+      "planting_score": 0.59,
+      "rotation_score": 0.57,
+      "win_rate": 0.8
+    },
+    "image_path": "frames/auto_frame_000045.jpg",
+    "frame_number": 45
+  },
+  "auto_sample_46": {
+    "map": "ASCENT",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.2,
+      "formation_score": 0.65,
+      "planting_score": 0.56,
+      "rotation_score": 0.58,
+      "win_rate": 0.48
+    },
+    "image_path": "frames/auto_frame_000046.jpg",
+    "frame_number": 46
+  },
+  "auto_sample_47": {
+    "map": "PEARL",
+    "tactical_situation": "retake",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.6,
+      "formation_score": 0.55,
+      "planting_score": 0.82,
+      "rotation_score": 0.53,
+      "win_rate": 0.74
+    },
+    "image_path": "frames/auto_frame_000047.jpg",
+    "frame_number": 47
+  },
+  "auto_sample_48": {
+    "map": "PEARL",
+    "tactical_situation": "buy_round",
+    "formation": "balanced",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.9,
+      "formation_score": 0.84,
+      "planting_score": 0.78,
+      "rotation_score": 0.62,
+      "win_rate": 0.77
+    },
+    "image_path": "frames/auto_frame_000048.jpg",
+    "frame_number": 48
+  },
+  "auto_sample_49": {
+    "map": "PEARL",
+    "tactical_situation": "post_plant",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.6,
+      "formation_score": 0.59,
+      "planting_score": 0.82,
+      "rotation_score": 0.53,
+      "win_rate": 0.77
+    },
+    "image_path": "frames/auto_frame_000049.jpg",
+    "frame_number": 49
+  },
+  "auto_sample_50": {
+    "map": "ASCENT",
+    "tactical_situation": "entry",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.5,
+      "formation_score": 0.65,
+      "planting_score": 0.65,
+      "rotation_score": 0.72,
+      "win_rate": 0.47
+    },
+    "image_path": "frames/auto_frame_000050.jpg",
+    "frame_number": 50
+  },
+  "auto_sample_51": {
+    "map": "BREEZE",
+    "tactical_situation": "post_plant",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.0,
+      "formation_score": 0.82,
+      "planting_score": 0.63,
+      "rotation_score": 0.42,
+      "win_rate": 0.58
+    },
+    "image_path": "frames/auto_frame_000051.jpg",
+    "frame_number": 51
+  },
+  "auto_sample_52": {
+    "map": "BREEZE",
+    "tactical_situation": "entry",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.4,
+      "formation_score": 0.41,
+      "planting_score": 0.71,
+      "rotation_score": 0.45,
+      "win_rate": 0.62
+    },
+    "image_path": "frames/auto_frame_000052.jpg",
+    "frame_number": 52
+  },
+  "auto_sample_53": {
+    "map": "FRACTURE",
+    "tactical_situation": "mid_control",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 0.5,
+      "formation_score": 0.59,
+      "planting_score": 0.61,
+      "rotation_score": 0.69,
+      "win_rate": 0.4
+    },
+    "image_path": "frames/auto_frame_000053.jpg",
+    "frame_number": 53
+  },
+  "auto_sample_54": {
+    "map": "HAVEN",
+    "tactical_situation": "retake",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.5,
+      "formation_score": 0.4,
+      "planting_score": 0.51,
+      "rotation_score": 0.63,
+      "win_rate": 0.51
+    },
+    "image_path": "frames/auto_frame_000054.jpg",
+    "frame_number": 54
+  },
+  "auto_sample_55": {
+    "map": "SUNSET",
+    "tactical_situation": "force_buy",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.6,
+      "formation_score": 0.42,
+      "planting_score": 0.55,
+      "rotation_score": 0.72,
+      "win_rate": 0.85
+    },
+    "image_path": "frames/auto_frame_000055.jpg",
+    "frame_number": 55
+  },
+  "auto_sample_56": {
+    "map": "BIND",
+    "tactical_situation": "buy_round",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.3,
+      "formation_score": 0.5,
+      "planting_score": 0.57,
+      "rotation_score": 0.47,
+      "win_rate": 0.45
+    },
+    "image_path": "frames/auto_frame_000056.jpg",
+    "frame_number": 56
+  },
+  "auto_sample_57": {
+    "map": "BREEZE",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 3.5,
+      "formation_score": 0.8,
+      "planting_score": 0.68,
+      "rotation_score": 0.79,
+      "win_rate": 0.46
+    },
+    "image_path": "frames/auto_frame_000057.jpg",
+    "frame_number": 57
+  },
+  "auto_sample_58": {
+    "map": "SPLIT",
+    "tactical_situation": "buy_round",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.3,
+      "formation_score": 0.81,
+      "planting_score": 0.84,
+      "rotation_score": 0.53,
+      "win_rate": 0.6
+    },
+    "image_path": "frames/auto_frame_000058.jpg",
+    "frame_number": 58
+  },
+  "auto_sample_59": {
+    "map": "FRACTURE",
+    "tactical_situation": "post_plant",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.6,
+      "formation_score": 0.64,
+      "planting_score": 0.63,
+      "rotation_score": 0.65,
+      "win_rate": 0.4
+    },
+    "image_path": "frames/auto_frame_000059.jpg",
+    "frame_number": 59
+  },
+  "auto_sample_60": {
+    "map": "LOTUS",
+    "tactical_situation": "buy_round",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.4,
+      "formation_score": 0.78,
+      "planting_score": 0.69,
+      "rotation_score": 0.53,
+      "win_rate": 0.79
+    },
+    "image_path": "frames/auto_frame_000060.jpg",
+    "frame_number": 60
+  },
+  "auto_sample_61": {
+    "map": "BREEZE",
+    "tactical_situation": "flank",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.1,
+      "formation_score": 0.67,
+      "planting_score": 0.69,
+      "rotation_score": 0.69,
+      "win_rate": 0.45
+    },
+    "image_path": "frames/auto_frame_000061.jpg",
+    "frame_number": 61
+  },
+  "auto_sample_62": {
+    "map": "BIND",
+    "tactical_situation": "entry",
+    "formation": "scattered",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 0.8,
+      "formation_score": 0.45,
+      "planting_score": 0.66,
+      "rotation_score": 0.42,
+      "win_rate": 0.8
+    },
+    "image_path": "frames/auto_frame_000062.jpg",
+    "frame_number": 62
+  },
+  "auto_sample_63": {
+    "map": "LOTUS",
+    "tactical_situation": "buy_round",
+    "formation": "scattered",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.1,
+      "formation_score": 0.76,
+      "planting_score": 0.87,
+      "rotation_score": 0.64,
+      "win_rate": 0.65
+    },
+    "image_path": "frames/auto_frame_000063.jpg",
+    "frame_number": 63
+  },
+  "auto_sample_64": {
+    "map": "SPLIT",
+    "tactical_situation": "post_plant",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.0,
+      "formation_score": 0.66,
+      "planting_score": 0.85,
+      "rotation_score": 0.58,
+      "win_rate": 0.71
+    },
+    "image_path": "frames/auto_frame_000064.jpg",
+    "frame_number": 64
+  },
+  "auto_sample_65": {
+    "map": "ASCENT",
+    "tactical_situation": "flank",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.0,
+      "formation_score": 0.76,
+      "planting_score": 0.82,
+      "rotation_score": 0.73,
+      "win_rate": 0.73
+    },
+    "image_path": "frames/auto_frame_000065.jpg",
+    "frame_number": 65
+  },
+  "auto_sample_66": {
+    "map": "SUNSET",
+    "tactical_situation": "force_buy",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.6,
+      "formation_score": 0.7,
+      "planting_score": 0.51,
+      "rotation_score": 0.55,
+      "win_rate": 0.69
+    },
+    "image_path": "frames/auto_frame_000066.jpg",
+    "frame_number": 66
+  },
+  "auto_sample_67": {
+    "map": "HAVEN",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.5,
+      "formation_score": 0.52,
+      "planting_score": 0.74,
+      "rotation_score": 0.44,
+      "win_rate": 0.4
+    },
+    "image_path": "frames/auto_frame_000067.jpg",
+    "frame_number": 67
+  },
+  "auto_sample_68": {
+    "map": "LOTUS",
+    "tactical_situation": "buy_round",
+    "formation": "balanced",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.6,
+      "formation_score": 0.67,
+      "planting_score": 0.86,
+      "rotation_score": 0.43,
+      "win_rate": 0.65
+    },
+    "image_path": "frames/auto_frame_000068.jpg",
+    "frame_number": 68
+  },
+  "auto_sample_69": {
+    "map": "HAVEN",
+    "tactical_situation": "eco",
+    "formation": "tight",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 1.7,
+      "formation_score": 0.58,
+      "planting_score": 0.59,
+      "rotation_score": 0.44,
+      "win_rate": 0.68
+    },
+    "image_path": "frames/auto_frame_000069.jpg",
+    "frame_number": 69
+  },
+  "auto_sample_70": {
+    "map": "BREEZE",
+    "tactical_situation": "entry",
+    "formation": "scattered",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.5,
+      "formation_score": 0.57,
+      "planting_score": 0.54,
+      "rotation_score": 0.56,
+      "win_rate": 0.46
+    },
+    "image_path": "frames/auto_frame_000070.jpg",
+    "frame_number": 70
+  },
+  "auto_sample_71": {
+    "map": "SPLIT",
+    "tactical_situation": "post_plant",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.0,
+      "formation_score": 0.85,
+      "planting_score": 0.67,
+      "rotation_score": 0.46,
+      "win_rate": 0.84
+    },
+    "image_path": "frames/auto_frame_000071.jpg",
+    "frame_number": 71
+  },
+  "auto_sample_72": {
+    "map": "HAVEN",
+    "tactical_situation": "flank",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.7,
+      "formation_score": 0.72,
+      "planting_score": 0.87,
+      "rotation_score": 0.68,
+      "win_rate": 0.5
+    },
+    "image_path": "frames/auto_frame_000072.jpg",
+    "frame_number": 72
+  },
+  "auto_sample_73": {
+    "map": "SPLIT",
+    "tactical_situation": "buy_round",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.9,
+      "formation_score": 0.69,
+      "planting_score": 0.74,
+      "rotation_score": 0.47,
+      "win_rate": 0.65
+    },
+    "image_path": "frames/auto_frame_000073.jpg",
+    "frame_number": 73
+  },
+  "auto_sample_74": {
+    "map": "BIND",
+    "tactical_situation": "entry",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.7,
+      "formation_score": 0.68,
+      "planting_score": 0.84,
+      "rotation_score": 0.65,
+      "win_rate": 0.66
+    },
+    "image_path": "frames/auto_frame_000074.jpg",
+    "frame_number": 74
+  },
+  "auto_sample_75": {
+    "map": "LOTUS",
+    "tactical_situation": "flank",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.6,
+      "formation_score": 0.85,
+      "planting_score": 0.56,
+      "rotation_score": 0.46,
+      "win_rate": 0.47
+    },
+    "image_path": "frames/auto_frame_000075.jpg",
+    "frame_number": 75
+  },
+  "auto_sample_76": {
+    "map": "FRACTURE",
+    "tactical_situation": "force_buy",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.3,
+      "formation_score": 0.45,
+      "planting_score": 0.78,
+      "rotation_score": 0.64,
+      "win_rate": 0.53
+    },
+    "image_path": "frames/auto_frame_000076.jpg",
+    "frame_number": 76
+  },
+  "auto_sample_77": {
+    "map": "BIND",
+    "tactical_situation": "eco",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.3,
+      "formation_score": 0.55,
+      "planting_score": 0.81,
+      "rotation_score": 0.52,
+      "win_rate": 0.6
+    },
+    "image_path": "frames/auto_frame_000077.jpg",
+    "frame_number": 77
+  },
+  "auto_sample_78": {
+    "map": "BIND",
+    "tactical_situation": "flank",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.6,
+      "formation_score": 0.59,
+      "planting_score": 0.86,
+      "rotation_score": 0.72,
+      "win_rate": 0.84
+    },
+    "image_path": "frames/auto_frame_000078.jpg",
+    "frame_number": 78
+  },
+  "auto_sample_79": {
+    "map": "BREEZE",
+    "tactical_situation": "post_plant",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.5,
+      "formation_score": 0.88,
+      "planting_score": 0.62,
+      "rotation_score": 0.62,
+      "win_rate": 0.64
+    },
+    "image_path": "frames/auto_frame_000079.jpg",
+    "frame_number": 79
+  },
+  "auto_sample_80": {
+    "map": "SPLIT",
+    "tactical_situation": "eco",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.4,
+      "formation_score": 0.42,
+      "planting_score": 0.76,
+      "rotation_score": 0.57,
+      "win_rate": 0.51
+    },
+    "image_path": "frames/auto_frame_000080.jpg",
+    "frame_number": 80
+  },
+  "auto_sample_81": {
+    "map": "BREEZE",
+    "tactical_situation": "force_buy",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.8,
+      "formation_score": 0.75,
+      "planting_score": 0.57,
+      "rotation_score": 0.4,
+      "win_rate": 0.65
+    },
+    "image_path": "frames/auto_frame_000081.jpg",
+    "frame_number": 81
+  },
+  "auto_sample_82": {
+    "map": "ASCENT",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.7,
+      "formation_score": 0.73,
+      "planting_score": 0.65,
+      "rotation_score": 0.59,
+      "win_rate": 0.44
+    },
+    "image_path": "frames/auto_frame_000082.jpg",
+    "frame_number": 82
+  },
+  "auto_sample_83": {
+    "map": "SPLIT",
+    "tactical_situation": "buy_round",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.3,
+      "formation_score": 0.46,
+      "planting_score": 0.73,
+      "rotation_score": 0.44,
+      "win_rate": 0.84
+    },
+    "image_path": "frames/auto_frame_000083.jpg",
+    "frame_number": 83
+  },
+  "auto_sample_84": {
+    "map": "FRACTURE",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.7,
+      "formation_score": 0.59,
+      "planting_score": 0.76,
+      "rotation_score": 0.73,
+      "win_rate": 0.58
+    },
+    "image_path": "frames/auto_frame_000084.jpg",
+    "frame_number": 84
+  },
+  "auto_sample_85": {
+    "map": "ASCENT",
+    "tactical_situation": "flank",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 0.7,
+      "formation_score": 0.44,
+      "planting_score": 0.89,
+      "rotation_score": 0.42,
+      "win_rate": 0.7
+    },
+    "image_path": "frames/auto_frame_000085.jpg",
+    "frame_number": 85
+  },
+  "auto_sample_86": {
+    "map": "LOTUS",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.7,
+      "formation_score": 0.73,
+      "planting_score": 0.62,
+      "rotation_score": 0.73,
+      "win_rate": 0.48
+    },
+    "image_path": "frames/auto_frame_000086.jpg",
+    "frame_number": 86
+  },
+  "auto_sample_87": {
+    "map": "SUNSET",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.7,
+      "formation_score": 0.73,
+      "planting_score": 0.74,
+      "rotation_score": 0.58,
+      "win_rate": 0.7
+    },
+    "image_path": "frames/auto_frame_000087.jpg",
+    "frame_number": 87
+  },
+  "auto_sample_88": {
+    "map": "BIND",
+    "tactical_situation": "post_plant",
+    "formation": "balanced",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.1,
+      "formation_score": 0.84,
+      "planting_score": 0.69,
+      "rotation_score": 0.45,
+      "win_rate": 0.77
+    },
+    "image_path": "frames/auto_frame_000088.jpg",
+    "frame_number": 88
+  },
+  "auto_sample_89": {
+    "map": "BREEZE",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.0,
+      "formation_score": 0.75,
+      "planting_score": 0.85,
+      "rotation_score": 0.77,
+      "win_rate": 0.61
+    },
+    "image_path": "frames/auto_frame_000089.jpg",
+    "frame_number": 89
+  },
+  "auto_sample_90": {
+    "map": "SPLIT",
+    "tactical_situation": "flank",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.9,
+      "formation_score": 0.78,
+      "planting_score": 0.83,
+      "rotation_score": 0.71,
+      "win_rate": 0.56
+    },
+    "image_path": "frames/auto_frame_000090.jpg",
+    "frame_number": 90
+  },
+  "auto_sample_91": {
+    "map": "FRACTURE",
+    "tactical_situation": "post_plant",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 3.5,
+      "formation_score": 0.71,
+      "planting_score": 0.89,
+      "rotation_score": 0.5,
+      "win_rate": 0.74
+    },
+    "image_path": "frames/auto_frame_000091.jpg",
+    "frame_number": 91
+  },
+  "auto_sample_92": {
+    "map": "PEARL",
+    "tactical_situation": "entry",
+    "formation": "scattered",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.1,
+      "formation_score": 0.78,
+      "planting_score": 0.69,
+      "rotation_score": 0.53,
+      "win_rate": 0.7
+    },
+    "image_path": "frames/auto_frame_000092.jpg",
+    "frame_number": 92
+  },
+  "auto_sample_93": {
+    "map": "LOTUS",
+    "tactical_situation": "flank",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.6,
+      "formation_score": 0.49,
+      "planting_score": 0.73,
+      "rotation_score": 0.71,
+      "win_rate": 0.41
+    },
+    "image_path": "frames/auto_frame_000093.jpg",
+    "frame_number": 93
+  },
+  "auto_sample_94": {
+    "map": "BREEZE",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 0.8,
+      "formation_score": 0.75,
+      "planting_score": 0.53,
+      "rotation_score": 0.72,
+      "win_rate": 0.76
+    },
+    "image_path": "frames/auto_frame_000094.jpg",
+    "frame_number": 94
+  },
+  "auto_sample_95": {
+    "map": "HAVEN",
+    "tactical_situation": "force_buy",
+    "formation": "tight",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.2,
+      "formation_score": 0.74,
+      "planting_score": 0.73,
+      "rotation_score": 0.56,
+      "win_rate": 0.52
+    },
+    "image_path": "frames/auto_frame_000095.jpg",
+    "frame_number": 95
+  },
+  "auto_sample_96": {
+    "map": "PEARL",
+    "tactical_situation": "eco",
+    "formation": "tight",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 1.2,
+      "formation_score": 0.71,
+      "planting_score": 0.67,
+      "rotation_score": 0.42,
+      "win_rate": 0.72
+    },
+    "image_path": "frames/auto_frame_000096.jpg",
+    "frame_number": 96
+  },
+  "auto_sample_97": {
+    "map": "PEARL",
+    "tactical_situation": "flank",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.8,
+      "formation_score": 0.79,
+      "planting_score": 0.75,
+      "rotation_score": 0.67,
+      "win_rate": 0.49
+    },
+    "image_path": "frames/auto_frame_000097.jpg",
+    "frame_number": 97
+  },
+  "auto_sample_98": {
+    "map": "FRACTURE",
+    "tactical_situation": "force_buy",
+    "formation": "balanced",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.6,
+      "formation_score": 0.57,
+      "planting_score": 0.72,
+      "rotation_score": 0.66,
+      "win_rate": 0.77
+    },
+    "image_path": "frames/auto_frame_000098.jpg",
+    "frame_number": 98
+  },
+  "auto_sample_99": {
+    "map": "HAVEN",
+    "tactical_situation": "retake",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 1.4,
+      "formation_score": 0.5,
+      "planting_score": 0.78,
+      "rotation_score": 0.64,
+      "win_rate": 0.7
+    },
+    "image_path": "frames/auto_frame_000099.jpg",
+    "frame_number": 99
+  },
+  "auto_sample_100": {
+    "map": "SUNSET",
+    "tactical_situation": "buy_round",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.6,
+      "formation_score": 0.64,
+      "planting_score": 0.76,
+      "rotation_score": 0.59,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000100.jpg",
+    "frame_number": 100
+  },
+  "auto_sample_101": {
+    "map": "BREEZE",
+    "tactical_situation": "force_buy",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.0,
+      "formation_score": 0.54,
+      "planting_score": 0.62,
+      "rotation_score": 0.59,
+      "win_rate": 0.73
+    },
+    "image_path": "frames/auto_frame_000101.jpg",
+    "frame_number": 101
+  },
+  "auto_sample_102": {
+    "map": "HAVEN",
+    "tactical_situation": "post_plant",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.2,
+      "formation_score": 0.52,
+      "planting_score": 0.75,
+      "rotation_score": 0.56,
+      "win_rate": 0.77
+    },
+    "image_path": "frames/auto_frame_000102.jpg",
+    "frame_number": 102
+  },
+  "auto_sample_103": {
+    "map": "HAVEN",
+    "tactical_situation": "retake",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 0.6,
+      "formation_score": 0.5,
+      "planting_score": 0.83,
+      "rotation_score": 0.43,
+      "win_rate": 0.61
+    },
+    "image_path": "frames/auto_frame_000103.jpg",
+    "frame_number": 103
+  },
+  "auto_sample_104": {
+    "map": "BREEZE",
+    "tactical_situation": "buy_round",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.4,
+      "formation_score": 0.87,
+      "planting_score": 0.71,
+      "rotation_score": 0.54,
+      "win_rate": 0.72
+    },
+    "image_path": "frames/auto_frame_000104.jpg",
+    "frame_number": 104
+  },
+  "auto_sample_105": {
+    "map": "BREEZE",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.6,
+      "formation_score": 0.48,
+      "planting_score": 0.63,
+      "rotation_score": 0.41,
+      "win_rate": 0.69
+    },
+    "image_path": "frames/auto_frame_000105.jpg",
+    "frame_number": 105
+  },
+  "auto_sample_106": {
+    "map": "BREEZE",
+    "tactical_situation": "retake",
+    "formation": "tight",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.9,
+      "formation_score": 0.45,
+      "planting_score": 0.75,
+      "rotation_score": 0.71,
+      "win_rate": 0.58
+    },
+    "image_path": "frames/auto_frame_000106.jpg",
+    "frame_number": 106
+  },
+  "auto_sample_107": {
+    "map": "SPLIT",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.5,
+      "formation_score": 0.48,
+      "planting_score": 0.83,
+      "rotation_score": 0.67,
+      "win_rate": 0.82
+    },
+    "image_path": "frames/auto_frame_000107.jpg",
+    "frame_number": 107
+  },
+  "auto_sample_108": {
+    "map": "HAVEN",
+    "tactical_situation": "eco",
+    "formation": "tight",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.2,
+      "formation_score": 0.43,
+      "planting_score": 0.84,
+      "rotation_score": 0.79,
+      "win_rate": 0.79
+    },
+    "image_path": "frames/auto_frame_000108.jpg",
+    "frame_number": 108
+  },
+  "auto_sample_109": {
+    "map": "ASCENT",
+    "tactical_situation": "mid_control",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.7,
+      "formation_score": 0.71,
+      "planting_score": 0.81,
+      "rotation_score": 0.76,
+      "win_rate": 0.76
+    },
+    "image_path": "frames/auto_frame_000109.jpg",
+    "frame_number": 109
+  },
+  "auto_sample_110": {
+    "map": "SUNSET",
+    "tactical_situation": "retake",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.2,
+      "formation_score": 0.63,
+      "planting_score": 0.76,
+      "rotation_score": 0.79,
+      "win_rate": 0.67
+    },
+    "image_path": "frames/auto_frame_000110.jpg",
+    "frame_number": 110
+  },
+  "auto_sample_111": {
+    "map": "HAVEN",
+    "tactical_situation": "buy_round",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.5,
+      "formation_score": 0.49,
+      "planting_score": 0.84,
+      "rotation_score": 0.73,
+      "win_rate": 0.8
+    },
+    "image_path": "frames/auto_frame_000111.jpg",
+    "frame_number": 111
+  },
+  "auto_sample_112": {
+    "map": "FRACTURE",
+    "tactical_situation": "post_plant",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.5,
+      "formation_score": 0.71,
+      "planting_score": 0.78,
+      "rotation_score": 0.46,
+      "win_rate": 0.46
+    },
+    "image_path": "frames/auto_frame_000112.jpg",
+    "frame_number": 112
+  },
+  "auto_sample_113": {
+    "map": "BIND",
+    "tactical_situation": "entry",
+    "formation": "scattered",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.2,
+      "formation_score": 0.81,
+      "planting_score": 0.77,
+      "rotation_score": 0.51,
+      "win_rate": 0.44
+    },
+    "image_path": "frames/auto_frame_000113.jpg",
+    "frame_number": 113
+  },
+  "auto_sample_114": {
+    "map": "ASCENT",
+    "tactical_situation": "entry",
+    "formation": "tight",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.4,
+      "formation_score": 0.46,
+      "planting_score": 0.68,
+      "rotation_score": 0.57,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000114.jpg",
+    "frame_number": 114
+  },
+  "auto_sample_115": {
+    "map": "HAVEN",
+    "tactical_situation": "entry",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.5,
+      "formation_score": 0.61,
+      "planting_score": 0.6,
+      "rotation_score": 0.78,
+      "win_rate": 0.57
+    },
+    "image_path": "frames/auto_frame_000115.jpg",
+    "frame_number": 115
+  },
+  "auto_sample_116": {
+    "map": "LOTUS",
+    "tactical_situation": "retake",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.4,
+      "formation_score": 0.41,
+      "planting_score": 0.85,
+      "rotation_score": 0.45,
+      "win_rate": 0.78
+    },
+    "image_path": "frames/auto_frame_000116.jpg",
+    "frame_number": 116
+  },
+  "auto_sample_117": {
+    "map": "BIND",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.7,
+      "formation_score": 0.53,
+      "planting_score": 0.69,
+      "rotation_score": 0.78,
+      "win_rate": 0.65
+    },
+    "image_path": "frames/auto_frame_000117.jpg",
+    "frame_number": 117
+  },
+  "auto_sample_118": {
+    "map": "ASCENT",
+    "tactical_situation": "mid_control",
+    "formation": "tight",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 1.0,
+      "formation_score": 0.65,
+      "planting_score": 0.66,
+      "rotation_score": 0.45,
+      "win_rate": 0.64
+    },
+    "image_path": "frames/auto_frame_000118.jpg",
+    "frame_number": 118
+  },
+  "auto_sample_119": {
+    "map": "BIND",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.6,
+      "formation_score": 0.56,
+      "planting_score": 0.72,
+      "rotation_score": 0.45,
+      "win_rate": 0.68
+    },
+    "image_path": "frames/auto_frame_000119.jpg",
+    "frame_number": 119
+  },
+  "auto_sample_120": {
+    "map": "BIND",
+    "tactical_situation": "entry",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.6,
+      "formation_score": 0.66,
+      "planting_score": 0.74,
+      "rotation_score": 0.54,
+      "win_rate": 0.61
+    },
+    "image_path": "frames/auto_frame_000120.jpg",
+    "frame_number": 120
+  },
+  "auto_sample_121": {
+    "map": "ICEBOX",
+    "tactical_situation": "retake",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.7,
+      "formation_score": 0.4,
+      "planting_score": 0.86,
+      "rotation_score": 0.65,
+      "win_rate": 0.69
+    },
+    "image_path": "frames/auto_frame_000121.jpg",
+    "frame_number": 121
+  },
+  "auto_sample_122": {
+    "map": "BREEZE",
+    "tactical_situation": "buy_round",
+    "formation": "scattered",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.4,
+      "formation_score": 0.8,
+      "planting_score": 0.83,
+      "rotation_score": 0.54,
+      "win_rate": 0.46
+    },
+    "image_path": "frames/auto_frame_000122.jpg",
+    "frame_number": 122
+  },
+  "auto_sample_123": {
+    "map": "BIND",
+    "tactical_situation": "post_plant",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.3,
+      "formation_score": 0.66,
+      "planting_score": 0.7,
+      "rotation_score": 0.71,
+      "win_rate": 0.59
+    },
+    "image_path": "frames/auto_frame_000123.jpg",
+    "frame_number": 123
+  },
+  "auto_sample_124": {
+    "map": "BREEZE",
+    "tactical_situation": "flank",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.2,
+      "formation_score": 0.7,
+      "planting_score": 0.78,
+      "rotation_score": 0.63,
+      "win_rate": 0.81
+    },
+    "image_path": "frames/auto_frame_000124.jpg",
+    "frame_number": 124
+  },
+  "auto_sample_125": {
+    "map": "ICEBOX",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.0,
+      "formation_score": 0.56,
+      "planting_score": 0.67,
+      "rotation_score": 0.41,
+      "win_rate": 0.58
+    },
+    "image_path": "frames/auto_frame_000125.jpg",
+    "frame_number": 125
+  },
+  "auto_sample_126": {
+    "map": "BIND",
+    "tactical_situation": "mid_control",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.0,
+      "formation_score": 0.47,
+      "planting_score": 0.64,
+      "rotation_score": 0.69,
+      "win_rate": 0.67
+    },
+    "image_path": "frames/auto_frame_000126.jpg",
+    "frame_number": 126
+  },
+  "auto_sample_127": {
+    "map": "ASCENT",
+    "tactical_situation": "retake",
+    "formation": "scattered",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.6,
+      "formation_score": 0.82,
+      "planting_score": 0.87,
+      "rotation_score": 0.55,
+      "win_rate": 0.66
+    },
+    "image_path": "frames/auto_frame_000127.jpg",
+    "frame_number": 127
+  },
+  "auto_sample_128": {
+    "map": "BREEZE",
+    "tactical_situation": "force_buy",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.2,
+      "formation_score": 0.88,
+      "planting_score": 0.65,
+      "rotation_score": 0.54,
+      "win_rate": 0.8
+    },
+    "image_path": "frames/auto_frame_000128.jpg",
+    "frame_number": 128
+  },
+  "auto_sample_129": {
+    "map": "ASCENT",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.2,
+      "formation_score": 0.84,
+      "planting_score": 0.54,
+      "rotation_score": 0.44,
+      "win_rate": 0.69
+    },
+    "image_path": "frames/auto_frame_000129.jpg",
+    "frame_number": 129
+  },
+  "auto_sample_130": {
+    "map": "SUNSET",
+    "tactical_situation": "post_plant",
+    "formation": "tight",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.4,
+      "formation_score": 0.86,
+      "planting_score": 0.67,
+      "rotation_score": 0.57,
+      "win_rate": 0.45
+    },
+    "image_path": "frames/auto_frame_000130.jpg",
+    "frame_number": 130
+  },
+  "auto_sample_131": {
+    "map": "BIND",
+    "tactical_situation": "force_buy",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.0,
+      "formation_score": 0.48,
+      "planting_score": 0.8,
+      "rotation_score": 0.57,
+      "win_rate": 0.71
+    },
+    "image_path": "frames/auto_frame_000131.jpg",
+    "frame_number": 131
+  },
+  "auto_sample_132": {
+    "map": "PEARL",
+    "tactical_situation": "entry",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.3,
+      "formation_score": 0.6,
+      "planting_score": 0.74,
+      "rotation_score": 0.69,
+      "win_rate": 0.83
+    },
+    "image_path": "frames/auto_frame_000132.jpg",
+    "frame_number": 132
+  },
+  "auto_sample_133": {
+    "map": "ASCENT",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.9,
+      "formation_score": 0.62,
+      "planting_score": 0.68,
+      "rotation_score": 0.66,
+      "win_rate": 0.59
+    },
+    "image_path": "frames/auto_frame_000133.jpg",
+    "frame_number": 133
+  },
+  "auto_sample_134": {
+    "map": "BIND",
+    "tactical_situation": "force_buy",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.4,
+      "formation_score": 0.62,
+      "planting_score": 0.69,
+      "rotation_score": 0.71,
+      "win_rate": 0.58
+    },
+    "image_path": "frames/auto_frame_000134.jpg",
+    "frame_number": 134
+  },
+  "auto_sample_135": {
+    "map": "PEARL",
+    "tactical_situation": "flank",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.1,
+      "formation_score": 0.82,
+      "planting_score": 0.85,
+      "rotation_score": 0.4,
+      "win_rate": 0.51
+    },
+    "image_path": "frames/auto_frame_000135.jpg",
+    "frame_number": 135
+  },
+  "auto_sample_136": {
+    "map": "FRACTURE",
+    "tactical_situation": "post_plant",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.7,
+      "formation_score": 0.85,
+      "planting_score": 0.64,
+      "rotation_score": 0.51,
+      "win_rate": 0.84
+    },
+    "image_path": "frames/auto_frame_000136.jpg",
+    "frame_number": 136
+  },
+  "auto_sample_137": {
+    "map": "BIND",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.9,
+      "formation_score": 0.84,
+      "planting_score": 0.71,
+      "rotation_score": 0.42,
+      "win_rate": 0.72
+    },
+    "image_path": "frames/auto_frame_000137.jpg",
+    "frame_number": 137
+  },
+  "auto_sample_138": {
+    "map": "BREEZE",
+    "tactical_situation": "buy_round",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.5,
+      "formation_score": 0.53,
+      "planting_score": 0.65,
+      "rotation_score": 0.4,
+      "win_rate": 0.69
+    },
+    "image_path": "frames/auto_frame_000138.jpg",
+    "frame_number": 138
+  },
+  "auto_sample_139": {
+    "map": "BIND",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.6,
+      "formation_score": 0.57,
+      "planting_score": 0.82,
+      "rotation_score": 0.67,
+      "win_rate": 0.56
+    },
+    "image_path": "frames/auto_frame_000139.jpg",
+    "frame_number": 139
+  },
+  "auto_sample_140": {
+    "map": "SUNSET",
+    "tactical_situation": "flank",
+    "formation": "tight",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.1,
+      "formation_score": 0.46,
+      "planting_score": 0.65,
+      "rotation_score": 0.78,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000140.jpg",
+    "frame_number": 140
+  },
+  "auto_sample_141": {
+    "map": "PEARL",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.5,
+      "formation_score": 0.77,
+      "planting_score": 0.55,
+      "rotation_score": 0.78,
+      "win_rate": 0.67
+    },
+    "image_path": "frames/auto_frame_000141.jpg",
+    "frame_number": 141
+  },
+  "auto_sample_142": {
+    "map": "BREEZE",
+    "tactical_situation": "eco",
+    "formation": "tight",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.5,
+      "formation_score": 0.49,
+      "planting_score": 0.76,
+      "rotation_score": 0.68,
+      "win_rate": 0.74
+    },
+    "image_path": "frames/auto_frame_000142.jpg",
+    "frame_number": 142
+  },
+  "auto_sample_143": {
+    "map": "BIND",
+    "tactical_situation": "force_buy",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.8,
+      "formation_score": 0.55,
+      "planting_score": 0.59,
+      "rotation_score": 0.63,
+      "win_rate": 0.63
+    },
+    "image_path": "frames/auto_frame_000143.jpg",
+    "frame_number": 143
+  },
+  "auto_sample_144": {
+    "map": "BIND",
+    "tactical_situation": "entry",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 0.9,
+      "formation_score": 0.46,
+      "planting_score": 0.56,
+      "rotation_score": 0.42,
+      "win_rate": 0.8
+    },
+    "image_path": "frames/auto_frame_000144.jpg",
+    "frame_number": 144
+  },
+  "auto_sample_145": {
+    "map": "LOTUS",
+    "tactical_situation": "entry",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.4,
+      "formation_score": 0.68,
+      "planting_score": 0.69,
+      "rotation_score": 0.49,
+      "win_rate": 0.7
+    },
+    "image_path": "frames/auto_frame_000145.jpg",
+    "frame_number": 145
+  },
+  "auto_sample_146": {
+    "map": "BIND",
+    "tactical_situation": "entry",
+    "formation": "scattered",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 0.9,
+      "formation_score": 0.72,
+      "planting_score": 0.77,
+      "rotation_score": 0.74,
+      "win_rate": 0.49
+    },
+    "image_path": "frames/auto_frame_000146.jpg",
+    "frame_number": 146
+  },
+  "auto_sample_147": {
+    "map": "BIND",
+    "tactical_situation": "post_plant",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.0,
+      "formation_score": 0.47,
+      "planting_score": 0.73,
+      "rotation_score": 0.58,
+      "win_rate": 0.69
+    },
+    "image_path": "frames/auto_frame_000147.jpg",
+    "frame_number": 147
+  },
+  "auto_sample_148": {
+    "map": "LOTUS",
+    "tactical_situation": "retake",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.2,
+      "formation_score": 0.6,
+      "planting_score": 0.58,
+      "rotation_score": 0.55,
+      "win_rate": 0.7
+    },
+    "image_path": "frames/auto_frame_000148.jpg",
+    "frame_number": 148
+  },
+  "auto_sample_149": {
+    "map": "HAVEN",
+    "tactical_situation": "post_plant",
+    "formation": "balanced",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 0.6,
+      "formation_score": 0.83,
+      "planting_score": 0.7,
+      "rotation_score": 0.46,
+      "win_rate": 0.42
+    },
+    "image_path": "frames/auto_frame_000149.jpg",
+    "frame_number": 149
+  },
+  "auto_sample_150": {
+    "map": "SUNSET",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.4,
+      "formation_score": 0.85,
+      "planting_score": 0.52,
+      "rotation_score": 0.46,
+      "win_rate": 0.52
+    },
+    "image_path": "frames/auto_frame_000150.jpg",
+    "frame_number": 150
+  },
+  "auto_sample_151": {
+    "map": "BIND",
+    "tactical_situation": "retake",
+    "formation": "tight",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.2,
+      "formation_score": 0.6,
+      "planting_score": 0.75,
+      "rotation_score": 0.46,
+      "win_rate": 0.83
+    },
+    "image_path": "frames/auto_frame_000151.jpg",
+    "frame_number": 151
+  },
+  "auto_sample_152": {
+    "map": "BREEZE",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.2,
+      "formation_score": 0.46,
+      "planting_score": 0.62,
+      "rotation_score": 0.64,
+      "win_rate": 0.61
+    },
+    "image_path": "frames/auto_frame_000152.jpg",
+    "frame_number": 152
+  },
+  "auto_sample_153": {
+    "map": "HAVEN",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.9,
+      "formation_score": 0.89,
+      "planting_score": 0.88,
+      "rotation_score": 0.69,
+      "win_rate": 0.83
+    },
+    "image_path": "frames/auto_frame_000153.jpg",
+    "frame_number": 153
+  },
+  "auto_sample_154": {
+    "map": "HAVEN",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.0,
+      "formation_score": 0.65,
+      "planting_score": 0.77,
+      "rotation_score": 0.66,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000154.jpg",
+    "frame_number": 154
+  },
+  "auto_sample_155": {
+    "map": "BIND",
+    "tactical_situation": "entry",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.9,
+      "formation_score": 0.56,
+      "planting_score": 0.76,
+      "rotation_score": 0.66,
+      "win_rate": 0.76
+    },
+    "image_path": "frames/auto_frame_000155.jpg",
+    "frame_number": 155
+  },
+  "auto_sample_156": {
+    "map": "LOTUS",
+    "tactical_situation": "force_buy",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.9,
+      "formation_score": 0.72,
+      "planting_score": 0.57,
+      "rotation_score": 0.61,
+      "win_rate": 0.44
+    },
+    "image_path": "frames/auto_frame_000156.jpg",
+    "frame_number": 156
+  },
+  "auto_sample_157": {
+    "map": "SUNSET",
+    "tactical_situation": "entry",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.3,
+      "formation_score": 0.87,
+      "planting_score": 0.9,
+      "rotation_score": 0.43,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000157.jpg",
+    "frame_number": 157
+  },
+  "auto_sample_158": {
+    "map": "SPLIT",
+    "tactical_situation": "eco",
+    "formation": "tight",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.2,
+      "formation_score": 0.75,
+      "planting_score": 0.86,
+      "rotation_score": 0.62,
+      "win_rate": 0.79
+    },
+    "image_path": "frames/auto_frame_000158.jpg",
+    "frame_number": 158
+  },
+  "auto_sample_159": {
+    "map": "BREEZE",
+    "tactical_situation": "force_buy",
+    "formation": "balanced",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.5,
+      "formation_score": 0.73,
+      "planting_score": 0.55,
+      "rotation_score": 0.48,
+      "win_rate": 0.84
+    },
+    "image_path": "frames/auto_frame_000159.jpg",
+    "frame_number": 159
+  },
+  "auto_sample_160": {
+    "map": "BIND",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.6,
+      "formation_score": 0.79,
+      "planting_score": 0.66,
+      "rotation_score": 0.6,
+      "win_rate": 0.41
+    },
+    "image_path": "frames/auto_frame_000160.jpg",
+    "frame_number": 160
+  },
+  "auto_sample_161": {
+    "map": "HAVEN",
+    "tactical_situation": "retake",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 3.0,
+      "formation_score": 0.42,
+      "planting_score": 0.87,
+      "rotation_score": 0.8,
+      "win_rate": 0.67
+    },
+    "image_path": "frames/auto_frame_000161.jpg",
+    "frame_number": 161
+  },
+  "auto_sample_162": {
+    "map": "HAVEN",
+    "tactical_situation": "buy_round",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.6,
+      "formation_score": 0.52,
+      "planting_score": 0.75,
+      "rotation_score": 0.43,
+      "win_rate": 0.45
+    },
+    "image_path": "frames/auto_frame_000162.jpg",
+    "frame_number": 162
+  },
+  "auto_sample_163": {
+    "map": "ICEBOX",
+    "tactical_situation": "mid_control",
+    "formation": "tight",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.4,
+      "formation_score": 0.88,
+      "planting_score": 0.76,
+      "rotation_score": 0.5,
+      "win_rate": 0.67
+    },
+    "image_path": "frames/auto_frame_000163.jpg",
+    "frame_number": 163
+  },
+  "auto_sample_164": {
+    "map": "ASCENT",
+    "tactical_situation": "post_plant",
+    "formation": "tight",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.5,
+      "formation_score": 0.51,
+      "planting_score": 0.87,
+      "rotation_score": 0.48,
+      "win_rate": 0.42
+    },
+    "image_path": "frames/auto_frame_000164.jpg",
+    "frame_number": 164
+  },
+  "auto_sample_165": {
+    "map": "FRACTURE",
+    "tactical_situation": "buy_round",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.4,
+      "formation_score": 0.89,
+      "planting_score": 0.75,
+      "rotation_score": 0.57,
+      "win_rate": 0.52
+    },
+    "image_path": "frames/auto_frame_000165.jpg",
+    "frame_number": 165
+  },
+  "auto_sample_166": {
+    "map": "LOTUS",
+    "tactical_situation": "eco",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.0,
+      "formation_score": 0.73,
+      "planting_score": 0.89,
+      "rotation_score": 0.69,
+      "win_rate": 0.43
+    },
+    "image_path": "frames/auto_frame_000166.jpg",
+    "frame_number": 166
+  },
+  "auto_sample_167": {
+    "map": "ASCENT",
+    "tactical_situation": "entry",
+    "formation": "balanced",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 3.0,
+      "formation_score": 0.66,
+      "planting_score": 0.55,
+      "rotation_score": 0.68,
+      "win_rate": 0.76
+    },
+    "image_path": "frames/auto_frame_000167.jpg",
+    "frame_number": 167
+  },
+  "auto_sample_168": {
+    "map": "HAVEN",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.5,
+      "formation_score": 0.46,
+      "planting_score": 0.77,
+      "rotation_score": 0.46,
+      "win_rate": 0.69
+    },
+    "image_path": "frames/auto_frame_000168.jpg",
+    "frame_number": 168
+  },
+  "auto_sample_169": {
+    "map": "BREEZE",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 3.2,
+      "formation_score": 0.59,
+      "planting_score": 0.8,
+      "rotation_score": 0.64,
+      "win_rate": 0.49
+    },
+    "image_path": "frames/auto_frame_000169.jpg",
+    "frame_number": 169
+  },
+  "auto_sample_170": {
+    "map": "BIND",
+    "tactical_situation": "entry",
+    "formation": "tight",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.1,
+      "formation_score": 0.76,
+      "planting_score": 0.72,
+      "rotation_score": 0.54,
+      "win_rate": 0.6
+    },
+    "image_path": "frames/auto_frame_000170.jpg",
+    "frame_number": 170
+  },
+  "auto_sample_171": {
+    "map": "SPLIT",
+    "tactical_situation": "flank",
+    "formation": "tight",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.8,
+      "formation_score": 0.7,
+      "planting_score": 0.7,
+      "rotation_score": 0.6,
+      "win_rate": 0.73
+    },
+    "image_path": "frames/auto_frame_000171.jpg",
+    "frame_number": 171
+  },
+  "auto_sample_172": {
+    "map": "SPLIT",
+    "tactical_situation": "post_plant",
+    "formation": "spread",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 1.4,
+      "formation_score": 0.76,
+      "planting_score": 0.55,
+      "rotation_score": 0.5,
+      "win_rate": 0.71
+    },
+    "image_path": "frames/auto_frame_000172.jpg",
+    "frame_number": 172
+  },
+  "auto_sample_173": {
+    "map": "PEARL",
+    "tactical_situation": "force_buy",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 3.0,
+      "formation_score": 0.85,
+      "planting_score": 0.82,
+      "rotation_score": 0.54,
+      "win_rate": 0.81
+    },
+    "image_path": "frames/auto_frame_000173.jpg",
+    "frame_number": 173
+  },
+  "auto_sample_174": {
+    "map": "SPLIT",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.2,
+      "formation_score": 0.64,
+      "planting_score": 0.82,
+      "rotation_score": 0.51,
+      "win_rate": 0.64
+    },
+    "image_path": "frames/auto_frame_000174.jpg",
+    "frame_number": 174
+  },
+  "auto_sample_175": {
+    "map": "LOTUS",
+    "tactical_situation": "post_plant",
+    "formation": "balanced",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.9,
+      "formation_score": 0.45,
+      "planting_score": 0.7,
+      "rotation_score": 0.69,
+      "win_rate": 0.82
+    },
+    "image_path": "frames/auto_frame_000175.jpg",
+    "frame_number": 175
+  },
+  "auto_sample_176": {
+    "map": "BREEZE",
+    "tactical_situation": "force_buy",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 0.8,
+      "formation_score": 0.67,
+      "planting_score": 0.67,
+      "rotation_score": 0.58,
+      "win_rate": 0.68
+    },
+    "image_path": "frames/auto_frame_000176.jpg",
+    "frame_number": 176
+  },
+  "auto_sample_177": {
+    "map": "SUNSET",
+    "tactical_situation": "mid_control",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.2,
+      "formation_score": 0.59,
+      "planting_score": 0.71,
+      "rotation_score": 0.54,
+      "win_rate": 0.6
+    },
+    "image_path": "frames/auto_frame_000177.jpg",
+    "frame_number": 177
+  },
+  "auto_sample_178": {
+    "map": "ASCENT",
+    "tactical_situation": "force_buy",
+    "formation": "tight",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.3,
+      "formation_score": 0.57,
+      "planting_score": 0.8,
+      "rotation_score": 0.57,
+      "win_rate": 0.57
+    },
+    "image_path": "frames/auto_frame_000178.jpg",
+    "frame_number": 178
+  },
+  "auto_sample_179": {
+    "map": "LOTUS",
+    "tactical_situation": "force_buy",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 2.3,
+      "formation_score": 0.88,
+      "planting_score": 0.66,
+      "rotation_score": 0.61,
+      "win_rate": 0.59
+    },
+    "image_path": "frames/auto_frame_000179.jpg",
+    "frame_number": 179
+  },
+  "auto_sample_180": {
+    "map": "ICEBOX",
+    "tactical_situation": "buy_round",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.7,
+      "formation_score": 0.74,
+      "planting_score": 0.58,
+      "rotation_score": 0.59,
+      "win_rate": 0.85
+    },
+    "image_path": "frames/auto_frame_000180.jpg",
+    "frame_number": 180
+  },
+  "auto_sample_181": {
+    "map": "ASCENT",
+    "tactical_situation": "entry",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.1,
+      "formation_score": 0.51,
+      "planting_score": 0.88,
+      "rotation_score": 0.66,
+      "win_rate": 0.51
+    },
+    "image_path": "frames/auto_frame_000181.jpg",
+    "frame_number": 181
+  },
+  "auto_sample_182": {
+    "map": "SUNSET",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.4,
+      "formation_score": 0.85,
+      "planting_score": 0.7,
+      "rotation_score": 0.57,
+      "win_rate": 0.5
+    },
+    "image_path": "frames/auto_frame_000182.jpg",
+    "frame_number": 182
+  },
+  "auto_sample_183": {
+    "map": "LOTUS",
+    "tactical_situation": "flank",
+    "formation": "tight",
+    "position_type": "support",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.3,
+      "formation_score": 0.51,
+      "planting_score": 0.55,
+      "rotation_score": 0.65,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000183.jpg",
+    "frame_number": 183
+  },
+  "auto_sample_184": {
+    "map": "LOTUS",
+    "tactical_situation": "flank",
+    "formation": "scattered",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 3.5,
+      "formation_score": 0.57,
+      "planting_score": 0.64,
+      "rotation_score": 0.7,
+      "win_rate": 0.62
+    },
+    "image_path": "frames/auto_frame_000184.jpg",
+    "frame_number": 184
+  },
+  "auto_sample_185": {
+    "map": "FRACTURE",
+    "tactical_situation": "buy_round",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.9,
+      "formation_score": 0.69,
+      "planting_score": 0.51,
+      "rotation_score": 0.61,
+      "win_rate": 0.77
+    },
+    "image_path": "frames/auto_frame_000185.jpg",
+    "frame_number": 185
+  },
+  "auto_sample_186": {
+    "map": "PEARL",
+    "tactical_situation": "retake",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.7,
+      "formation_score": 0.4,
+      "planting_score": 0.82,
+      "rotation_score": 0.52,
+      "win_rate": 0.78
+    },
+    "image_path": "frames/auto_frame_000186.jpg",
+    "frame_number": 186
+  },
+  "auto_sample_187": {
+    "map": "ICEBOX",
+    "tactical_situation": "buy_round",
+    "formation": "balanced",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 0.5,
+      "formation_score": 0.46,
+      "planting_score": 0.8,
+      "rotation_score": 0.57,
+      "win_rate": 0.61
+    },
+    "image_path": "frames/auto_frame_000187.jpg",
+    "frame_number": 187
+  },
+  "auto_sample_188": {
+    "map": "SPLIT",
+    "tactical_situation": "force_buy",
+    "formation": "tight",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.9,
+      "formation_score": 0.72,
+      "planting_score": 0.75,
+      "rotation_score": 0.78,
+      "win_rate": 0.54
+    },
+    "image_path": "frames/auto_frame_000188.jpg",
+    "frame_number": 188
+  },
+  "auto_sample_189": {
+    "map": "HAVEN",
+    "tactical_situation": "mid_control",
+    "formation": "spread",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 1.2,
+      "formation_score": 0.67,
+      "planting_score": 0.79,
+      "rotation_score": 0.54,
+      "win_rate": 0.59
+    },
+    "image_path": "frames/auto_frame_000189.jpg",
+    "frame_number": 189
+  },
+  "auto_sample_190": {
+    "map": "SUNSET",
+    "tactical_situation": "eco",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.7,
+      "formation_score": 0.57,
+      "planting_score": 0.87,
+      "rotation_score": 0.8,
+      "win_rate": 0.61
+    },
+    "image_path": "frames/auto_frame_000190.jpg",
+    "frame_number": 190
+  },
+  "auto_sample_191": {
+    "map": "BIND",
+    "tactical_situation": "flank",
+    "formation": "tight",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 3.3,
+      "formation_score": 0.64,
+      "planting_score": 0.57,
+      "rotation_score": 0.59,
+      "win_rate": 0.78
+    },
+    "image_path": "frames/auto_frame_000191.jpg",
+    "frame_number": 191
+  },
+  "auto_sample_192": {
+    "map": "BREEZE",
+    "tactical_situation": "post_plant",
+    "formation": "balanced",
+    "position_type": "anchoring",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.4,
+      "formation_score": 0.53,
+      "planting_score": 0.74,
+      "rotation_score": 0.46,
+      "win_rate": 0.52
+    },
+    "image_path": "frames/auto_frame_000192.jpg",
+    "frame_number": 192
+  },
+  "auto_sample_193": {
+    "map": "BIND",
+    "tactical_situation": "eco",
+    "formation": "scattered",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.5,
+      "formation_score": 0.61,
+      "planting_score": 0.61,
+      "rotation_score": 0.68,
+      "win_rate": 0.55
+    },
+    "image_path": "frames/auto_frame_000193.jpg",
+    "frame_number": 193
+  },
+  "auto_sample_194": {
+    "map": "ICEBOX",
+    "tactical_situation": "mid_control",
+    "formation": "scattered",
+    "position_type": "roaming",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 1.7,
+      "formation_score": 0.71,
+      "planting_score": 0.7,
+      "rotation_score": 0.54,
+      "win_rate": 0.66
+    },
+    "image_path": "frames/auto_frame_000194.jpg",
+    "frame_number": 194
+  },
+  "auto_sample_195": {
+    "map": "HAVEN",
+    "tactical_situation": "force_buy",
+    "formation": "scattered",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 2.9,
+      "formation_score": 0.75,
+      "planting_score": 0.57,
+      "rotation_score": 0.46,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000195.jpg",
+    "frame_number": 195
+  },
+  "auto_sample_196": {
+    "map": "PEARL",
+    "tactical_situation": "mid_control",
+    "formation": "balanced",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 3,
+      "timing_gap": 2.9,
+      "formation_score": 0.76,
+      "planting_score": 0.54,
+      "rotation_score": 0.41,
+      "win_rate": 0.75
+    },
+    "image_path": "frames/auto_frame_000196.jpg",
+    "frame_number": 196
+  },
+  "auto_sample_197": {
+    "map": "ICEBOX",
+    "tactical_situation": "force_buy",
+    "formation": "spread",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 5,
+      "timing_gap": 1.9,
+      "formation_score": 0.67,
+      "planting_score": 0.54,
+      "rotation_score": 0.52,
+      "win_rate": 0.53
+    },
+    "image_path": "frames/auto_frame_000197.jpg",
+    "frame_number": 197
+  },
+  "auto_sample_198": {
+    "map": "BIND",
+    "tactical_situation": "retake",
+    "formation": "tight",
+    "position_type": "defensive",
+    "performance_metrics": {
+      "entry_rating": 4,
+      "timing_gap": 1.3,
+      "formation_score": 0.62,
+      "planting_score": 0.71,
+      "rotation_score": 0.49,
+      "win_rate": 0.69
+    },
+    "image_path": "frames/auto_frame_000198.jpg",
+    "frame_number": 198
+  },
+  "auto_sample_199": {
+    "map": "ASCENT",
+    "tactical_situation": "post_plant",
+    "formation": "spread",
+    "position_type": "aggressive",
+    "performance_metrics": {
+      "entry_rating": 2,
+      "timing_gap": 2.4,
+      "formation_score": 0.66,
+      "planting_score": 0.54,
+      "rotation_score": 0.71,
+      "win_rate": 0.7
+    },
+    "image_path": "frames/auto_frame_000199.jpg",
+    "frame_number": 199
+  }
+}

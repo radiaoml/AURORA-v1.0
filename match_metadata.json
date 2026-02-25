@@ -1,0 +1,36 @@
+{
+    "match_info": {
+        "match_id": "VAL-12345-PRO-SUMMIT",
+        "map": "Ascent",
+        "mode": "Competitive",
+        "date": "2026-02-16"
+    },
+    "teams": {
+        "ATK": [
+            "Player_1",
+            "Player_2",
+            "Player_3",
+            "Player_4",
+            "Player_5"
+        ],
+        "DEF": [
+            "Player_6",
+            "Player_7",
+            "Player_8",
+            "Player_9",
+            "Player_10"
+        ]
+    },
+    "round_results": [
+        {
+            "round_id": 1,
+            "winner": "ATK",
+            "win_type": "Elimination"
+        },
+        {
+            "round_id": 2,
+            "winner": "DEF",
+            "win_type": "Bomb Defused"
+        }
+    ]
+}

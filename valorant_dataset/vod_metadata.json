@@ -1,0 +1,53 @@
+{
+  "vod_1": {
+    "url": "https://youtu.be/E4517INnHII?si=rqlSBD-gFFkwW4eM",
+    "frames": [
+      "frames_buffer/frame_0.jpg",
+      "frames_buffer/frame_1.jpg",
+      "frames_buffer/frame_2.jpg",
+      "frames_buffer/frame_3.jpg",
+      "frames_buffer/frame_4.jpg",
+      "frames_buffer/frame_5.jpg",
+      "frames_buffer/frame_6.jpg",
+      "frames_buffer/frame_7.jpg",
+      "frames_buffer/frame_8.jpg",
+      "frames_buffer/frame_9.jpg"
+    ],
+    "source_meta": "YT_https://youtu.be/E4517INnHII?si=rqlSBD-gFFkwW4eM",
+    "frame_count": 10
+  },
+  "vod_2": {
+    "url": "https://youtu.be/7gMwkCTbHMs?si=K20nmoKyWurq25HL",
+    "frames": [
+      "frames_buffer/frame_0.jpg",
+      "frames_buffer/frame_1.jpg",
+      "frames_buffer/frame_2.jpg",
+      "frames_buffer/frame_3.jpg",
+      "frames_buffer/frame_4.jpg",
+      "frames_buffer/frame_5.jpg",
+      "frames_buffer/frame_6.jpg",
+      "frames_buffer/frame_7.jpg",
+      "frames_buffer/frame_8.jpg",
+      "frames_buffer/frame_9.jpg"
+    ],
+    "source_meta": "YT_https://youtu.be/7gMwkCTbHMs?si=K20nmoKyWurq25HL",
+    "frame_count": 10
+  },
+  "vod_3": {
+    "url": "https://youtu.be/2LnFuREmbpk?si=FtMcNS9qihdEFypF",
+    "frames": [
+      "frames_buffer/frame_0.jpg",
+      "frames_buffer/frame_1.jpg",
+      "frames_buffer/frame_2.jpg",
+      "frames_buffer/frame_3.jpg",
+      "frames_buffer/frame_4.jpg",
+      "frames_buffer/frame_5.jpg",
+      "frames_buffer/frame_6.jpg",
+      "frames_buffer/frame_7.jpg",
+      "frames_buffer/frame_8.jpg",
+      "frames_buffer/frame_9.jpg"
+    ],
+    "source_meta": "YT_https://youtu.be/2LnFuREmbpk?si=FtMcNS9qihdEFypF",
+    "frame_count": 10
+  }
+}

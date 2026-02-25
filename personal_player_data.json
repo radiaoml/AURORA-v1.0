@@ -1,0 +1,38 @@
+{
+    "identity": {
+        "riot_id": "RadiantPlayer",
+        "tagline": "TOP1",
+        "puuid": "user_b460ec7325772ff1",
+        "rank": "Ascendant 3",
+        "region": "NA"
+    },
+    "performance_summary": {
+        "total_games": 24,
+        "win_rate": "62.5%",
+        "mvp_count": 8,
+        "avg_combat_score": 245
+    },
+    "gaming_style": {
+        "dominant_archetype": "Aggressive Entry",
+        "archetype_confidence": "88%",
+        "traits": [
+            "High First Blood rate",
+            "Aggressive space creator",
+            "Latent Rotation Speed"
+        ]
+    },
+    "recent_mvp_highlights": [
+        {
+            "map": "Ascent",
+            "agent": "Jett",
+            "score": 310,
+            "kda": "22/12/5"
+        },
+        {
+            "map": "Bind",
+            "agent": "Raze",
+            "score": 285,
+            "kda": "18/14/8"
+        }
+    ]
+}
