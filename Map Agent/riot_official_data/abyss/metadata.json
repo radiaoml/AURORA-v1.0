@@ -1,0 +1,180 @@
+{
+  "uuid": "224b0a95-48b9-f703-1bd8-67aca101a61f",
+  "name": "Abyss",
+  "tacticalDescription": "A/B Sites",
+  "coordinates": "70\u00b0 50' AJ\" N, 9\u00b0 00' VX\" W",
+  "xMultiplier": 8.1e-05,
+  "yMultiplier": -8.1e-05,
+  "xScalarToAdd": 0.5,
+  "yScalarToAdd": 0.5,
+  "callouts": [
+    {
+      "region": "Bridge",
+      "super_region": "A",
+      "x": 5700,
+      "y": -375,
+      "z": 900
+    },
+    {
+      "region": "Link",
+      "super_region": "A",
+      "x": 2800,
+      "y": -2450,
+      "z": 1075
+    },
+    {
+      "region": "Lobby",
+      "super_region": "A",
+      "x": 3250,
+      "y": 3400,
+      "z": 975
+    },
+    {
+      "region": "Main",
+      "super_region": "A",
+      "x": 3800,
+      "y": 1650,
+      "z": 975
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 4300,
+      "y": -200,
+      "z": 800
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 950,
+      "y": 4950,
+      "z": 850
+    },
+    {
+      "region": "Tower",
+      "super_region": "A",
+      "x": 3025,
+      "y": -125,
+      "z": 1350
+    },
+    {
+      "region": "Bend",
+      "super_region": "Mid",
+      "x": -1700,
+      "y": 1075,
+      "z": 950
+    },
+    {
+      "region": "Link",
+      "super_region": "B",
+      "x": -2000,
+      "y": -2350,
+      "z": 925
+    },
+    {
+      "region": "Lobby",
+      "super_region": "B",
+      "x": -3650,
+      "y": 4025,
+      "z": 400
+    },
+    {
+      "region": "Main",
+      "super_region": "B",
+      "x": -4450,
+      "y": 1525,
+      "z": 525
+    },
+    {
+      "region": "Nest",
+      "super_region": "B",
+      "x": -4975,
+      "y": 2150,
+      "z": 900
+    },
+    {
+      "region": "Bottom",
+      "super_region": "Mid",
+      "x": -400,
+      "y": 575,
+      "z": 975
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": -4425,
+      "y": -1175,
+      "z": 700
+    },
+    {
+      "region": "Catwalk",
+      "super_region": "Mid",
+      "x": 600,
+      "y": 525,
+      "z": 1300
+    },
+    {
+      "region": "Danger",
+      "super_region": "B",
+      "x": -5850,
+      "y": 700,
+      "z": 625
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 950,
+      "y": -5275,
+      "z": 1125
+    },
+    {
+      "region": "Library",
+      "super_region": "Mid",
+      "x": -325,
+      "y": -600,
+      "z": 975
+    },
+    {
+      "region": "Secret",
+      "super_region": "A",
+      "x": 3775,
+      "y": -3850,
+      "z": 1025
+    },
+    {
+      "region": "Security",
+      "super_region": "A",
+      "x": 4900,
+      "y": -2975,
+      "z": 950
+    },
+    {
+      "region": "Top",
+      "super_region": "Mid",
+      "x": 775,
+      "y": -2375,
+      "z": 1075
+    },
+    {
+      "region": "Tower",
+      "super_region": "B",
+      "x": -3925,
+      "y": -2500,
+      "z": 1100
+    },
+    {
+      "region": "Vent",
+      "super_region": "A",
+      "x": 1700,
+      "y": -325,
+      "z": 1325
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\abyss\\minimap.png",
+    "listViewIcon": "riot_official_data\\abyss\\listview.png",
+    "listViewIconTall": "riot_official_data\\abyss\\listview_tall.png",
+    "splash": "riot_official_data\\abyss\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\abyss\\background.png"
+  }
+}

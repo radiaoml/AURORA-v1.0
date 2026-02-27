@@ -1,0 +1,215 @@
+{
+  "uuid": "2fe4ed3a-450a-948b-6d6b-e89a78e680a9",
+  "name": "Lotus",
+  "tacticalDescription": "A/B/C Sites",
+  "coordinates": "14\u00b007'AD.4\"N8 74\u00b053'XY\"E8",
+  "xMultiplier": 7.2e-05,
+  "yMultiplier": -7.2e-05,
+  "xScalarToAdd": 0.454789,
+  "yScalarToAdd": 0.917752,
+  "callouts": [
+    {
+      "region": "Top",
+      "super_region": "A",
+      "x": 9260.3,
+      "y": 5045.5884,
+      "z": 80.35567
+    },
+    {
+      "region": "Drop",
+      "super_region": "A",
+      "x": 9516.38,
+      "y": 6092.8936,
+      "z": 232.63
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 7735.5396,
+      "y": 5557.309,
+      "z": 232.63
+    },
+    {
+      "region": "Hut",
+      "super_region": "A",
+      "x": 7917.4614,
+      "y": 5557.309,
+      "z": 232.63098
+    },
+    {
+      "region": "Tree",
+      "super_region": "A",
+      "x": 6149.525,
+      "y": 5557.309,
+      "z": 232.63074
+    },
+    {
+      "region": "Door",
+      "super_region": "A",
+      "x": 5608.7563,
+      "y": 5203.91,
+      "z": 232.63055
+    },
+    {
+      "region": "Main",
+      "super_region": "A",
+      "x": 5288.3022,
+      "y": 4159.762,
+      "z": 232.63074
+    },
+    {
+      "region": "Rubble",
+      "super_region": "A",
+      "x": 4401.0713,
+      "y": 4918.189,
+      "z": 232.66272
+    },
+    {
+      "region": "Root",
+      "super_region": "A",
+      "x": 4401.0713,
+      "y": 3294.1523,
+      "z": 232.66956
+    },
+    {
+      "region": "Lobby",
+      "super_region": "A",
+      "x": 2685.951,
+      "y": 2927.1755,
+      "z": 232.66956
+    },
+    {
+      "region": "Lobby",
+      "super_region": "C",
+      "x": 1403.5685,
+      "y": -1576.5884,
+      "z": 100.21295
+    },
+    {
+      "region": "Pillars",
+      "super_region": "B",
+      "x": 3565.3691,
+      "y": 668.18317,
+      "z": 167.20193
+    },
+    {
+      "region": "Main",
+      "super_region": "B",
+      "x": 4876.832,
+      "y": -47.87195,
+      "z": 167.20193
+    },
+    {
+      "region": "Door",
+      "super_region": "C",
+      "x": 4818.6655,
+      "y": -1752.8021,
+      "z": 232.62439
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": 6368.0327,
+      "y": 668.18317,
+      "z": 167.20438
+    },
+    {
+      "region": "Link",
+      "super_region": "A",
+      "x": 6011.0664,
+      "y": 2087.6528,
+      "z": 167.20193
+    },
+    {
+      "region": "Upper",
+      "super_region": "B",
+      "x": 7682.943,
+      "y": 1517.3606,
+      "z": 167.20193
+    },
+    {
+      "region": "Waterfall",
+      "super_region": "C",
+      "x": 6719.804,
+      "y": -1994.2986,
+      "z": 71.56726
+    },
+    {
+      "region": "Link",
+      "super_region": "C",
+      "x": 7504.109,
+      "y": -1377.893,
+      "z": 71.56726
+    },
+    {
+      "region": "Stairs",
+      "super_region": "A",
+      "x": 8257.875,
+      "y": 3860.9312,
+      "z": 232.63
+    },
+    {
+      "region": "Mound",
+      "super_region": "C",
+      "x": 3863.7183,
+      "y": -1576.5884,
+      "z": 125.12698
+    },
+    {
+      "region": "Main",
+      "super_region": "C",
+      "x": 5311.2646,
+      "y": -3148.162,
+      "z": 74.64343
+    },
+    {
+      "region": "Bend",
+      "super_region": "C",
+      "x": 5657.522,
+      "y": -5281.4395,
+      "z": 80.35518
+    },
+    {
+      "region": "Site",
+      "super_region": "C",
+      "x": 6676.6636,
+      "y": -4265.876,
+      "z": 80.35567
+    },
+    {
+      "region": "Hall",
+      "super_region": "C",
+      "x": 7902.0615,
+      "y": -4265.876,
+      "z": 80.35567
+    },
+    {
+      "region": "Gravel",
+      "super_region": "C",
+      "x": 8936.881,
+      "y": -1752.2874,
+      "z": 80.35567
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 9686.767,
+      "y": 1697.8223,
+      "z": 80.35567
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 1401.2915,
+      "y": 777.29834,
+      "z": 232.63013
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\lotus\\minimap.png",
+    "listViewIcon": "riot_official_data\\lotus\\listview.png",
+    "listViewIconTall": "riot_official_data\\lotus\\listview_tall.png",
+    "splash": "riot_official_data\\lotus\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\lotus\\background.png"
+  }
+}

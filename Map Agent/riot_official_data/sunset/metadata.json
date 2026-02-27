@@ -1,0 +1,138 @@
+{
+  "uuid": "92584fbe-486a-b1b2-9faa-39b0f486b498",
+  "name": "Sunset",
+  "tacticalDescription": "A/B Sites",
+  "coordinates": "34\u00b0 2\u2032 C\u2033 N, 118\u00b0 12\u2032 YT\u2033 W",
+  "xMultiplier": 7.8e-05,
+  "yMultiplier": -7.8e-05,
+  "xScalarToAdd": 0.5,
+  "yScalarToAdd": 0.515625,
+  "callouts": [
+    {
+      "region": "Boba",
+      "super_region": "B",
+      "x": 2200,
+      "y": -4800,
+      "z": -200
+    },
+    {
+      "region": "Tiles",
+      "super_region": "Mid",
+      "x": -1800,
+      "y": 400,
+      "z": -200
+    },
+    {
+      "region": "Market",
+      "super_region": "B",
+      "x": -200,
+      "y": -3400,
+      "z": -200
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": -600,
+      "y": -5850,
+      "z": -200
+    },
+    {
+      "region": "Main",
+      "super_region": "B",
+      "x": -2000,
+      "y": -5650,
+      "z": -200
+    },
+    {
+      "region": "Lobby",
+      "super_region": "B",
+      "x": -3400,
+      "y": -2600,
+      "z": -200
+    },
+    {
+      "region": "Bottom",
+      "super_region": "Mid",
+      "x": -1800,
+      "y": -2025,
+      "z": -200
+    },
+    {
+      "region": "Courtyard",
+      "super_region": "Mid",
+      "x": -600,
+      "y": -1200,
+      "z": -200
+    },
+    {
+      "region": "Lobby",
+      "super_region": "A",
+      "x": -1800,
+      "y": 2000,
+      "z": -200
+    },
+    {
+      "region": "Main",
+      "super_region": "A",
+      "x": -400,
+      "y": 2200,
+      "z": -200
+    },
+    {
+      "region": "Link",
+      "super_region": "A",
+      "x": 2200,
+      "y": 3000,
+      "z": -200
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 1000,
+      "y": 3200,
+      "z": -200
+    },
+    {
+      "region": "Elbow",
+      "super_region": "A",
+      "x": 200,
+      "y": 4200,
+      "z": -200
+    },
+    {
+      "region": "Alley",
+      "super_region": "A",
+      "x": 3400,
+      "y": 3600,
+      "z": -200
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 3805.4785,
+      "y": -1989.0962,
+      "z": -198.4972
+    },
+    {
+      "region": "Top",
+      "super_region": "Mid",
+      "x": 2000,
+      "y": -2000,
+      "z": -200
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": -6025,
+      "y": -400,
+      "z": -200
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\sunset\\minimap.png",
+    "listViewIcon": "riot_official_data\\sunset\\listview.png",
+    "listViewIconTall": "riot_official_data\\sunset\\listview_tall.png",
+    "splash": "riot_official_data\\sunset\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\sunset\\background.png"
+  }
+}

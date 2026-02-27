@@ -1,0 +1,187 @@
+{
+  "uuid": "d960549e-485c-e861-8d71-aa9d1aed12a2",
+  "name": "Split",
+  "tacticalDescription": "A/B Sites",
+  "coordinates": "35\u00b041'CD'N,139\u00b041'WX'E",
+  "xMultiplier": 7.8e-05,
+  "yMultiplier": -7.8e-05,
+  "xScalarToAdd": 0.842188,
+  "yScalarToAdd": 0.697578,
+  "callouts": [
+    {
+      "region": "Back",
+      "super_region": "A",
+      "x": 7345.049,
+      "y": -7858.0405,
+      "z": -0.001953125
+    },
+    {
+      "region": "Lobby",
+      "super_region": "A",
+      "x": 6814.217,
+      "y": -2457.7468,
+      "z": 300
+    },
+    {
+      "region": "Main",
+      "super_region": "A",
+      "x": 6279.9795,
+      "y": -4492.833,
+      "z": 199.95233
+    },
+    {
+      "region": "Rafters",
+      "super_region": "A",
+      "x": 5434.726,
+      "y": -6258.442,
+      "z": 549.9768
+    },
+    {
+      "region": "Ramps",
+      "super_region": "A",
+      "x": 4330,
+      "y": -4750,
+      "z": 590
+    },
+    {
+      "region": "Screens",
+      "super_region": "A",
+      "x": 5648.7144,
+      "y": -8868.611,
+      "z": 200.00006
+    },
+    {
+      "region": "Sewer",
+      "super_region": "A",
+      "x": 4862.6064,
+      "y": -2367.2578,
+      "z": 59.34729
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 6588.6597,
+      "y": -6761.131,
+      "z": 100.00012
+    },
+    {
+      "region": "Tower",
+      "super_region": "A",
+      "x": 4636.7925,
+      "y": -6748.2334,
+      "z": 650.00006
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 1901.97,
+      "y": 59.588867,
+      "z": 300.00012
+    },
+    {
+      "region": "Alley",
+      "super_region": "B",
+      "x": -1158.0048,
+      "y": -8066.301,
+      "z": 399.99982
+    },
+    {
+      "region": "Back",
+      "super_region": "B",
+      "x": -3107.181,
+      "y": -7417.2607,
+      "z": 300.00012
+    },
+    {
+      "region": "Link",
+      "super_region": "B",
+      "x": -27.670135,
+      "y": -2369.784,
+      "z": 349.99997
+    },
+    {
+      "region": "Garage",
+      "super_region": "B",
+      "x": -2190.7827,
+      "y": -3848.0293,
+      "z": 300.00018
+    },
+    {
+      "region": "Rafters",
+      "super_region": "B",
+      "x": -637.1397,
+      "y": -6070.6167,
+      "z": 922.2615
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": -2167.2456,
+      "y": -6264.7715,
+      "z": 399.99982
+    },
+    {
+      "region": "Stairs",
+      "super_region": "B",
+      "x": 1061.493,
+      "y": -6760.976,
+      "z": 839.9651
+    },
+    {
+      "region": "Tower",
+      "super_region": "B",
+      "x": 168.89589,
+      "y": -5290.194,
+      "z": 900
+    },
+    {
+      "region": "Lobby",
+      "super_region": "B",
+      "x": -1271.6421,
+      "y": -1983.6248,
+      "z": 300.00012
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 2142.3635,
+      "y": -8964.969,
+      "z": 500.00012
+    },
+    {
+      "region": "Bottom",
+      "super_region": "Mid",
+      "x": 1922.6552,
+      "y": -2899.4626,
+      "z": 450
+    },
+    {
+      "region": "Mail",
+      "super_region": "Mid",
+      "x": 1155.3333,
+      "y": -4808.6436,
+      "z": 800.00024
+    },
+    {
+      "region": "Top",
+      "super_region": "Mid",
+      "x": 2021.9575,
+      "y": -4596.936,
+      "z": 649.9999
+    },
+    {
+      "region": "Vent",
+      "super_region": "Mid",
+      "x": 3155.1648,
+      "y": -5338.5215,
+      "z": 650
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\split\\minimap.png",
+    "listViewIcon": "riot_official_data\\split\\listview.png",
+    "listViewIconTall": "riot_official_data\\split\\listview_tall.png",
+    "splash": "riot_official_data\\split\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\split\\background.png"
+  }
+}

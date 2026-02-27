@@ -1,0 +1,96 @@
+{
+  "uuid": "2c09d728-42d5-30d8-43dc-96a05cc7ee9d",
+  "name": "Drift",
+  "tacticalDescription": null,
+  "coordinates": null,
+  "xMultiplier": 0,
+  "yMultiplier": 0,
+  "xScalarToAdd": 0,
+  "yScalarToAdd": 0,
+  "callouts": [
+    {
+      "region": "Alley",
+      "super_region": "Attacker Side",
+      "x": 3200,
+      "y": 2200,
+      "z": 1400
+    },
+    {
+      "region": "Nest",
+      "super_region": "Attacker Side",
+      "x": 2000,
+      "y": -3400,
+      "z": 1400
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 1200,
+      "y": -2200,
+      "z": 1400
+    },
+    {
+      "region": "Tower",
+      "super_region": "Attacker Side",
+      "x": -400,
+      "y": -1800,
+      "z": 1400
+    },
+    {
+      "region": "Yard",
+      "super_region": "Attacker Side",
+      "x": -1600,
+      "y": -3400,
+      "z": 1400
+    },
+    {
+      "region": "Alley",
+      "super_region": "Defender Side",
+      "x": -3200,
+      "y": -2200,
+      "z": 1400
+    },
+    {
+      "region": "Nest",
+      "super_region": "Defender Side",
+      "x": -2000,
+      "y": 3400,
+      "z": 1400
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": -1200,
+      "y": 2200,
+      "z": 1400
+    },
+    {
+      "region": "Tower",
+      "super_region": "Defender Side",
+      "x": 400,
+      "y": 1800,
+      "z": 1400
+    },
+    {
+      "region": "Yard",
+      "super_region": "Defender Side",
+      "x": 1600,
+      "y": 3400,
+      "z": 1400
+    },
+    {
+      "region": "Water",
+      "super_region": "Mid",
+      "x": -800,
+      "y": -600,
+      "z": 1400
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\drift\\minimap.png",
+    "listViewIcon": "riot_official_data\\drift\\listview.png",
+    "listViewIconTall": "riot_official_data\\drift\\listview_tall.png",
+    "splash": "riot_official_data\\drift\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\drift\\background.png"
+  }
+}

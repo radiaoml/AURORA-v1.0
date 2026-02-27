@@ -1,0 +1,180 @@
+{
+  "uuid": "2fb9a4fd-47b8-4e7d-a969-74b4046ebd53",
+  "name": "Breeze",
+  "tacticalDescription": "A/B Sites",
+  "coordinates": "26\u00b011'AG\"N 71\u00b010'WY\"W",
+  "xMultiplier": 7e-05,
+  "yMultiplier": -7e-05,
+  "xScalarToAdd": 0.465123,
+  "yScalarToAdd": 0.833078,
+  "callouts": [
+    {
+      "region": "Hall",
+      "super_region": "Mid",
+      "x": 4256.5713,
+      "y": 2491.0493,
+      "z": 212.8035
+    },
+    {
+      "region": "Bridge",
+      "super_region": "A",
+      "x": 8400,
+      "y": 3525,
+      "z": 1100
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 8900,
+      "y": 3525,
+      "z": 1100
+    },
+    {
+      "region": "Arches",
+      "super_region": "Defender Side",
+      "x": 9400,
+      "y": -1300,
+      "z": 1100
+    },
+    {
+      "region": "Wood Doors",
+      "super_region": "Mid",
+      "x": 4825,
+      "y": 2550,
+      "z": 500
+    },
+    {
+      "region": "Pillar",
+      "super_region": "Mid",
+      "x": 4175,
+      "y": 475,
+      "z": 200
+    },
+    {
+      "region": "Top",
+      "super_region": "Mid",
+      "x": 6175,
+      "y": 525,
+      "z": 200
+    },
+    {
+      "region": "Nest",
+      "super_region": "Mid",
+      "x": 8650,
+      "y": 275,
+      "z": 200
+    },
+    {
+      "region": "Window",
+      "super_region": "B",
+      "x": 2225,
+      "y": -4175,
+      "z": 200
+    },
+    {
+      "region": "Main",
+      "super_region": "B",
+      "x": 3550,
+      "y": -4450,
+      "z": 200
+    },
+    {
+      "region": "Elbow",
+      "super_region": "B",
+      "x": 4675,
+      "y": -2900,
+      "z": 200
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": 6450,
+      "y": -5650,
+      "z": 200
+    },
+    {
+      "region": "Tunnel",
+      "super_region": "B",
+      "x": 6450,
+      "y": -1450,
+      "z": 200
+    },
+    {
+      "region": "Ramp",
+      "super_region": "A",
+      "x": 7300,
+      "y": 2725,
+      "z": 1100
+    },
+    {
+      "region": "Back",
+      "super_region": "B",
+      "x": 7550,
+      "y": -5675,
+      "z": 200
+    },
+    {
+      "region": "Wall",
+      "super_region": "B",
+      "x": 8550,
+      "y": -3000,
+      "z": 200
+    },
+    {
+      "region": "Cannon",
+      "super_region": "Mid",
+      "x": 2900,
+      "y": -1850,
+      "z": 200
+    },
+    {
+      "region": "Bottom",
+      "super_region": "Mid",
+      "x": 1575,
+      "y": 475,
+      "z": 200
+    },
+    {
+      "region": "Lobby",
+      "super_region": "A",
+      "x": -1250,
+      "y": 3400,
+      "z": 200
+    },
+    {
+      "region": "Shop",
+      "super_region": "A",
+      "x": 2150,
+      "y": 4250,
+      "z": 200
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 4825,
+      "y": 6325,
+      "z": 200
+    },
+    {
+      "region": "Pyramids",
+      "super_region": "A",
+      "x": 5200,
+      "y": 5450,
+      "z": 200
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": -575,
+      "y": -450,
+      "z": 200
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\breeze\\minimap.png",
+    "listViewIcon": "riot_official_data\\breeze\\listview.png",
+    "listViewIconTall": "riot_official_data\\breeze\\listview_tall.png",
+    "splash": "riot_official_data\\breeze\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\breeze\\background.png"
+  }
+}

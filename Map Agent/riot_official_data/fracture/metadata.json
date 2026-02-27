@@ -1,0 +1,173 @@
+{
+  "uuid": "b529448b-4d60-346e-e89e-00a4c527a405",
+  "name": "Fracture",
+  "tacticalDescription": "A/B Sites",
+  "coordinates": "35\u00b048'BI\"N 106\u00b008'YQ\"W",
+  "xMultiplier": 7.8e-05,
+  "yMultiplier": -7.8e-05,
+  "xScalarToAdd": 0.556952,
+  "yScalarToAdd": 1.155886,
+  "callouts": [
+    {
+      "region": "Bridge",
+      "super_region": "Attacker Side",
+      "x": 13204,
+      "y": -756,
+      "z": 253
+    },
+    {
+      "region": "Bench",
+      "super_region": "B",
+      "x": 11473,
+      "y": -2897,
+      "z": 400
+    },
+    {
+      "region": "Arcade",
+      "super_region": "B",
+      "x": 10181,
+      "y": -4179,
+      "z": 500
+    },
+    {
+      "region": "Tower",
+      "super_region": "B",
+      "x": 9155,
+      "y": -5601,
+      "z": 1000
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": 8178,
+      "y": -5942,
+      "z": 747
+    },
+    {
+      "region": "Generator",
+      "super_region": "B",
+      "x": 8362,
+      "y": -3380,
+      "z": 550
+    },
+    {
+      "region": "Link",
+      "super_region": "B",
+      "x": 9198,
+      "y": -2741,
+      "z": 650
+    },
+    {
+      "region": "Canteen",
+      "super_region": "B",
+      "x": 7111,
+      "y": -3138,
+      "z": 547
+    },
+    {
+      "region": "Link",
+      "super_region": "A",
+      "x": 8578,
+      "y": 1302,
+      "z": 650
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 9156,
+      "y": -677,
+      "z": 650
+    },
+    {
+      "region": "Main",
+      "super_region": "B",
+      "x": 5967,
+      "y": -5343,
+      "z": 425
+    },
+    {
+      "region": "Tree",
+      "super_region": "B",
+      "x": 4965,
+      "y": -4109,
+      "z": 300
+    },
+    {
+      "region": "Tunnel",
+      "super_region": "B",
+      "x": 7402,
+      "y": -4058,
+      "z": 109
+    },
+    {
+      "region": "Hall",
+      "super_region": "A",
+      "x": 5063.5464,
+      "y": 2057.6648,
+      "z": 599.99963
+    },
+    {
+      "region": "Door",
+      "super_region": "A",
+      "x": 5807.855,
+      "y": 1940.4603,
+      "z": 602.01306
+    },
+    {
+      "region": "Rope",
+      "super_region": "A",
+      "x": 6638.828,
+      "y": 1052.6461,
+      "z": 493.07227
+    },
+    {
+      "region": "Main",
+      "super_region": "A",
+      "x": 5878.792,
+      "y": 3450.9639,
+      "z": 550.0005
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 8125.7627,
+      "y": 3373.7861,
+      "z": 550.00305
+    },
+    {
+      "region": "Drop",
+      "super_region": "A",
+      "x": 9306.803,
+      "y": 2826.1626,
+      "z": 850.00006
+    },
+    {
+      "region": "Dish",
+      "super_region": "A",
+      "x": 11296.665,
+      "y": 1391.7144,
+      "z": 622.6172
+    },
+    {
+      "region": "Gate",
+      "super_region": "A",
+      "x": 12962,
+      "y": 1565,
+      "z": 450
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 4345.554,
+      "y": -948.4505,
+      "z": 307.17273
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\fracture\\minimap.png",
+    "listViewIcon": "riot_official_data\\fracture\\listview.png",
+    "listViewIconTall": "riot_official_data\\fracture\\listview_tall.png",
+    "splash": "riot_official_data\\fracture\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\fracture\\background.png"
+  }
+}

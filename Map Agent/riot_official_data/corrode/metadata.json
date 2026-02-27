@@ -1,0 +1,166 @@
+{
+  "uuid": "1c18ab1f-420d-0d8b-71d0-77ad3c439115",
+  "name": "Corrode",
+  "tacticalDescription": "A/B Sites",
+  "coordinates": "48\u00b0 38' FH\" N8, 1\u00b0 33' YV\" W8",
+  "xMultiplier": 7e-05,
+  "yMultiplier": -7e-05,
+  "xScalarToAdd": 0.526158,
+  "yScalarToAdd": 0.5,
+  "callouts": [
+    {
+      "region": "Crane",
+      "super_region": "A",
+      "x": 4458.2866,
+      "y": -3999.4976,
+      "z": 600
+    },
+    {
+      "region": "Elbow",
+      "super_region": "A",
+      "x": 5583.2793,
+      "y": -2074.4995,
+      "z": 700
+    },
+    {
+      "region": "Link",
+      "super_region": "A",
+      "x": 1783.2793,
+      "y": -1049.5073,
+      "z": 675
+    },
+    {
+      "region": "Lobby",
+      "super_region": "A",
+      "x": 4333.2793,
+      "y": 2600.4976,
+      "z": 700
+    },
+    {
+      "region": "Main",
+      "super_region": "A",
+      "x": 5933.2793,
+      "y": 1225.4977,
+      "z": 700
+    },
+    {
+      "region": "Pocket",
+      "super_region": "A",
+      "x": 5583.2793,
+      "y": -799.4995,
+      "z": 700
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 3458.2793,
+      "y": -1824.5004,
+      "z": 700
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": -25,
+      "y": 5675,
+      "z": 575
+    },
+    {
+      "region": "Yard",
+      "super_region": "A",
+      "x": 4333.2793,
+      "y": -799.50256,
+      "z": 700
+    },
+    {
+      "region": "Arch",
+      "super_region": "B",
+      "x": -3216.7134,
+      "y": -4399.5156,
+      "z": 600
+    },
+    {
+      "region": "Elbow",
+      "super_region": "B",
+      "x": -5591.7236,
+      "y": -2924.5183,
+      "z": 700
+    },
+    {
+      "region": "Link",
+      "super_region": "B",
+      "x": -1291.7185,
+      "y": -1824.5093,
+      "z": 700
+    },
+    {
+      "region": "Lobby",
+      "super_region": "B",
+      "x": -1666.7264,
+      "y": 2775.4875,
+      "z": 700
+    },
+    {
+      "region": "Main",
+      "super_region": "B",
+      "x": -2716.7236,
+      "y": 750.4862,
+      "z": 700
+    },
+    {
+      "region": "Bottom",
+      "super_region": "Mid",
+      "x": 133.27757,
+      "y": 175.49072,
+      "z": 700
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": -2716.7234,
+      "y": -1174.5138,
+      "z": 700
+    },
+    {
+      "region": "Tower",
+      "super_region": "B",
+      "x": -3516.7236,
+      "y": -2924.5183,
+      "z": 700
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 8.286561,
+      "y": -5749.507,
+      "z": 700
+    },
+    {
+      "region": "Stairs",
+      "super_region": "Mid",
+      "x": 133.28067,
+      "y": -1474.5093,
+      "z": 700
+    },
+    {
+      "region": "Window",
+      "super_region": "Mid",
+      "x": 133.28421,
+      "y": -3099.5093,
+      "z": 700
+    },
+    {
+      "region": "Top",
+      "super_region": "Mid",
+      "x": 133.2815,
+      "y": -1824.5093,
+      "z": 700
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\corrode\\minimap.png",
+    "listViewIcon": "riot_official_data\\corrode\\listview.png",
+    "listViewIconTall": "riot_official_data\\corrode\\listview_tall.png",
+    "splash": "riot_official_data\\corrode\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\corrode\\background.png"
+  }
+}

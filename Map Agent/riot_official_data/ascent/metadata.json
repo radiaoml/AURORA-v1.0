@@ -1,0 +1,173 @@
+{
+  "uuid": "7eaecc1b-4337-bbf6-6ab9-04b8f06b3319",
+  "name": "Ascent",
+  "tacticalDescription": "A/B Sites",
+  "coordinates": "45\u00b026'BF'N,12\u00b020'Q'E",
+  "xMultiplier": 7e-05,
+  "yMultiplier": -7e-05,
+  "xScalarToAdd": 0.813895,
+  "yScalarToAdd": 0.573242,
+  "callouts": [
+    {
+      "region": "Tree",
+      "super_region": "A",
+      "x": 3980.9062,
+      "y": -5938.758,
+      "z": 400.00003
+    },
+    {
+      "region": "Lobby",
+      "super_region": "A",
+      "x": 4489.032,
+      "y": -3014.0515,
+      "z": 400
+    },
+    {
+      "region": "Main",
+      "super_region": "A",
+      "x": 5321.6206,
+      "y": -4710.1274,
+      "z": 399.99994
+    },
+    {
+      "region": "Window",
+      "super_region": "A",
+      "x": 4023.0244,
+      "y": -8180.692,
+      "z": 803.03015
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 6153.585,
+      "y": -6626.2114,
+      "z": 499.99933
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 60,
+      "y": 50,
+      "z": 190
+    },
+    {
+      "region": "Lobby",
+      "super_region": "B",
+      "x": -1490.5864,
+      "y": -1389.9706,
+      "z": 199.99994
+    },
+    {
+      "region": "Main",
+      "super_region": "B",
+      "x": -1983.6713,
+      "y": -5840.8125,
+      "z": 100
+    },
+    {
+      "region": "Boat House",
+      "super_region": "B",
+      "x": -4484.774,
+      "y": -7763.3584,
+      "z": -105.08359
+    },
+    {
+      "region": "Bottom",
+      "super_region": "Mid",
+      "x": 1122.2262,
+      "y": -5951.704,
+      "z": 200.00006
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": -2344.065,
+      "y": -7548.511,
+      "z": 99.33539
+    },
+    {
+      "region": "Catwalk",
+      "super_region": "Mid",
+      "x": 2315.7944,
+      "y": -4127.2554,
+      "z": 415.80453
+    },
+    {
+      "region": "Cubby",
+      "super_region": "Mid",
+      "x": 3387.3167,
+      "y": -5129.764,
+      "z": 400.00037
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 1995.2354,
+      "y": -9744.923,
+      "z": 300.0053
+    },
+    {
+      "region": "Garden",
+      "super_region": "A",
+      "x": 3773.6653,
+      "y": -7551.3535,
+      "z": 570.3553
+    },
+    {
+      "region": "Market",
+      "super_region": "Mid",
+      "x": 1089.1044,
+      "y": -7363.1914,
+      "z": 306.9743
+    },
+    {
+      "region": "Courtyard",
+      "super_region": "Mid",
+      "x": 1222.7029,
+      "y": -4586.6,
+      "z": 200.13477
+    },
+    {
+      "region": "Link",
+      "super_region": "Mid",
+      "x": -632.0929,
+      "y": -4280.2573,
+      "z": 200.00018
+    },
+    {
+      "region": "Pizza",
+      "super_region": "Mid",
+      "x": 1801.5667,
+      "y": -7262.1704,
+      "z": 300.00006
+    },
+    {
+      "region": "Rafters",
+      "super_region": "A",
+      "x": 6129.893,
+      "y": -8210,
+      "z": 806.1185
+    },
+    {
+      "region": "Top",
+      "super_region": "Mid",
+      "x": 2753.9297,
+      "y": -2129.6155,
+      "z": 400
+    },
+    {
+      "region": "Wine",
+      "super_region": "A",
+      "x": 7358.7407,
+      "y": -4689.2705,
+      "z": 300.00034
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\ascent\\minimap.png",
+    "listViewIcon": "riot_official_data\\ascent\\listview.png",
+    "listViewIconTall": "riot_official_data\\ascent\\listview_tall.png",
+    "splash": "riot_official_data\\ascent\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\ascent\\background.png"
+  }
+}

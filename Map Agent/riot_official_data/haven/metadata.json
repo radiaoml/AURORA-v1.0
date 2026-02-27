@@ -1,0 +1,166 @@
+{
+  "uuid": "2bee0dc9-4ffe-519b-1cbd-7fbe763a6047",
+  "name": "Haven",
+  "tacticalDescription": "A/B/C Sites",
+  "coordinates": "27\u00b028'A'N,89\u00b038'WZ'E",
+  "xMultiplier": 7.5e-05,
+  "yMultiplier": -7.5e-05,
+  "xScalarToAdd": 1.09345,
+  "yScalarToAdd": 0.642728,
+  "callouts": [
+    {
+      "region": "Garden",
+      "super_region": "A",
+      "x": 3100.261,
+      "y": -4683.6016,
+      "z": 300.0001
+    },
+    {
+      "region": "Link",
+      "super_region": "A",
+      "x": 4244.4214,
+      "y": -10715.68,
+      "z": 299.99994
+    },
+    {
+      "region": "Lobby",
+      "super_region": "A",
+      "x": 3438.537,
+      "y": -6260.409,
+      "z": 300.00006
+    },
+    {
+      "region": "Long",
+      "super_region": "A",
+      "x": 6209.695,
+      "y": -6901.142,
+      "z": 100
+    },
+    {
+      "region": "Sewer",
+      "super_region": "A",
+      "x": 3452.8735,
+      "y": -7915.7246,
+      "z": 0.00010681152
+    },
+    {
+      "region": "Site",
+      "super_region": "A",
+      "x": 6309.3076,
+      "y": -9225.703,
+      "z": 300
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 1741.7622,
+      "y": -2642.7925,
+      "z": 278.31885
+    },
+    {
+      "region": "Back",
+      "super_region": "B",
+      "x": 1966.1608,
+      "y": -10664.775,
+      "z": 300.00006
+    },
+    {
+      "region": "Site",
+      "super_region": "B",
+      "x": 1884.706,
+      "y": -9231.335,
+      "z": 700.1339
+    },
+    {
+      "region": "Link",
+      "super_region": "C",
+      "x": -87.761444,
+      "y": -10004.415,
+      "z": 299.99963
+    },
+    {
+      "region": "Lobby",
+      "super_region": "C",
+      "x": -1642.189,
+      "y": -5720.345,
+      "z": 100.90173
+    },
+    {
+      "region": "Long",
+      "super_region": "C",
+      "x": -3356.814,
+      "y": -5990.872,
+      "z": 99.999756
+    },
+    {
+      "region": "Garage",
+      "super_region": "C",
+      "x": 180.07678,
+      "y": -7999.5845,
+      "z": 99.99872
+    },
+    {
+      "region": "Window",
+      "super_region": "C",
+      "x": -10.126678,
+      "y": -8993.241,
+      "z": 300
+    },
+    {
+      "region": "Site",
+      "super_region": "C",
+      "x": -2378.1328,
+      "y": -9010.557,
+      "z": 199.99994
+    },
+    {
+      "region": "Cubby",
+      "super_region": "C",
+      "x": -2119.7693,
+      "y": -6561.603,
+      "z": 200.00006
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 2946.3042,
+      "y": -12714.707,
+      "z": 300.0011
+    },
+    {
+      "region": "Doors",
+      "super_region": "Mid",
+      "x": 151.11594,
+      "y": -6262.9155,
+      "z": 95.41321
+    },
+    {
+      "region": "Courtyard",
+      "super_region": "Mid",
+      "x": 1822.1299,
+      "y": -6712.6875,
+      "z": 94.86078
+    },
+    {
+      "region": "Window",
+      "super_region": "Mid",
+      "x": 1950.2218,
+      "y": -5567.912,
+      "z": 300.0006
+    },
+    {
+      "region": "Tower",
+      "super_region": "A",
+      "x": 6721.4043,
+      "y": -10472.5205,
+      "z": 900.0001
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\haven\\minimap.png",
+    "listViewIcon": "riot_official_data\\haven\\listview.png",
+    "listViewIconTall": "riot_official_data\\haven\\listview_tall.png",
+    "splash": "riot_official_data\\haven\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\haven\\background.png"
+  }
+}

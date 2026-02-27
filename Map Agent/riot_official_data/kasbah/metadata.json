@@ -1,0 +1,173 @@
+{
+  "uuid": "12452a9d-48c3-0b02-e7eb-0381c3520404",
+  "name": "Kasbah",
+  "tacticalDescription": null,
+  "coordinates": null,
+  "xMultiplier": 0,
+  "yMultiplier": 0,
+  "xScalarToAdd": 0,
+  "yScalarToAdd": 0,
+  "callouts": [
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Angle Box",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Link",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Pit",
+      "super_region": "Mid",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Tower",
+      "super_region": "Mid",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Ramp",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Flat Box",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Nest",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Tunnel",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Window",
+      "super_region": "Defender Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Angle Box",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Link",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Pit",
+      "super_region": "Mid",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Tower",
+      "super_region": "Mid",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Ramp",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Flat Box",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Nest",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Tunnel",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    },
+    {
+      "region": "Window",
+      "super_region": "Attacker Side",
+      "x": 0,
+      "y": 0,
+      "z": 200
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\kasbah\\minimap.png",
+    "listViewIcon": "riot_official_data\\kasbah\\listview.png",
+    "listViewIconTall": "riot_official_data\\kasbah\\listview_tall.png",
+    "splash": "riot_official_data\\kasbah\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\kasbah\\background.png"
+  }
+}

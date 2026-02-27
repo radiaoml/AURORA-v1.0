@@ -1,0 +1,110 @@
+{
+  "uuid": "690b3ed2-4dff-945b-8223-6da834e30d24",
+  "name": "District",
+  "tacticalDescription": null,
+  "coordinates": null,
+  "xMultiplier": 0,
+  "yMultiplier": 0,
+  "xScalarToAdd": 0,
+  "yScalarToAdd": 0,
+  "callouts": [
+    {
+      "region": "Box",
+      "super_region": "Attacker Side",
+      "x": -2225,
+      "y": 1700,
+      "z": -200
+    },
+    {
+      "region": "Nest",
+      "super_region": "Attacker Side",
+      "x": -2200,
+      "y": 800,
+      "z": -200
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Attacker Side",
+      "x": -1200,
+      "y": 3000,
+      "z": -200
+    },
+    {
+      "region": "Stairs",
+      "super_region": "Attacker Side",
+      "x": -200,
+      "y": 1200,
+      "z": -200
+    },
+    {
+      "region": "Wall",
+      "super_region": "Attacker Side",
+      "x": 700,
+      "y": 900,
+      "z": -200
+    },
+    {
+      "region": "Box",
+      "super_region": "Defender Side",
+      "x": -2225,
+      "y": -2900,
+      "z": -200
+    },
+    {
+      "region": "Nest",
+      "super_region": "Defender Side",
+      "x": -2200,
+      "y": -1700,
+      "z": -199.99951
+    },
+    {
+      "region": "Spawn",
+      "super_region": "Defender Side",
+      "x": -1200,
+      "y": -3000,
+      "z": -200
+    },
+    {
+      "region": "Stairs",
+      "super_region": "Defender Side",
+      "x": -200,
+      "y": -1200,
+      "z": -200
+    },
+    {
+      "region": "Wall",
+      "super_region": "Defender Side",
+      "x": 700,
+      "y": -900,
+      "z": -200
+    },
+    {
+      "region": "Generator",
+      "super_region": "Mid",
+      "x": -1400,
+      "y": -1000,
+      "z": -200
+    },
+    {
+      "region": "Horseshoe",
+      "super_region": "Mid",
+      "x": -3200,
+      "y": -900,
+      "z": -200
+    },
+    {
+      "region": "Sewer",
+      "super_region": "Mid",
+      "x": 700,
+      "y": -900,
+      "z": -200
+    }
+  ],
+  "images": {
+    "displayIcon": "riot_official_data\\district\\minimap.png",
+    "listViewIcon": "riot_official_data\\district\\listview.png",
+    "listViewIconTall": "riot_official_data\\district\\listview_tall.png",
+    "splash": "riot_official_data\\district\\splash.png",
+    "stylizedBackgroundImage": "riot_official_data\\district\\background.png"
+  }
+}
