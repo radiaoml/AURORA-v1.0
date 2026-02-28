@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 10
+names: ['ally', 'ally behind wall', 'enemy', 'enemy behind wall', 'gun', 'molly', 'orb', 'smoke', 'spike', 'spike-planted']
+
+roboflow:
+  workspace: youssefs-workspace-cz8mf
+  project: enemy-and-weapon-recognition-owkbr
+  version: 1
+  license: CC BY 4.0
+  url: https://app.roboflow.com/youssefs-workspace-cz8mf/enemy-and-weapon-recognition-owkbr/1

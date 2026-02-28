@@ -8,6 +8,7 @@ from local_video_analyzer import LocalVideoAnalyzer
 from aurora_agents import process_video_analysis
 from aurora_advanced_agents import run_advanced_analysis
 from n8n_integration import setup_n8n_routes
+from weapon_prediction_api import weapon_router
 
 app = FastAPI(title="AURORA Neural Backend")
 
@@ -18,6 +19,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount shared weapon prediction endpoints so HUD can reach them via port 8000
+app.include_router(weapon_router)
 
 class AnalysisRequest(BaseModel):
     source: str

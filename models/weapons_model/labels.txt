@@ -1,0 +1,6 @@
+0 Phantom
+1 sheriff
+2 vandal
+3 ghost
+4 guardian
+5 classic

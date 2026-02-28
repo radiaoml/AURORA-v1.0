@@ -79,6 +79,20 @@ pip install duckdb langchain numpy scikit-learn
    Open `index.html` in any modern browser
 3. **System Ready**: Backend runs on http://localhost:8000
 
+## 🔫 Teachable Weapons Model
+
+Drop your Teachable Machine export (`keras_model.h5` + `labels.txt`) inside `models/weapons_model/` and the FastAPI backend will automatically load it through TensorFlow:
+
+```bash
+pip install tensorflow pillow
+
+# Optional: override paths if you keep the export elsewhere
+set WEAPON_TF_MODEL_PATH=C:\path\to\keras_model.h5
+set WEAPON_TF_LABELS_PATH=C:\path\to\labels.txt
+```
+
+The `/insights/analyze` endpoint now streams frames into that model, aggregates confidences, and augments the predictions with live Valorant weapon stats. The legacy YOLO26 trainer (`train_yolo26.py`) remains in the repo for experimentation, but it is no longer required for the HUD.
+
 ## 🛰️ Usage Guide
 
 ### **🎮 Basic Workflow**
@@ -101,6 +115,7 @@ pip install duckdb langchain numpy scikit-learn
 - `video_analyzer.py`: Frame extraction and video processing
 - `local_video_analyzer.py`: Local analysis engine
 - `index.html`: Professional tactical Cyber-HUD
+- `weapon_insights.html`: Dedicated upload page for Teachable weapon telemetry + improvement tips
 
 ### **Multi-Agent System**
 - `aurora_agents.py`: CleanerBot and AnalystBot implementations

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURORA // Weapon & Agent Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #010718;
+            --bg-panel: rgba(6, 12, 28, 0.92);
+            --accent-red: #ff4d6d;
+            --accent-cyan: #3df5ff;
+            --accent-amber: #f8c537;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.2);
+            --card-glow: 0 25px 60px rgba(0, 200, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            background: radial-gradient(circle at 20% 20%, rgba(255, 77, 109, 0.2), transparent 45%),
+                        radial-gradient(circle at 80% 0%, rgba(61, 245, 255, 0.25), transparent 40%),
+                        var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 40px 6vw 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 0.15rem;
+        }
+
+        .logo span {
+            color: var(--accent-red);
+        }
+
+        .cta-link {
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+
+        .cta-link:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        main {
+            padding: 0 6vw 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 30px;
+            position: relative;
+            box-shadow: var(--card-glow);
+        }
+
+        .panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            pointer-events: none;
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            font-size: 1rem;
+            letter-spacing: 0.25rem;
+            color: var(--text-muted);
+        }
+
+        .mode-select {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .mode-select label {
+            flex: 1;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08rem;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .mode-select input {
+            display: none;
+        }
+
+        .mode-select label.active {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .input-panel {
+            border: 1px dashed var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-panel.hidden {
+            display: none;
+        }
+
+        input[type="file"],
+        input[type="text"],
+        select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: var(--text-main);
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(241, 245, 249, 0.4);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(120deg, var(--accent-red), var(--accent-cyan));
+            color: var(--bg-primary);
+            font-weight: 700;
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .status {
+            margin-top: 10px;
+            min-height: 24px;
+            font-size: 0.85rem;
+            color: var(--accent-amber);
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .result-card h3 {
+            margin: 0;
+            font-size: 0.85rem;
+            letter-spacing: 0.12rem;
+            color: var(--text-muted);
+        }
+
+        .result-card .value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .chip {
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            font-size: 0.8rem;
+        }
+
+        .notes {
+            list-style: none;
+            padding-left: 18px;
+            margin: 0;
+            color: var(--text-muted);
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .notes li {
+            margin: 8px 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 10px;
+            color: var(--text-muted);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .mode-select {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">AURORA <span>//</span> WEAPON INSIGHTS</div>
+        <a class="cta-link" href="index.html">return to hud</a>
+    </header>
+
+    <main>
+        <section class="panel">
+            <h2>INPUT CHANNEL</h2>
+            <form id="insight-form">
+                <div class="mode-select">
+                    <label class="active">
+                        <input type="radio" name="mediaType" value="video" checked>
+                        VIDEO CLIP
+                    </label>
+                    <label>
+                        <input type="radio" name="mediaType" value="image">
+                        STILL FRAME
+                    </label>
+                    <label>
+                        <input type="radio" name="mediaType" value="youtube">
+                        YOUTUBE URL
+                    </label>
+                </div>
+
+                <div class="input-panel" data-panel="video">
+                    <p class="input-hint">Upload a short POV clip (mp4, mov, webm).</p>
+                    <input type="file" id="video-input" accept="video/*">
+                </div>
+
+                <div class="input-panel hidden" data-panel="image">
+                    <p class="input-hint">Drop a tactical still image or screenshot.</p>
+                    <input type="file" id="image-input" accept="image/*">
+                </div>
+
+                <div class="input-panel hidden" data-panel="youtube">
+                    <p class="input-hint">Paste a YouTube URL (public or unlisted).</p>
+                    <input type="text" id="youtube-input" placeholder="https://youtube.com/...">
+                </div>
+
+                <div class="input-panel">
+                    <p class="input-hint">Optional: choose a weapon to fetch official Valorant API stats.</p>
+                    <select id="weapon-select">
+                        <option value="">Auto (use predicted weapon)</option>
+                    </select>
+                </div>
+
+                <button type="submit">Analyze Sequence</button>
+                <div class="status" id="status"></div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>INTELLIGENCE OUTPUT</h2>
+            <div id="results" class="empty-state">
+                Upload a clip or still to generate combined weapon + agent telemetry.
+            </div>
+        </section>
+    </main>
+
+    <template id="results-template">
+        <div>
+            <div class="result-grid">
+                <div class="result-card">
+                    <h3>PRIMARY WEAPON</h3>
+                    <div class="value" data-field="weapon-label">-</div>
+                    <div class="chip" data-field="weapon-confidence"></div>
+                </div>
+                <div class="result-card">
+                    <h3>DOMINANT AGENT</h3>
+                    <div class="value" data-field="dominant-agent">-</div>
+                    <div class="chip" data-field="agent-count"></div>
+                </div>
+                <div class="result-card">
+                    <h3>WEAPON VISIBILITY</h3>
+                    <div class="value" data-field="weapon-presence">0%</div>
+                    <div class="chip" data-field="frames-analyzed"></div>
+                </div>
+            </div>
+
+            <div class="result-card" style="margin-top: 20px;">
+                <h3>AGENT COUNTS</h3>
+                <div class="chips" data-field="agent-counts"></div>
+            </div>
+
+            <div class="result-card" style="margin-top: 20px;">
+                <h3>WEAPON STATS</h3>
+                <ul class="notes" data-field="weapon-stats"></ul>
+            </div>
+
+            <div class="result-card" style="margin-top: 20px;">
+                <h3>IMPROVEMENT NOTES</h3>
+                <ul class="notes" data-field="notes"></ul>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        const form = document.getElementById('insight-form');
+        const modeLabels = document.querySelectorAll('.mode-select label');
+        const panels = document.querySelectorAll('.input-panel');
+        const statusEl = document.getElementById('status');
+        const resultsEl = document.getElementById('results');
+        const template = document.getElementById('results-template');
+        const weaponSelect = document.getElementById('weapon-select');
+        const API_BASE = 'http://localhost:8000';
+
+        async function loadWeaponOptions() {
+            try {
+                const response = await fetch(`${API_BASE}/weapons`);
+                if (!response.ok) {
+                    return;
+                }
+                const payload = await response.json();
+                const weapons = Array.isArray(payload.api_weapons) ? payload.api_weapons : [];
+                weapons.forEach((weapon) => {
+                    const option = document.createElement('option');
+                    option.value = weapon;
+                    option.textContent = weapon;
+                    weaponSelect.appendChild(option);
+                });
+            } catch (_err) {
+                // Keep selector optional when API metadata is unavailable.
+            }
+        }
+
+        loadWeaponOptions();
+
+        modeLabels.forEach((label) => {
+            label.addEventListener('click', () => {
+                modeLabels.forEach((l) => l.classList.remove('active'));
+                label.classList.add('active');
+                const mode = label.querySelector('input').value;
+                panels.forEach((panel) => {
+                    if (!panel.dataset.panel) {
+                        return;
+                    }
+                    panel.classList.toggle('hidden', panel.dataset.panel !== mode);
+                });
+            });
+        });
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            statusEl.textContent = 'Calibrating detector...';
+            const formData = new FormData();
+            const mode = form.querySelector('input[name="mediaType"]:checked').value;
+
+            if (mode === 'video') {
+                const videoFile = document.getElementById('video-input').files[0];
+                if (!videoFile) {
+                    statusEl.textContent = 'Please attach a video clip.';
+                    return;
+                }
+                formData.append('video_file', videoFile);
+            } else if (mode === 'image') {
+                const imageFile = document.getElementById('image-input').files[0];
+                if (!imageFile) {
+                    statusEl.textContent = 'Please attach an image.';
+                    return;
+                }
+                formData.append('image_file', imageFile);
+            } else {
+                const youtubeUrl = document.getElementById('youtube-input').value.trim();
+                if (!youtubeUrl) {
+                    statusEl.textContent = 'Paste a valid YouTube URL.';
+                    return;
+                }
+                formData.append('youtube_url', youtubeUrl);
+            }
+            const selectedWeapon = weaponSelect.value.trim();
+            if (selectedWeapon) {
+                formData.append('selected_weapon', selectedWeapon);
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/insights/analyze`, {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    const errorPayload = await response.json().catch(() => ({}));
+                    throw new Error(errorPayload.detail || 'The analyzer rejected this media.');
+                }
+                const payload = await response.json();
+                renderResults(payload);
+                statusEl.textContent = 'Telemetry synced.';
+            } catch (error) {
+                console.error(error);
+                statusEl.textContent = error.message || 'Analysis failed. Check backend logs.';
+            }
+        });
+
+        function renderResults(payload) {
+            const fragment = template.content.cloneNode(true);
+            const weaponLabel = fragment.querySelector('[data-field="weapon-label"]');
+            const weaponConfidence = fragment.querySelector('[data-field="weapon-confidence"]');
+            const agentName = fragment.querySelector('[data-field="dominant-agent"]');
+            const agentCountChip = fragment.querySelector('[data-field="agent-count"]');
+            const weaponPresence = fragment.querySelector('[data-field="weapon-presence"]');
+            const framesAnalyzed = fragment.querySelector('[data-field="frames-analyzed"]');
+            const chipsContainer = fragment.querySelector('[data-field="agent-counts"]');
+            const weaponStatsList = fragment.querySelector('[data-field="weapon-stats"]');
+            const notesList = fragment.querySelector('[data-field="notes"]');
+
+            if (payload.weapon_prediction) {
+                weaponLabel.textContent = payload.weapon_prediction.top_prediction.label;
+                weaponConfidence.textContent = `${(payload.weapon_prediction.top_prediction.confidence * 100).toFixed(1)}% CONF`;
+                framesAnalyzed.textContent = `${payload.weapon_prediction.frames_analyzed || payload.detection_summary.frames_evaluated} frames`;
+            } else {
+                weaponLabel.textContent = 'N/A';
+                weaponConfidence.textContent = 'NO MODEL OUTPUT';
+                framesAnalyzed.textContent = `${payload.detection_summary.frames_evaluated} frames`;
+            }
+
+            agentName.textContent = payload.dominant_agent || 'UNRESOLVED';
+            const dominantCount = payload.dominant_agent ? (payload.detection_summary.named_agent_counts[payload.dominant_agent] || 0) : 0;
+            agentCountChip.textContent = dominantCount ? `${dominantCount} sightings` : 'insufficient data';
+
+            weaponPresence.textContent = `${(payload.detection_summary.weapon_presence * 100).toFixed(0)}%`;
+
+            chipsContainer.innerHTML = '';
+            const counts = payload.detection_summary.agent_counts;
+            if (counts && Object.keys(counts).length) {
+                Object.entries(counts).forEach(([label, value]) => {
+                    const chip = document.createElement('span');
+                    chip.className = 'chip';
+                    chip.textContent = `${label}: ${value}`;
+                    chipsContainer.appendChild(chip);
+                });
+            } else {
+                const placeholder = document.createElement('span');
+                placeholder.className = 'chip';
+                placeholder.textContent = 'No agents detected';
+                chipsContainer.appendChild(placeholder);
+            }
+
+            notesList.innerHTML = '';
+            if (payload.improvement_notes && payload.improvement_notes.length) {
+                payload.improvement_notes.forEach((note) => {
+                    const li = document.createElement('li');
+                    li.textContent = note;
+                    notesList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = 'System standing by for guidance.';
+                notesList.appendChild(li);
+            }
+
+            weaponStatsList.innerHTML = '';
+            const stats = payload.selected_weapon_stats || (payload.weapon_prediction && payload.weapon_prediction.weapon_stats) || null;
+            const statsLabel = payload.selected_weapon || (payload.weapon_prediction && payload.weapon_prediction.top_prediction && payload.weapon_prediction.top_prediction.label) || null;
+            const rows = buildStatsRows(statsLabel, stats);
+            rows.forEach((row) => {
+                const li = document.createElement('li');
+                li.textContent = row;
+                weaponStatsList.appendChild(li);
+            });
+
+            resultsEl.innerHTML = '';
+            resultsEl.classList.remove('empty-state');
+            resultsEl.appendChild(fragment);
+        }
+
+        function buildStatsRows(label, stats) {
+            if (!stats) {
+                return ['Stats unavailable from Valorant API.'];
+            }
+            const rows = [];
+            if (label) rows.push(`Weapon: ${label}`);
+            if (stats.category) rows.push(`Category: ${stats.category}`);
+            if (typeof stats.cost === 'number') rows.push(`Cost: ${stats.cost} credits`);
+            if (typeof stats.fire_rate === 'number') rows.push(`Fire rate: ${stats.fire_rate.toFixed(2)} rps`);
+            if (typeof stats.magazine_size === 'number') rows.push(`Magazine: ${stats.magazine_size}`);
+            if (typeof stats.reload_time_seconds === 'number') rows.push(`Reload: ${stats.reload_time_seconds.toFixed(2)} s`);
+            if (typeof stats.first_bullet_accuracy === 'number') rows.push(`First-shot accuracy: ${stats.first_bullet_accuracy.toFixed(3)}`);
+            if (stats.wall_penetration) rows.push(`Wall penetration: ${stats.wall_penetration}`);
+            if (stats.damage_ranges && stats.damage_ranges.length) {
+                stats.damage_ranges.forEach((range) => {
+                    const start = typeof range.range_start_meters === 'number' ? range.range_start_meters : '?';
+                    const end = typeof range.range_end_meters === 'number' ? range.range_end_meters : '?';
+                    const head = typeof range.head_damage === 'number' ? range.head_damage.toFixed(0) : '-';
+                    const body = typeof range.body_damage === 'number' ? range.body_damage.toFixed(0) : '-';
+                    const leg = typeof range.leg_damage === 'number' ? range.leg_damage.toFixed(0) : '-';
+                    rows.push(`Damage ${start}-${end}m (H/B/L): ${head}/${body}/${leg}`);
+                });
+            }
+            return rows.length ? rows : ['Stats payload returned no usable fields.'];
+        }
+    </script>
+</body>
+</html>

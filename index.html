@@ -1036,6 +1036,15 @@
                         Initializing neural VOD scan...
                     </div>
                 </div>
+                <div id="weapon-intel-panel"
+                    style="flex: 1; font-family: var(--font-mono); font-size: 0.7rem; border-left: 1px solid var(--border); padding-left: 20px; min-height: 140px; display: flex; flex-direction: column;">
+                    <div style="color: var(--tactical-cyan); margin-bottom: 8px;">[WEAPON_INTEL_FEED]</div>
+                    <div id="weapon-intel-status" style="font-size: 0.65rem; color: #94a3b8;">
+                        Awaiting local upload...
+                    </div>
+                    <div id="weapon-intel-details"
+                        style="display: none; margin-top: 10px; font-size: 0.65rem; color: #cbd5e1; line-height: 1.4;"></div>
+                </div>
             </div>
         </div>
 
@@ -1047,6 +1056,204 @@
 
     <script>
         const RIOT_AUTH_URL = "https://auth.riotgames.com/authorize?client_id=AURORA-SIM&redirect_uri=aurora://callback&response_type=code&scope=openid+riotid";
+        const weaponPredictionEndpoint = (() => {
+            const raw = window.WEAPON_INTEL_ENDPOINT || "http://localhost:8000/predict";
+            if (!raw) return null;
+            return raw.endsWith('/predict') ? raw : `${raw.replace(/\/$/, '')}/predict`;
+        })();
+        const weaponPredictionUrlEndpoint = weaponPredictionEndpoint
+            ? weaponPredictionEndpoint.replace(/\/predict$/, '/predict-by-url')
+            : null;
+        let lastUploadedVODFile = null;
+        let weaponIntelRequestId = 0;
+        const weaponIntelStatusEl = document.getElementById('weapon-intel-status');
+        const weaponIntelDetailsEl = document.getElementById('weapon-intel-details');
+
+        function resetWeaponIntel(message = "Awaiting local upload...", tone = "idle") {
+            if (!weaponIntelStatusEl) return;
+            const palette = {
+                idle: "#94a3b8",
+                loading: "var(--neural-blue)",
+                success: "var(--tactical-cyan)",
+                error: "var(--riot-red)"
+            };
+            weaponIntelStatusEl.style.color = palette[tone] || palette.idle;
+            weaponIntelStatusEl.innerText = message;
+            if (weaponIntelDetailsEl) {
+                if (tone === "success") {
+                    weaponIntelDetailsEl.style.display = "block";
+                } else {
+                    weaponIntelDetailsEl.style.display = "none";
+                    weaponIntelDetailsEl.innerHTML = "";
+                }
+            }
+        }
+
+        async function analyzeWeaponFromFile(file) {
+            if (!file) return;
+            if (!weaponPredictionEndpoint) {
+                resetWeaponIntel("Weapon service endpoint not configured.", "error");
+                return;
+            }
+            const requestId = ++weaponIntelRequestId;
+            resetWeaponIntel(`Scanning weapon telemetry in ${file.name}...`, "loading");
+            const formData = new FormData();
+            formData.append('file', file, file.name);
+            try {
+                const response = await fetch(weaponPredictionEndpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) {
+                    throw new Error(`Model offline (${response.status})`);
+                }
+                const intel = await response.json();
+                if (requestId !== weaponIntelRequestId) return;
+                renderWeaponIntel(intel);
+            } catch (err) {
+                if (requestId !== weaponIntelRequestId) return;
+                console.error('[WEAPON_INTEL] Prediction failed:', err);
+                resetWeaponIntel(err.message || "Weapon telemetry unavailable.", "error");
+            }
+        }
+
+        async function analyzeWeaponFromUrl(url) {
+            if (!url) return;
+            if (!weaponPredictionUrlEndpoint) {
+                resetWeaponIntel("Remote weapon service endpoint not configured.", "error");
+                return;
+            }
+            const requestId = ++weaponIntelRequestId;
+            resetWeaponIntel("Ingesting cloud VOD for weapon telemetry...", "loading");
+            try {
+                const response = await fetch(weaponPredictionUrlEndpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ source_url: url })
+                });
+                if (!response.ok) {
+                    throw new Error(`Remote ingest failed (${response.status})`);
+                }
+                const intel = await response.json();
+                if (requestId !== weaponIntelRequestId) return;
+                renderWeaponIntel(intel);
+            } catch (err) {
+                if (requestId !== weaponIntelRequestId) return;
+                console.error('[WEAPON_INTEL] Remote prediction failed:', err);
+                resetWeaponIntel(err.message || "Remote weapon telemetry unavailable.", "error");
+            }
+        }
+
+        function renderWeaponIntel(payload) {
+            if (!weaponIntelDetailsEl) return;
+            const primary = (payload && payload.top_prediction) || {};
+            const alts = (payload && payload.alternatives) || [];
+            const stats = payload && payload.weapon_stats ? payload.weapon_stats : null;
+
+            resetWeaponIntel("Weapon telemetry synchronized.", "success");
+
+            const alternateMarkup = alts.length
+                ? alts.slice(0, 3).map(alt => `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                        <span>${escapeHtml(alt.label || 'N/A')}</span>
+                        <span>${formatConfidence(alt.confidence)}</span>
+                    </div>
+                `).join('')
+                : '<div style="opacity:0.7;">No alternate predictions.</div>';
+
+            weaponIntelDetailsEl.innerHTML = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span>Primary Weapon</span>
+                    <strong style="color: var(--tactical-cyan);">${escapeHtml(primary.label || 'Unknown')}</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                    <span>Confidence</span>
+                    <strong>${formatConfidence(primary.confidence)}</strong>
+                </div>
+                <div style="border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px;">
+                    <div style="margin-bottom:4px; color:#94a3b8;">Alternate Reads</div>
+                    ${alternateMarkup}
+                </div>
+                <div style="border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px;">
+                    ${renderWeaponStats(stats)}
+                </div>
+            `;
+            weaponIntelDetailsEl.style.display = "block";
+        }
+
+        function renderWeaponStats(stats) {
+            if (!stats) {
+                return '<div style="opacity:0.7;">Stats unavailable from Valorant API.</div>';
+            }
+            const rows = [
+                { label: 'Display', value: stats.display_name },
+                { label: 'Category', value: stats.category },
+                { label: 'Cost', value: typeof stats.cost === 'number' ? formatCredits(stats.cost) : null },
+                { label: 'Fire Rate', value: typeof stats.fire_rate === 'number' ? stats.fire_rate.toFixed(2) + ' rps' : null },
+                { label: 'Magazine', value: typeof stats.magazine_size === 'number' ? stats.magazine_size + ' rounds' : null },
+                { label: 'Reload', value: typeof stats.reload_time_seconds === 'number' ? stats.reload_time_seconds.toFixed(2) + ' s' : null },
+                { label: '1st Shot', value: typeof stats.first_bullet_accuracy === 'number' ? stats.first_bullet_accuracy.toFixed(3) : null },
+                { label: 'Run Speed', value: typeof stats.run_speed_multiplier === 'number' ? stats.run_speed_multiplier.toFixed(2) : null },
+                { label: 'Wall Pen', value: stats.wall_penetration },
+                { label: 'Feature', value: stats.feature }
+            ];
+            const baseRows = rows
+                .filter(row => row.value)
+                .map(row => `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                        <span>${row.label}</span>
+                        <span>${escapeHtml(row.value)}</span>
+                    </div>
+                `).join('') || '<div style="opacity:0.7;">Core stats not provided.</div>';
+
+            const damageProfile = (stats.damage_ranges && stats.damage_ranges.length)
+                ? stats.damage_ranges.map(formatDamageRange).join('')
+                : '<div style="opacity:0.7;">Damage profile unavailable.</div>';
+
+            return `
+                <div style="margin-bottom:6px; color:#94a3b8;">Valorant API Stats</div>
+                ${baseRows}
+                <div style="margin-top:8px; color:#94a3b8;">Damage Profile</div>
+                <div>${damageProfile}</div>
+            `;
+        }
+
+        function formatDamageRange(range) {
+            if (!range) {
+                return '<div style="opacity:0.7;">Range data unavailable.</div>';
+            }
+            const start = typeof range.range_start_meters === 'number' ? range.range_start_meters : '?';
+            const end = typeof range.range_end_meters === 'number' ? range.range_end_meters : '?';
+            const head = typeof range.head_damage === 'number' ? range.head_damage.toFixed(0) : '—';
+            const body = typeof range.body_damage === 'number' ? range.body_damage.toFixed(0) : '—';
+            const leg = typeof range.leg_damage === 'number' ? range.leg_damage.toFixed(0) : '—';
+            return `
+                <div style="padding:6px 0; border-bottom:1px solid rgba(148,163,184,0.2);">
+                    <div style="display:flex; justify-content:space-between;">
+                        <span>${start}-${end} m</span>
+                        <span>${head} / ${body} / ${leg}</span>
+                    </div>
+                    <div style="font-size:0.55rem; color:#94a3b8;">Head / Body / Leg</div>
+                </div>
+            `;
+        }
+
+        function formatConfidence(value) {
+            if (typeof value !== 'number') return 'N/A';
+            return (value * 100).toFixed(1) + '%';
+        }
+
+        function formatCredits(cost) {
+            if (typeof cost !== 'number') return 'Unknown';
+            return `${cost} creds`;
+        }
+
+        function escapeHtml(value) {
+            const str = value === undefined || value === null ? '' : String(value);
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+            return str.replace(/[&<>"']/g, (ch) => map[ch]);
+        }
+
 
         function startAuth() {
             const portal = document.getElementById('auth-portal');
@@ -1133,7 +1340,9 @@
             if (!file) return;
 
             console.log("[UPLOAD] Selected file: " + file.name + " (" + (file.size / 1024 / 1024).toFixed(2) + " MB)");
+            lastUploadedVODFile = file;
             processVideoIngestion("local_upload", file.name);
+            analyzeWeaponFromFile(file);
         }
 
         // Drag & Drop Handling
@@ -1169,6 +1378,11 @@
             const sourceId = type === "cloud_stream" ? val : "PATH_RESOLVED";
 
             processVideoIngestion(type, sourceId);
+            if (type === "cloud_stream") {
+                analyzeWeaponFromUrl(val);
+            } else {
+                resetWeaponIntel("Provide a local upload to activate weapon telemetry.");
+            }
         }
 
         function processVideoIngestion(type, id) {
@@ -1465,6 +1679,7 @@
                     if (index[0]) index[0].innerText = `COORDINATE_GRID_MAPPING // ${data.map_id}`;
                 }, 300);
             }
+
         }
     </script>
 
