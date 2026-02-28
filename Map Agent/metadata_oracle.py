@@ -53,15 +53,23 @@ class MetadataOracle:
             # Return map-level info only (no specific callout)
             return {
                 "map": map_data.get("name", map_name),
+                "tactical_description": map_data.get("tacticalDescription"),
+                "lore_coordinates": map_data.get("coordinates"),
                 "location": location,
                 "super_region": None,
                 "coordinates": None,
+                "precise_z": None,
                 "tactical_advice": self._generate_advice(map_name, location),
                 "note": "Callout matched at map level only."
             }
 
+        # Elevation labeling
+        elevation_label = self._get_elevation_label(matched["z"], callouts, matched["region"])
+
         return {
             "map": map_data.get("name", map_name),
+            "tactical_description": map_data.get("tacticalDescription"),
+            "lore_coordinates": map_data.get("coordinates"),
             "location": matched["region"],
             "super_region": matched["super_region"],
             "coordinates": {
@@ -69,6 +77,8 @@ class MetadataOracle:
                 "y": matched["y"],
                 "z": matched["z"]
             },
+            "precise_z": matched["z"],
+            "elevation_label": elevation_label,
             "tactical_advice": self._generate_advice(map_name, matched["region"]),
         }
 
@@ -124,8 +134,40 @@ class MetadataOracle:
             "location": location or "Unknown",
             "super_region": None,
             "coordinates": None,
+            "elevation_label": None,
             "tactical_advice": f"On {map_name}: Maintain awareness and call positions clearly.",
         }
+
+    def _get_elevation_label(self, z: float, callouts: list, region: str) -> str:
+        """Categorizes Z-axis into human-readable labels based on map distribution."""
+        z_values = [c["z"] for c in callouts if "z" in c]
+        if not z_values:
+            return "Ground Level"
+        
+        min_z = min(z_values)
+        max_z = max(z_values)
+        z_range = max_z - min_z
+        
+        if z_range == 0:
+            return "Ground Level"
+            
+        percentile = (z - min_z) / z_range
+        
+        # Priority 1: Keyword matching
+        region_upper = region.upper()
+        if "HEAVEN" in region_upper or "TOWER" in region_upper or "RAFTERS" in region_upper:
+            return "Heaven / Upper"
+        if "GROUND" in region_upper or "BOTTOM" in region_upper or "FLOOR" in region_upper:
+            return "Ground Level"
+            
+        # Priority 2: Range-based
+        if percentile < 0.2:
+            return "Lower Level / Ground"
+        if percentile < 0.5:
+            return "Mid Level"
+        if percentile < 0.8:
+            return "Upper Level"
+        return "Heaven / High Point"
 
     def get_map_scalars(self, map_name: str) -> dict | None:
         """Returns the multipliers and scalars for pixel-to-world conversion."""

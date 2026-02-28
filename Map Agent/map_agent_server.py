@@ -10,19 +10,30 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import uvicorn
-from PIL import Image
+from PIL import Image, ImageStat
 import numpy as np
 
 # Add Map Agent directory to path for metadata_oracle import
+import numpy as np
+
+# Optional OCR dependencies. If unavailable we gracefully fallback to UNKNOWN.
+try:
+    import cv2
+    import pytesseract
+    OCR_AVAILABLE = True
+except Exception:
+    OCR_AVAILABLE = False
 sys.path.insert(0, os.path.dirname(__file__))
 from metadata_oracle import MetadataOracle
+from lore_geographer import LoreGeographer
 
 load_dotenv()
 
 # Configure Gemini
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
-vision_model = genai.GenerativeModel("gemini-2.5-flash")
+lore_agent = LoreGeographer()
+vision_model = genai.GenerativeModel('gemini-2.5-flash')
 
 app = FastAPI(title="AURORA Map Intelligence Agent v2")
 oracle = MetadataOracle(knowledge_base_path="Map Agent/riot_official_data/index.json")
@@ -34,6 +45,54 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+def ocr_minimap_text(image_bytes: bytes) -> str:
+    """Attempt to extract text from the top-left minimap area.
+
+    This function is intentionally conservative: it will try to crop the
+    top-left portion of the image (where the minimap typically lives),
+    apply simple binarization and OCR, and return the extracted text.
+    If OCR libraries are not installed or extraction fails, returns "UNKNOWN".
+    """
+    if not OCR_AVAILABLE:
+        return "UNKNOWN"
+
+    try:
+        arr = np.frombuffer(image_bytes, np.uint8)
+        img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+        if img is None:
+            return "UNKNOWN"
+
+        h, w = img.shape[:2]
+
+        # Heuristic minimap ROI: top-left corner. These ratios are conservative
+        # and can be tuned per-stream resolution. We crop 0..0.28 width and 0..0.28 height.
+        x1 = int(w * 0.0)
+        x2 = max(1, int(w * 0.28))
+        y1 = int(h * 0.0)
+        y2 = max(1, int(h * 0.28))
+
+        roi = img[y1:y2, x1:x2]
+        if roi is None or roi.size == 0:
+            return "UNKNOWN"
+
+        gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+        # upscale to help OCR
+        gray = cv2.resize(gray, None, fx=2.0, fy=2.0, interpolation=cv2.INTER_CUBIC)
+        _, thr = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+        # Use pytesseract to extract text. Use a forgiving page segmentation mode.
+        text = pytesseract.image_to_string(thr, config='--psm 6')
+        text = text.strip()
+        if not text:
+            return "UNKNOWN"
+
+        # Clean up common OCR noise
+        text = re.sub(r"[^A-Za-z0-9 '\-]", ' ', text).strip()
+        return text if text else "UNKNOWN"
+    except Exception:
+        return "UNKNOWN"
+
 ANALYSIS_PROMPT = """You are an expert Valorant analyst with perfect map knowledge.
 Analyze this gameplay screenshot and identify the map and location.
 
@@ -42,19 +101,23 @@ CRITICAL: STREAMER OVERLAYS & UI
 - Ignore colorful borders, stripes, or frames (e.g., orange/green stripes often denote streamer UI, NOT the map).
 - Focus ONLY on the actual 3D game world and the Minimap.
 
-IMPORTANT - Use this PRIORITY ORDER for identification:
-1. OCR (Top-Left): Check the minimap for a text label of the current location - this is ground truth.
-2. GEOMETRY: Analyze the minimap shape and layout (e.g., three sites vs. two, verticality).
-3. ENVIRONMENT: Use your native knowledge of Valorant map aesthetics (colors, architectural styles, unique landmarks) to confirm.
+IMPORTANT - Use this VERIFICATION WORKFLOW:
+1. LIST ALL SITE LABELS: Scan the entire minimap. Which letters (A, B, C) do you see?
+   - If you see A, B, AND C -> Strictly identify as Haven or Lotus.
+   - If you see only A and B -> Most other maps.
+2. OCR (Top-Left): Read the text label in the minimap (e.g., "A Garden").
+3. LANDMARK CHECK: Look for THE "02" building (Split), Asian Monastery arches (Haven), or Desert murals (Bind).
+4. SELF-CORRECTION: "I see A, B, and C sites, so I cannot choose Bind. This must be Haven."
 
 EXACT MAP NAMES (use strictly one): Ascent, Bind, Breeze, Corrode, Fracture, Haven, Icebox, Lotus, Pearl, Split, Sunset, Abyss, District, Drift, Kasbah
 
 Respond in STRICT JSON format only:
 {
   "map": "<exact map name>",
-  "location": "<specific callout or region>",
+  "location": "<specific callout visible in text>",
+  "sites_observed": ["<list every site letter seen>"],
   "confidence": "<high/medium/low>",
-  "visual_cues": "<brief explanation of the game-world evidence found>"
+  "visual_cues": "<brief explanation - MUST mention why site-count matches the map choice>"
 }
 
 If you cannot identify the map, use "UNKNOWN" for both fields."""
@@ -131,6 +194,10 @@ async def analyze_image(file: UploadFile = File(...)):
     if not image_bytes:
         raise HTTPException(status_code=400, detail="Empty image file")
 
+    # Run OCR pre-step on the minimap region and surface the text to the LLM
+    minimap_text = ocr_minimap_text(image_bytes)
+    print(f"🔎 Minimap OCR result: '{minimap_text}' (OCR_AVAILABLE={OCR_AVAILABLE})")
+
     # Send to Gemini Vision
     try:
         image_part = {
@@ -140,7 +207,8 @@ async def analyze_image(file: UploadFile = File(...)):
             }
         }
         print("🤖 Sending to Gemini Vision...")
-        response = vision_model.generate_content([ANALYSIS_PROMPT, image_part])
+        combined_prompt = ANALYSIS_PROMPT + "\n\nMINIMAP_OCR: '" + minimap_text + "'\n\n"
+        response = vision_model.generate_content([combined_prompt, image_part])
         raw_text = response.text.strip()
         print(f"📡 Gemini raw response: {raw_text}")
     except Exception as e:
@@ -169,18 +237,31 @@ async def analyze_image(file: UploadFile = File(...)):
     # 2. Attempt Precision Tracing
     precision_coords = get_precision_coordinates(image_bytes, detected_map)
     final_coords = precision_coords if precision_coords else oracle_data.get("coordinates")
+    is_precision = precision_coords is not None
 
     # Merge results
     result = {
         "map": detected_map,
         "location": detected_location,
+        "sites_observed": gemini_data.get("sites_observed", []),
+        "tactical_description": oracle_data.get("tactical_description"),
+        "lore_coordinates": oracle_data.get("lore_coordinates"),
+        "precise_z": oracle_data.get("precise_z"),
+        "elevation_label": oracle_data.get("elevation_label"),
         "confidence": gemini_data.get("confidence", "unknown"),
         "visual_cues": gemini_data.get("visual_cues", ""),
         "coordinates": final_coords,
         "super_region": oracle_data.get("super_region"),
         "tactical_advice": oracle_data.get("tactical_advice", "Maintain awareness."),
-        "source": "Gemini Vision + Precision Tracer" if precision_coords else "Gemini Vision + Oracle"
+        "source": "Gemini Vision + Precision Tracer" if is_precision else "Gemini Vision + Oracle"
     }
+
+    # Phase 4: Enrich with Lore Geographer Agent
+    if result["lore_coordinates"]:
+        print(f"🌍 Lore Agent analyzing: {result['lore_coordinates']}")
+        lore_context = lore_agent.get_location_context(result["lore_coordinates"])
+        result["lore_context"] = lore_context
+
     print(f"✅ Final result: {json.dumps(result, indent=2)}")
     return result
 

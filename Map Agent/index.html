@@ -59,6 +59,7 @@
             letter-spacing: -1px;
             background: linear-gradient(to right, #fff, var(--neural-blue));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -101,6 +102,27 @@
             font-family: var(--font-mono);
             font-size: 0.9rem;
             color: #94a3b8;
+        }
+
+        .lore-report {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 245, 212, 0.05);
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 5px;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #a3e635;
+            /* A subtle green for lore */
+            font-family: var(--font-mono);
+        }
+
+        .lore-report h3 {
+            color: var(--tactical-cyan);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed rgba(0, 245, 212, 0.1);
+            padding-bottom: 5px;
         }
 
         #preview-container {
@@ -358,10 +380,23 @@
                 : 'N/A';
 
             outputContent.innerHTML = `
-                <p>📍 DETECTED MAP: <b>${data.map || 'UNKNOWN'}</b></p>
+                <p style="display: flex; align-items: center; gap: 10px;">
+                    📍 DETECTED MAP: <b>${data.map || 'UNKNOWN'}</b> 
+                    ${data.tactical_description ? `<span style="background: rgba(0, 245, 212, 0.1); color: #00f5d4; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(0, 245, 212, 0.2); letter-spacing: 0.5px;">${data.tactical_description}</span>` : ''}
+                </p>
+                ${data.lore_coordinates ? `<p style="color: #3b82f6; font-size: 0.75rem; margin-top: -8px; margin-bottom: 12px; font-family: 'JetBrains Mono', 'Fira Code', monospace; background: rgba(59, 130, 246, 0.05); padding: 4px 8px; border-radius: 4px; display: inline-block;">🛰️ LORE COORDS: ${data.lore_coordinates}</p>` : ''}
                 <p>🛰️ LOCATION: <b>${data.location || 'UNKNOWN'}</b></p>
                 <p>🎯 ZONE: <b>${data.super_region || 'N/A'}</b></p>
                 <p>📐 COORDINATES: <b>${coordStr}</b></p>
+                ${data.precise_z !== null && data.precise_z !== undefined ? `<p style="color: #00f5d4; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;">⛰️ ELEVATION: <b>${Math.round(data.precise_z)}</b> <span style="color: #64748b; font-size: 0.7rem; margin-left: 5px;">(${data.elevation_label || 'Standard Level'})</span></p>` : ''}
+                
+                ${data.lore_context ? `
+                <div style="margin-top: 12px; padding: 10px; background: rgba(59, 130, 246, 0.05); border-left: 3px solid #3b82f6; border-radius: 4px;">
+                    <p style="color: #3b82f6; font-size: 0.75rem; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">🌍 GEO-DISCOVERY: ${data.lore_context.geographic_discovery}</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem; font-style: italic; line-height: 1.4;">"${data.lore_context.lore_report}"</p>
+                </div>
+                ` : ''}
+
                 ${data.visual_cues ? `<p style="color:#64748b;font-size:0.8rem;margin-top:8px;">👁️ VISUAL CUES: ${data.visual_cues}</p>` : ''}
                 <div style="margin-top:16px;color:#00f5d4;font-size:0.85rem;border-top:1px solid rgba(0,245,212,0.15);padding-top:12px;">
                     🧠 TACTICAL ADVICE: ${data.tactical_advice}
