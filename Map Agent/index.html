@@ -379,10 +379,47 @@
                 ? `X: ${Math.round(data.coordinates.x)}, Y: ${Math.round(data.coordinates.y)}`
                 : 'N/A';
 
+            function renderStructuredReport(blocks) {
+                if (!blocks || !Array.isArray(blocks)) return null;
+                return blocks.map(block => {
+                    switch (block.type) {
+                        case 'header':
+                            return `<p style="color: #00f5d4; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 15px; margin-bottom: 5px; border-bottom: 1px solid rgba(0, 245, 212, 0.2); display: inline-block;">${block.content}</p>`;
+                        case 'bullet':
+                            return `<div style="display: flex; gap: 8px; margin-bottom: 6px; padding-left: 5px;">
+                                        <span style="color: #00f5d4;">•</span>
+                                        <span style="color: #cbd5e1; font-size: 0.82rem; line-height: 1.4;">${block.content}</span>
+                                    </div>`;
+                        case 'tip':
+                            return `<div style="margin: 10px 0; padding: 8px 12px; background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; border-radius: 4px; font-size: 0.8rem; color: #93c5fd;">
+                                        <span style="font-weight: bold; color: #3b82f6; margin-right: 5px;">💡 PRO TIP:</span> ${block.content}
+                                    </div>`;
+                        case 'warning':
+                            return `<div style="margin: 10px 0; padding: 8px 12px; background: rgba(255, 70, 85, 0.1); border-left: 3px solid #ff4655; border-radius: 4px; font-size: 0.8rem; color: #fca5a5;">
+                                        <span style="font-weight: bold; color: #ff4655; margin-right: 5px;">⚠️ URGENT:</span> ${block.content}
+                                    </div>`;
+                        default:
+                            return `<p style="color: #cbd5e1; font-size: 0.82rem; line-height: 1.5; margin-bottom: 10px;">${block.content}</p>`;
+                    }
+                }).join('');
+            }
+
+            const tacticalHtml = data.tactical_advice_beautified
+                ? renderStructuredReport(data.tactical_advice_beautified)
+                : `<p style="color: #f8fafc; font-style: italic; line-height: 1.4;">"${data.tactical_advice}"</p>`;
+
+            const visualHtml = data.visual_cues_beautified
+                ? renderStructuredReport(data.visual_cues_beautified)
+                : `<p style="color:#64748b;font-size:0.8rem;margin-top:8px;">👁️ VISUAL CUES: ${data.visual_cues}</p>`;
+
             outputContent.innerHTML = `
                 <p style="display: flex; align-items: center; gap: 10px;">
                     📍 DETECTED MAP: <b>${data.map || 'UNKNOWN'}</b> 
                     ${data.tactical_description ? `<span style="background: rgba(0, 245, 212, 0.1); color: #00f5d4; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(0, 245, 212, 0.2); letter-spacing: 0.5px;">${data.tactical_description}</span>` : ''}
+                    <div style="margin-left: auto; display: flex; gap: 10px;">
+                        ${data.round_context && data.round_context.time ? `<span style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(59, 130, 246, 0.2); letter-spacing: 0.5px;">TIME: ${data.round_context.time}</span>` : ''}
+                        ${data.round_context && data.round_context.score ? `<span style="background: rgba(255, 70, 85, 0.1); color: #ff4655; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(255, 70, 85, 0.2); letter-spacing: 0.5px;">SCORE: ${data.round_context.score}</span>` : ''}
+                    </div>
                 </p>
                 ${data.lore_coordinates ? `<p style="color: #3b82f6; font-size: 0.75rem; margin-top: -8px; margin-bottom: 12px; font-family: 'JetBrains Mono', 'Fira Code', monospace; background: rgba(59, 130, 246, 0.05); padding: 4px 8px; border-radius: 4px; display: inline-block;">🛰️ LORE COORDS: ${data.lore_coordinates}</p>` : ''}
                 <p>🛰️ LOCATION: <b>${data.location || 'UNKNOWN'}</b></p>
@@ -397,11 +434,21 @@
                 </div>
                 ` : ''}
 
-                ${data.visual_cues ? `<p style="color:#64748b;font-size:0.8rem;margin-top:8px;">👁️ VISUAL CUES: ${data.visual_cues}</p>` : ''}
-                <div style="margin-top:16px;color:#00f5d4;font-size:0.85rem;border-top:1px solid rgba(0,245,212,0.15);padding-top:12px;">
-                    🧠 TACTICAL ADVICE: ${data.tactical_advice}
+                ${data.visual_cues ? `
+                <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
+                    <span style="color: #64748b; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">👁️ Visual Evidence</span>
+                    ${visualHtml}
                 </div>
-                <div style="margin-top:10px;font-size:0.7rem;color:#3b82f6;">
+                ` : ''}
+
+                <div style="margin-top:16px; color:#00f5d4; font-size:0.85rem; border-top:1px solid rgba(0,245,212,0.15); padding-top:12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span>🧠 TACTICAL ANALYSIS</span>
+                        ${data.round_context && data.round_context.time ? `<span style="color: #64748b; font-size: 0.7rem;">🕒 TIME: ${data.round_context.time} (${data.round_context.phase || 'LIVE'})</span>` : ''}
+                    </div>
+                    ${tacticalHtml}
+                </div>
+                <div style="margin-top:10px; font-size:0.7rem; color:#3b82f6;">
                     CONFIDENCE: ${data.confidence || 'N/A'} &nbsp;|&nbsp; SOURCE: ${data.source || 'Gemini Vision + Oracle'}
                 </div>
             `;

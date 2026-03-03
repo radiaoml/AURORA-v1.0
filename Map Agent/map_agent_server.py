@@ -26,6 +26,8 @@ except Exception:
 sys.path.insert(0, os.path.dirname(__file__))
 from metadata_oracle import MetadataOracle
 from lore_geographer import LoreGeographer
+from tactical_specialist import TacticalSpecialist
+from report_specialist import ReportSpecialist
 
 load_dotenv()
 
@@ -33,6 +35,8 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 lore_agent = LoreGeographer()
+tactical_agent = TacticalSpecialist()
+report_agent = ReportSpecialist()
 vision_model = genai.GenerativeModel('gemini-2.5-flash')
 
 app = FastAPI(title="AURORA Map Intelligence Agent v2")
@@ -113,11 +117,17 @@ EXACT MAP NAMES (use strictly one): Ascent, Bind, Breeze, Corrode, Fracture, Hav
 
 Respond in STRICT JSON format only:
 {
-  "map": "<exact map name>",
-  "location": "<specific callout visible in text>",
-  "sites_observed": ["<list every site letter seen>"],
-  "confidence": "<high/medium/low>",
-  "visual_cues": "<brief explanation - MUST mention why site-count matches the map choice>"
+    "map": "<exact map name>",
+    "location": "<specific callout visible in text>",
+    "agent": "<name of the character being played, e.g. Brimstone, Jett>",
+    "sites_observed": ["<list site letters seen>"],
+    "round_context": {
+        "score": "<current score e.g. 0-0>",
+        "time": "<current round time e.g. 1:40>",
+        "phase": "<Buy/Round/Post-Plant/End>"
+    },
+    "confidence": "<high/medium/low>",
+    "visual_cues": "<brief explanation>"
 }
 
 If you cannot identify the map, use "UNKNOWN" for both fields."""
@@ -250,17 +260,53 @@ async def analyze_image(file: UploadFile = File(...)):
         "elevation_label": oracle_data.get("elevation_label"),
         "confidence": gemini_data.get("confidence", "unknown"),
         "visual_cues": gemini_data.get("visual_cues", ""),
+        "round_context": gemini_data.get("round_context", {}),
+        "agent": gemini_data.get("agent", "Unknown"),
         "coordinates": final_coords,
         "super_region": oracle_data.get("super_region"),
-        "tactical_advice": oracle_data.get("tactical_advice", "Maintain awareness."),
         "source": "Gemini Vision + Precision Tracer" if is_precision else "Gemini Vision + Oracle"
     }
 
+    # Phase 6: Deep Tactical Analysis via Specialist Agent
+    try:
+        print(f"🧠 Tactical Specialist analyzing round state...")
+        round_state = {
+            "map_name": detected_map,
+            "location": detected_location,
+            "score": result["round_context"].get("score", "0-0"),
+            "time": result["round_context"].get("time", "Unknown"),
+            "phase": result["round_context"].get("phase", "Round"),
+            "agent_name": result.get("agent", "Unknown")
+        }
+        result["tactical_advice"] = tactical_agent.get_tactical_advice(round_state)
+    except Exception as tac_err:
+        print(f"⚠️ Tactical Agent failed: {tac_err}")
+        result["tactical_advice"] = oracle_data.get("tactical_advice", "Maintain awareness.")
+
+    # Phase 7: Report Beautification (Structured JSON for UI)
+    try:
+        print(f"🎨 Report Specialist beautifying analysis...")
+        result["tactical_advice_beautified"] = report_agent.beautify(result["tactical_advice"])
+        result["visual_cues_beautified"] = report_agent.beautify(result["visual_cues"])
+    except Exception as report_err:
+        print(f"⚠️ Report Agent failed: {report_err}")
+        result["tactical_advice_beautified"] = None
+        result["visual_cues_beautified"] = None
+
     # Phase 4: Enrich with Lore Geographer Agent
     if result["lore_coordinates"]:
-        print(f"🌍 Lore Agent analyzing: {result['lore_coordinates']}")
-        lore_context = lore_agent.get_location_context(result["lore_coordinates"])
-        result["lore_context"] = lore_context
+        try:
+            print(f"🌍 Lore Agent analyzing: {result['lore_coordinates']}")
+            lore_context = lore_agent.get_location_context(result["lore_coordinates"])
+            result["lore_context"] = lore_context
+        except Exception as lore_err:
+            import traceback
+            print(f"⚠️  Lore Agent failed: {lore_err}")
+            traceback.print_exc()
+            result["lore_context"] = {
+                "geographic_discovery": f"Coordinates: {result['lore_coordinates']}",
+                "lore_report": "Lore data temporarily unavailable."
+            }
 
     print(f"✅ Final result: {json.dumps(result, indent=2)}")
     return result

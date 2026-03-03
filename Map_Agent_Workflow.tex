@@ -1,0 +1,167 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage[french]{babel}
+
+% Couleurs
+\definecolor{riotred}{HTML}{FF4655}
+\definecolor{tacticalcyan}{HTML}{00F5D4}
+\definecolor{neuralblue}{HTML}{3B82F6}
+\definecolor{darkbg}{HTML}{020617}
+
+% Style des sections
+\titleformat{\section}{\large\bfseries\sffamily\color{neuralblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries\sffamily\color{neuralblue}}{\thesubsection}{1em}{}
+
+% Configuration hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=neuralblue,
+    urlcolor=neuralblue,
+}
+
+\title{\sffamily\bfseries\huge \color{neuralblue} AURORA // MAP AGENT WORKFLOW}
+\author{Système d'Intelligence AURORA}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-1em}
+\begin{center}
+    \textit{Module d'Intelligence Spatiale pour la Vigilance Tactique}
+\end{center}
+\vspace{1em}
+
+\noindent L'\textbf{Map Agent} est un module d'intelligence spatiale spécialisé au sein de l'écosystème tactique AURORA :
+\begin{itemize}
+    \item Il exploite les LLM multi-modaux (\textbf{Gemini Vision}).
+    \item Il utilise les métadonnées officielles de \textbf{Riot Games}.
+    \item Il fournit une conscience géographique et tactique en temps réel à partir des visuels de jeu.
+\end{itemize}
+
+\section{Description Générale \& Objectif}
+L'Map Agent transforme les \textbf{visuels bruts} en \textbf{intelligence tactique structurée} via une approche hybride :
+\begin{itemize}[label=\textbullet]
+    \item \textbf{Visual Recognition} : Identification de la carte via Gemini Vision.
+    \item \textbf{Data Grounding} : Validation par l'API officielle de Riot Games.
+    \item \textbf{Lore Synthesis} : Enrichissement narratif et géographique.
+\end{itemize}
+
+\textbf{Objectifs Clés :}
+\begin{itemize}[label=$\diamond$]
+    \item Automatisation de la détection spatiale (carte et callouts).
+    \item Calcul de coordonnées mondiales précises.
+    \item Diffusion de briefings tactiques et narratifs.
+\end{itemize}
+
+\section{System Architecture}
+Le flux de travail suit un pipeline linéaire allant de l'\textbf{Ingestion} à l'\textbf{Enrichissement}.
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1.6cm and 2.2cm,
+    block/.style={rectangle, draw, rounded corners, minimum width=3cm, minimum height=0.8cm, text centered, font=\sffamily\scriptsize},
+    io/.style={ellipse, draw, fill=gray!5, minimum width=2.8cm, minimum height=0.8cm, text centered, font=\sffamily\scriptsize},
+    arrow/.style={-{Stealth[scale=1.0]}, rounded corners}
+]
+    % Central Column
+    \node [io] (user) {User Screenshot};
+    \node [block, below=of user] (frontend) {Frontend Interface};
+    \node [block, below=of frontend] (server) {Map Agent Server};
+    \node [block, below=of server, yshift=-0.5cm] (gemini) {Gemini Vision};
+    \node [block, below=of gemini] (oracle) {Metadata Oracle};
+    \node [block, below=of oracle] (lore) {Lore Geographer};
+    \node [io, below=of lore] (report) {Final Intel Report};
+
+    % Side Nodes
+    \node [block, left=of gemini] (ocr) {Minimap OCR};
+    \node [block, right=of gemini] (tracer) {Precision Tracer};
+    \node [block, right=of oracle] (db) {Riot Data};
+
+    % Main Vertical Flow
+    \draw [arrow] (user) -- (frontend);
+    \draw [arrow] (frontend) -- (server);
+    \draw [arrow] (server) -- (gemini);
+    \draw [arrow] (gemini) -- (oracle);
+    \draw [arrow] (oracle) -- (lore);
+    \draw [arrow] (lore) -- (report);
+
+    % Sideways Distribution from Server
+    \draw [arrow] (server.west) -| (ocr.north);
+    \draw [arrow] (server.east) -| (tracer.north);
+    
+    % Data & Processing
+    \draw [arrow] (oracle) -- (db);
+    
+    % Convergence to Report
+    \draw [arrow] (ocr.south) |- (report.west);
+    \draw [arrow] (tracer.south) |- (report.east);
+    
+    % Feedback Loop
+    \draw [arrow] (report.west) -- ++(-1.5,0) |- (frontend.west);
+
+    % Core Intelligence Box
+    \draw[dashed, neuralblue!40] ($(ocr.north west)+(-0.4,0.4)$ ) rectangle ($(db.south east)+(0.4,-0.4)$);
+    \node[anchor=north east, neuralblue, font=\sffamily\tiny] at ($(db.south east)+(0.4,-0.4)$) {Core Intelligence};
+    
+\end{tikzpicture}
+\end{center}
+
+\section{Analyse des Composants}
+
+\subsection{Map Agent Server (\texttt{map\_agent\_server.py})}
+L'orchestrateur central de l'ensemble du flux de travail. Il gère le cycle de vie d'une demande d'analyse.
+\begin{itemize}
+    \item \textbf{Input} : Flux d'octets d'image brute (PNG/JPG).
+    \item \textbf{Process} : Effectue l'OCR pré-analyse ; Synchronise les appels ; Exécute le traçage de précision.
+    \item \textbf{Output} : Objet d'intelligence tactique JSON unifié.
+\end{itemize}
+
+\subsection{Metadata Oracle (\texttt{metadata\_oracle.py})}
+La source faisant autorité qui convertit le langage naturel en données spatiales.
+\begin{itemize}
+    \item \textbf{Input} : Nom de carte prédit et chaîne d'emplacement.
+    \item \textbf{Process} : Correspondance floue avec les données de Riot ; Calcule les niveaux d'élévation.
+    \item \textbf{Output} : Coordonnées officielles (X, Y, Z), Super-région et Conseils Tactiques.
+\end{itemize}
+
+\subsection{Lore Geographer (\texttt{lore\_geographer.py})}
+Ajoute une couche de narration et de contexte réel aux données tactiques.
+\begin{itemize}
+    \item \textbf{Input} : Lore Coordinates (Lat/Long).
+    \item \textbf{Process} : Associe les coordonnées à des lieux réels ; Génère des extraits de briefing.
+    \item \textbf{Output} : Nom du lieu réel et « Tactical Lore Report ».
+\end{itemize}
+
+\section{Résumé du Flux de Données}
+
+\begin{center}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Composant} & \textbf{Input} & \textbf{Primary Tool} & \textbf{Output} \\ \midrule
+\textbf{Server}    & Screenshot     & FastAPI / Gemini      & Raw Map ID      \\
+\textbf{Oracle}     & Raw Map ID     & Fuzzy Matching        & Exact Coords    \\
+\textbf{Geographer}  & Lore Coords    & Gemini NLP            & Geo-Context     \\
+\textbf{Tracer}    & Minimap Pixel  & Matrix Math           & World Coords \\ \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[colback=tacticalcyan!5,colframe=tacticalcyan!80,title=\sffamily\bfseries TIP : Precision Tracing]
+\small
+\textbf{Precision Tracing} : Localisation 3D via icône minimap et multiplicateurs Riot officiels.
+\end{tcolorbox}
+
+\end{document}

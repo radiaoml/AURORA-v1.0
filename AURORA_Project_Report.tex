@@ -1,0 +1,190 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=0.9in, headheight=20pt, headsep=25pt}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, shadows}
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs}
+\usepackage[french]{babel}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Couleurs Premium
+\definecolor{auroracyl}{HTML}{00F5D4} % Tactical Cyan
+\definecolor{aurorablue}{HTML}{1A56DB} % Neural Blue Plus Profond
+\definecolor{darkbg}{HTML}{0B1120}
+\definecolor{glassbg}{HTML}{F1F5F9}
+
+% Style des boîtes de section
+\newtcolorbox{sectionbox}[1]{
+    colback=white,
+    colframe=aurorablue!20,
+    boxrule=0.5pt,
+    left=15pt,
+    right=15pt,
+    top=10pt,
+    bottom=10pt,
+    sharp corners=southwest,
+    arc=4pt,
+    title=\sffamily\bfseries\color{aurorablue} #1,
+    colbacktitle=white,
+    attach boxed title to top left={xshift=10pt, yshift=-3mm},
+    boxed title style={boxrule=0pt, colback=white}
+}
+
+% Style des sections standard
+\titleformat{\section}{\large\bfseries\sffamily\color{aurorablue}\clearpage\vspace{1em}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\sffamily\color{aurorablue!80}}{}{0em}{}
+
+% Configuration hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=aurorablue,
+    urlcolor=aurorablue,
+}
+
+\begin{document}
+
+% Header / Titre Premium
+\begin{tcolorbox}[
+    colback=darkbg,
+    colframe=aurorablue!50,
+    arc=0mm,
+    boxrule=0pt,
+    bottomrule=3pt,
+    left=20pt,
+    right=20pt,
+    top=30pt,
+    bottom=30pt
+]
+    \centering
+    \textcolor{white}{\sffamily\Huge\bfseries AURORA // RAPPORT DE PROJET} \\
+    \vspace{0.8em}
+    \textcolor{auroracyl}{\sffamily\large VERSION 2.6 // HYBRID_MULTI_AGENT_INTELLIGENCE} \\
+    \vspace{1.5em}
+    \textcolor{white!80}{\sffamily\small Système d'Intelligence Hybride pour l'Excellence Tactique sur Valorant}
+\end{tcolorbox}
+
+\vspace{3em}
+
+\noindent \textbf{AURORA} est une plateforme de \textit{Decision Intelligence} de pointe :
+\begin{itemize}[label=\textcolor{auroracyl}{\tiny\faIcon{check}}]
+    \item Elle transforme des flux vidéo bruts en analyses tactiques de niveau professionnel.
+    \item Elle combine la vision par ordinateur multimodale et un écosystème multi-agents sophistiqué.
+\end{itemize}
+
+\section{Description Générale}
+Le projet AURORA repose sur trois piliers fondamentaux :
+\begin{itemize}[label=\textcolor{auroracyl}{$\blacktriangleright$}]
+    \item \textbf{Analyse Vidéo Multimodale} : Exploitation de \textbf{Gemini 1.5 Pro} pour l'interprétation sémantique des visuels (VOD, streams).
+    \item \textbf{Intelligence Multi-Agents} : Pipeline de 5 agents spécialisés collaborant pour l'audit, le conseil et la prédiction.
+    \item \textbf{Visualisation Tactique} : Génération automatisée de heatmaps, tracés de trajectoires et Cyber-HUD (interface futuriste).
+\end{itemize}
+
+\section{Catégorisation des Composants Clés}
+
+\begin{sectionbox}{Backend \& Orchestration}
+    \begin{itemize}[label=\textbullet, leftmargin=15pt]
+        \item \texttt{aurora\_backend.py} : Serveur FastAPI central gérant les requêtes et la coordination des agents.
+        \item \texttt{valorant\_tactical\_engine.py} : Base de connaissances sur les cartes, les agents et la logique tactique.
+        \item \texttt{gemini\_vision\_client.py} : Interface SDK pour l'analyse visuelle via Gemini 1.5 Pro.
+    \end{itemize}
+\end{sectionbox}
+
+\vspace{1em}
+
+\begin{sectionbox}{Intelligence Multi-Agents}
+    \begin{itemize}[label=\textbullet, leftmargin=15pt]
+        \item \texttt{aurora\_agents.py} : Implémentation des agents \textbf{CleanerBot} (données) et \textbf{AnalystBot} (KPIs).
+        \item \texttt{aurora\_advanced\_agents.py} : Logique des agents \textbf{CoachBot} (stratégie) et \textbf{OracleBot} (prédictions).
+        \item \texttt{aurora\_rag\_system.py} : Système de recherche vectorielle (FAISS) basé sur les stratégies VCT.
+    \end{itemize}
+\end{sectionbox}
+
+\vspace{1em}
+
+\begin{sectionbox}{Interface \& Automatisation}
+    \begin{itemize}[label=\textbullet, leftmargin=15pt]
+        \item \texttt{index.html} \& \texttt{frontend.js} : Cyber-HUD exploitant des designs en \textit{glass-morphism}.
+        \item \texttt{n8n\_integration.py} : Connecteurs pour l'automatisation externe via Discord et YouTube.
+    \end{itemize}
+\end{sectionbox}
+
+\section{Workflow Global du Système}
+
+Le cycle de transformation de la donnée suit quatre phases majeures :
+\begin{enumerate}[label=\protect\tikz[baseline=(char.base)]{\node[shape=circle,fill=aurorablue,inner sep=1.5pt] (char) {\textcolor{white}{\tiny\bfseries \arabic*}};}]
+    \item \textbf{Ingestion Tactique} : Extraction des frames clés depuis un VOD ou un lien YouTube via le \texttt{VideoAnalyzer}.
+    \item \textbf{Vision Layer} : Identification spatiale et événementielle par Gemini Vision (Map, Agents, Spike).
+    \item \textbf{Intelligence Layer} : Calcul de l'OVR, comparaison RAG avec les stratégies pro et évaluation des risques.
+    \item \textbf{Output Layer} : Projection des résultats sur le Cyber-HUD et notification via n8n.
+\end{enumerate}
+
+\section{Architecture du Flux de Données}
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1.5cm and 2cm,
+    block/.style={rectangle, draw=aurorablue!40, fill=white, drop shadow={opacity=0.1}, rounded corners, minimum width=3.5cm, minimum height=1cm, text centered, font=\sffamily\scriptsize\bfseries},
+    io/.style={ellipse, draw=auroracyl!60, fill=auroracyl!5, drop shadow={opacity=0.1}, minimum width=3cm, minimum height=0.9cm, text centered, font=\sffamily\scriptsize\bfseries},
+    arrow/.style={-{Stealth[scale=1.2, color=aurorablue]}, thick, rounded corners, color=aurorablue!60}
+]
+    % Colonne Centrale
+    \node [io] (input) {Vidéo / YouTube};
+    \node [block, below=of input] (backend) {FastAPI Backend};
+    \node [block, below=of backend] (vision) {Gemini Vision};
+    \node [block, below=of vision] (agents) {Multi-Agent Pipeline};
+    \node [block, below=of agents] (viz) {Visualisation Layout};
+    \node [io, below=of viz] (hud) {Cyber-HUD / Report};
+
+    % Éléments Latéraux (Pipeline)
+    \node [block, right=of agents] (rag) {RAG System};
+    \node [block, left=of agents] (cleaner) {Analyst / Cleaner};
+
+    % Connexions
+    \draw [arrow] (input) -- (backend);
+    \draw [arrow] (backend) -- (vision);
+    \draw [arrow] (vision) -- (agents);
+    \draw [arrow] (agents) -- (viz);
+    \draw [arrow] (viz) -- (hud);
+
+    % Interaction Agents
+    \draw [arrow] (agents.west) -- (cleaner.east);
+    \draw [arrow] (agents.east) -- (rag.west);
+
+    % Boîte Intelligence
+    \draw[dashed, aurorablue!30, line width=1pt] ($(cleaner.north west)+(-0.4,0.4)$ ) rectangle ($(rag.south east)+(0.4,-0.4)$);
+    \node[anchor=north, aurorablue, font=\sffamily\tiny\bfseries, fill=white, inner sep=2pt] at ($(agents.north)+(0,0.6)$) {PROJECTION INTELLIGENTE};
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{2em}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=auroracyl,
+    boxrule=0.5pt,
+    arc=4pt,
+    title=\sffamily\bfseries FOCUS : Moteur RAG,
+    attach boxed title to top center={yshift=-3mm},
+    boxed title style={colback=auroracyl, boxrule=0pt},
+    coltitle=white,
+    shadow={2pt}{-2pt}{0pt}{black!10}
+]
+\small
+Le système \textbf{RAG} est le cœur stratégique d'AURORA :
+\begin{itemize}
+    \item Il compare vos performances en temps réel à une base de données de stratégies VCT professionnelles.
+    \item Il fournit des conseils exploitables de haut niveau.
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}
