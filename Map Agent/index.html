@@ -269,6 +269,53 @@
                 border-color: rgba(255, 70, 85, 0.4);
             }
         }
+
+        .dashboard-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .dashboard-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .dashboard-grid::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .dashboard-grid::-webkit-scrollbar-thumb {
+            background: rgba(0, 245, 212, 0.2);
+            border-radius: 3px;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 245, 212, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .section-header {
+            font-size: 0.65rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -430,57 +477,86 @@
                 : `<p style="color:#64748b;font-size:0.8rem;margin-top:8px;">👁️ VISUAL CUES: ${data.visual_cues}</p>`;
 
             outputContent.innerHTML = `
-                <p style="display: flex; align-items: center; gap: 10px;">
-                    📍 DETECTED MAP: <b>${data.map || 'UNKNOWN'}</b> 
-                    ${data.tactical_description ? `<span style="background: rgba(0, 245, 212, 0.1); color: #00f5d4; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(0, 245, 212, 0.2); letter-spacing: 0.5px;">${data.tactical_description}</span>` : ''}
-                    <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
-                        ${data.tactical_state ? `<span style="background: ${data.tactical_state.enemy_detected ? 'rgba(255, 70, 85, 0.15)' : 'rgba(0, 245, 212, 0.1)'}; color: ${data.tactical_state.enemy_detected ? '#ff4655' : '#00f5d4'}; padding: 2px 10px; border-radius: 4px; font-size: 0.7rem; border: 1px solid ${data.tactical_state.enemy_detected ? 'rgba(255, 70, 85, 0.3)' : 'rgba(0, 245, 212, 0.2)'}; letter-spacing: 0.7px; font-weight: bold; animation: ${data.tactical_state.enemy_detected ? 'pulse 1.5s infinite' : 'none'};">${data.tactical_state.status_msg}</span>` : ''}
-                        ${data.round_context && data.round_context.time ? `<span style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(59, 130, 246, 0.2); letter-spacing: 0.5px;">TIME: ${data.round_context.time}</span>` : ''}
-                        ${data.round_context && data.round_context.score ? `<span style="background: rgba(255, 70, 85, 0.1); color: #ff4655; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(255, 70, 85, 0.2); letter-spacing: 0.5px;">SCORE: ${data.round_context.score}</span>` : ''}
+                <div class="dashboard-grid">
+                    <!-- SECTION 1: STRATEGIC HUD -->
+                    <div class="section-card">
+                        <div class="section-header">🛰️ Strategic HUD</div>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <p style="display: flex; align-items: center; gap: 10px; margin: 0;">
+                                📍 MAP: <b style="color: #fff;">${data.map || 'UNKNOWN'}</b> 
+                                ${data.tactical_description ? `<span style="background: rgba(0, 245, 212, 0.1); color: #00f5d4; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(0, 245, 212, 0.2); letter-spacing: 0.5px;">${data.tactical_description}</span>` : ''}
+                                <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
+                                    ${data.tactical_state ? `<span style="background: ${data.tactical_state.enemy_detected ? 'rgba(255, 70, 85, 0.15)' : 'rgba(0, 245, 212, 0.1)'}; color: ${data.tactical_state.enemy_detected ? '#ff4655' : '#00f5d4'}; padding: 2px 10px; border-radius: 4px; font-size: 0.7rem; border: 1px solid ${data.tactical_state.enemy_detected ? 'rgba(255, 70, 85, 0.3)' : 'rgba(0, 245, 212, 0.2)'}; letter-spacing: 0.7px; font-weight: bold; animation: ${data.tactical_state.enemy_detected ? 'pulse 1.5s infinite' : 'none'};">${data.tactical_state.status_msg}</span>` : ''}
+                                    ${data.round_context && data.round_context.time ? `<span style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(59, 130, 246, 0.2); letter-spacing: 0.5px;">TIME: ${data.round_context.time}</span>` : ''}
+                                    ${data.round_context && data.round_context.score ? `<span style="background: rgba(255, 70, 85, 0.1); color: #ff4655; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; border: 1px solid rgba(255, 70, 85, 0.2); letter-spacing: 0.5px;">SCORE: ${data.round_context.score}</span>` : ''}
+                                </div>
+                            </p>
+                            <p style="margin: 0; font-size: 0.9rem;">🛰️ SECTOR: <b style="color: #3b82f6;">${data.location || 'UNKNOWN'}</b> &nbsp;|&nbsp; 🎯 ZONE: <b style="color: #fff;">${data.super_region || 'N/A'}</b></p>
+                        </div>
                     </div>
-                </p>
-                ${data.lore_coordinates ? `<p style="color: #3b82f6; font-size: 0.75rem; margin-top: -8px; margin-bottom: 12px; font-family: 'JetBrains Mono', 'Fira Code', monospace; background: rgba(59, 130, 246, 0.05); padding: 4px 8px; border-radius: 4px; display: inline-block;">🛰️ LORE COORDS: ${data.lore_coordinates}</p>` : ''}
-                <p>🛰️ LOCATION: <b>${data.location || 'UNKNOWN'}</b></p>
-                <p>🎯 ZONE: <b>${data.super_region || 'N/A'}</b></p>
-                <p>📐 COORDINATES: <b>${coordStr}</b></p>
-                ${data.precise_z !== null && data.precise_z !== undefined ? `<p style="color: #00f5d4; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;">⛰️ ELEVATION: <b>${Math.round(data.precise_z)}</b> <span style="color: #64748b; font-size: 0.7rem; margin-left: 5px;">(${data.elevation_label || 'Standard Level'})</span></p>` : ''}
-                
-                ${data.lore_context ? `
-                <div style="margin-top: 12px; padding: 10px; background: rgba(59, 130, 246, 0.05); border-left: 3px solid #3b82f6; border-radius: 4px;">
-                    <p style="color: #3b82f6; font-size: 0.75rem; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">🌍 GEO-DISCOVERY: ${data.lore_context.geographic_discovery}</p>
-                    <p style="color: #94a3b8; font-size: 0.8rem; font-style: italic; line-height: 1.4;">"${data.lore_context.lore_report}"</p>
-                </div>
-                ` : ''}
 
-                ${data.spike_status ? `
-                <div style="margin-top: 15px; border: 1px solid ${data.spike_status.is_planted ? 'rgba(255, 70, 85, 0.4)' : 'rgba(255, 255, 255, 0.1)'}; background: ${data.spike_status.is_planted ? 'rgba(255, 70, 85, 0.1)' : 'rgba(255, 255, 255, 0.02)'}; padding: 12px; border-radius: 6px; position: relative; overflow: hidden;">
-                    ${data.spike_status.is_planted ? `<div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #ff4655; animation: pulse 1.5s infinite;"></div>` : ''}
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                        <span style="color: ${data.spike_status.is_planted ? '#ff4655' : '#64748b'}; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">💣 Spike Report</span>
-                        <span style="color: ${data.spike_status.is_planted ? '#ff4655' : '#cbd5e1'}; font-size: 0.75rem; font-weight: bold; animation: ${data.spike_status.is_planted ? 'pulse 1.5s infinite' : 'none'};">${data.spike_status.status_msg}</span>
+                    <!-- SECTION 2: GEOSPATIAL INTELLIGENCE -->
+                    <div class="section-card">
+                        <div class="section-header">🌍 Geospatial Intelligence</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                <p style="margin: 0; font-size: 0.8rem; color: #cbd5e1;">📐 COORDS: <b>${coordStr}</b></p>
+                                ${data.precise_z !== null && data.precise_z !== undefined ? `<p style="margin: 0; color: #00f5d4; font-size: 0.8rem;">⛰️ ELEVATION: <b>${Math.round(data.precise_z)}</b> <span style="color: #64748b; font-size: 0.7rem;">(${data.elevation_label || 'Standard Level'})</span></p>` : ''}
+                                ${data.lore_coordinates ? `<p style="margin:0; color: #3b82f6; font-size: 0.75rem; background: rgba(59, 130, 246, 0.05); padding: 2px 8px; border-radius: 4px;">🛰️ LORE: ${data.lore_coordinates}</p>` : ''}
+                            </div>
+                            
+                            ${data.lore_context ? `
+                            <div style="margin-top: 8px; padding: 10px; background: rgba(59, 130, 246, 0.05); border-left: 3px solid #3b82f6; border-radius: 4px;">
+                                <p style="color: #3b82f6; font-size: 0.75rem; font-weight: bold; margin-bottom: 4px; text-transform: uppercase;">🌍 GEO-DISCOVERY: ${data.lore_context.geographic_discovery}</p>
+                                <p style="color: #94a3b8; font-size: 0.8rem; font-style: italic; line-height: 1.4; margin: 0;">"${data.lore_context.lore_report}"</p>
+                            </div>
+                            ` : ''}
+                        </div>
                     </div>
-                    <div style="font-size: 0.82rem; color: #cbd5e1;">
-                        ${data.spike_status.is_planted ? `STATUS: <b style="color: #ff4655;">PLANTED</b> | SECTOR: <b style="color: #00f5d4;">${data.location || 'UNKNOWN'}</b>` : `STATUS: <span style="color: #64748b;">NOT PLANTED</span>`}
-                    </div>
-                </div>
-                ` : ''}
 
-                ${data.visual_cues ? `
-                <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
-                    <span style="color: #64748b; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">👁️ Visual Evidence</span>
-                    ${visualHtml}
-                </div>
-                ` : ''}
-
-                <div style="margin-top:16px; color:#00f5d4; font-size:0.85rem; border-top:1px solid rgba(0,245,212,0.15); padding-top:12px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span>🧠 TACTICAL ANALYSIS</span>
-                        ${data.round_context && data.round_context.time ? `<span style="color: #64748b; font-size: 0.7rem;">🕒 TIME: ${data.round_context.time} (${data.round_context.phase || 'LIVE'})</span>` : ''}
+                    <!-- SECTION 3: MISSION OBJECTIVE -->
+                    ${data.spike_status ? `
+                    <div class="section-card" style="border-color: ${data.spike_status.is_planted ? 'rgba(255, 70, 85, 0.3)' : 'rgba(255, 255, 255, 0.05)'};">
+                        <div class="section-header">💣 Mission Objective</div>
+                        <div style="border: 1px solid ${data.spike_status.is_planted ? 'rgba(255, 70, 85, 0.4)' : 'rgba(255, 255, 255, 0.1)'}; background: ${data.spike_status.is_planted ? 'rgba(255, 70, 85, 0.1)' : 'rgba(255, 255, 255, 0.02)'}; padding: 12px; border-radius: 6px; position: relative; overflow: hidden;">
+                            ${data.spike_status.is_planted ? `<div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #ff4655; animation: pulse 1.5s infinite;"></div>` : ''}
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                <span style="color: ${data.spike_status.is_planted ? '#ff4655' : '#64748b'}; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Spike Report</span>
+                                <span style="color: ${data.spike_status.is_planted ? '#ff4655' : '#cbd5e1'}; font-size: 0.75rem; font-weight: bold; animation: ${data.spike_status.is_planted ? 'pulse 1.5s infinite' : 'none'};">${data.spike_status.status_msg}</span>
+                            </div>
+                            <div style="font-size: 0.82rem; color: #cbd5e1;">
+                                ${data.spike_status.is_planted ? `STATUS: <b style="color: #ff4655;">PLANTED</b> | SECTOR: <b style="color: #00f5d4;">${data.location || 'UNKNOWN'}</b>` : `STATUS: <span style="color: #64748b;">NOT PLANTED</span>`}
+                            </div>
+                        </div>
                     </div>
-                    ${tacticalHtml}
-                </div>
-                <div style="margin-top:10px; font-size:0.7rem; color:#3b82f6;">
-                    CONFIDENCE: ${data.confidence || 'N/A'} &nbsp;|&nbsp; SOURCE: ${data.source || 'Gemini Vision + Oracle'}
+                    ` : ''}
+
+                    <!-- SECTION 4: TACTICAL OPERATIONS -->
+                    <div class="section-card">
+                        <div class="section-header">🧠 Tactical Operations</div>
+                        
+                        ${data.visual_cues ? `
+                        <div style="margin-bottom: 15px;">
+                            <span style="color: #64748b; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px;">👁️ Visual Evidence</span>
+                            <div style="background: rgba(255,255,255,0.02); padding: 10px; border-radius: 4px;">${visualHtml}</div>
+                        </div>
+                        ` : ''}
+
+                        <div style="border-top: 1px solid rgba(0,245,212,0.1); padding-top: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="color: #00f5d4; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px;">STRATEGIC ANALYSIS</span>
+                                ${data.round_context && data.round_context.time ? `<span style="color: #64748b; font-size: 0.6rem;">TIMESTAMP: ${data.round_context.time}</span>` : ''}
+                            </div>
+                            <div style="max-height: 300px; overflow-y: auto; padding-right: 5px;">
+                                ${tacticalHtml}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top:5px; font-size:0.6rem; color:#3b82f6; display: flex; justify-content: space-between; opacity: 0.7;">
+                        <span>CONFIDENCE: ${data.confidence || 'N/A'}</span>
+                        <span>SOURCE: ${data.source || 'Gemini Vision + Precision Tracer'}</span>
+                    </div>
                 </div>
             `;
         }
