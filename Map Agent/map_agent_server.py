@@ -28,15 +28,17 @@ from metadata_oracle import MetadataOracle
 from lore_geographer import LoreGeographer
 from tactical_specialist import TacticalSpecialist
 from report_specialist import ReportSpecialist
+from enemy_specialist import EnemySpecialist
 
 load_dotenv()
 
 # Configure Gemini
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_API_KEY = os.getenv("MapAgent_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 lore_agent = LoreGeographer()
 tactical_agent = TacticalSpecialist()
 report_agent = ReportSpecialist()
+enemy_agent = EnemySpecialist()
 vision_model = genai.GenerativeModel('gemini-2.5-flash')
 
 app = FastAPI(title="AURORA Map Intelligence Agent v2")
@@ -244,10 +246,25 @@ async def analyze_image(file: UploadFile = File(...)):
     # 1. Get Regional Data (Oracle)
     oracle_data = oracle.lookup(detected_map, detected_location)
 
-    # 2. Attempt Precision Tracing
+    # 2. Attempt Precision Tracing and Minimap Crop for Enemy Detection
+    minimap_img = None
+    try:
+        full_img = Image.open(io.BytesIO(image_bytes))
+        w, h = full_img.size
+        # Reuse standard crop from get_precision_coordinates logic
+        sx, sy, sw, sh = int(w * 0.01), int(h * 0.015), int(w * 0.16), int(h * 0.28)
+        minimap_img = full_img.crop((sx, sy, sx+sw, sy+sh))
+    except Exception:
+        pass
+
     precision_coords = get_precision_coordinates(image_bytes, detected_map)
     final_coords = precision_coords if precision_coords else oracle_data.get("coordinates")
     is_precision = precision_coords is not None
+
+    # Apply Enemy Specialist
+    tactical_state = {"status_msg": "🟢 SECTOR CLEAR", "enemy_count": 0, "threat_level": "NONE"}
+    if minimap_img:
+        tactical_state = enemy_agent.detect_enemies(minimap_img)
 
     # Merge results
     result = {
@@ -264,7 +281,8 @@ async def analyze_image(file: UploadFile = File(...)):
         "agent": gemini_data.get("agent", "Unknown"),
         "coordinates": final_coords,
         "super_region": oracle_data.get("super_region"),
-        "source": "Gemini Vision + Precision Tracer" if is_precision else "Gemini Vision + Oracle"
+        "source": "Gemini Vision + Precision Tracer" if is_precision else "Gemini Vision + Oracle",
+        "tactical_state": tactical_state
     }
 
     # Phase 6: Deep Tactical Analysis via Specialist Agent
