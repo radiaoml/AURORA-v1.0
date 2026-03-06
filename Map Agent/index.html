@@ -452,6 +452,19 @@
                 </div>
                 ` : ''}
 
+                ${data.spike_status ? `
+                <div style="margin-top: 15px; border: 1px solid ${data.spike_status.is_planted ? 'rgba(255, 70, 85, 0.4)' : 'rgba(255, 255, 255, 0.1)'}; background: ${data.spike_status.is_planted ? 'rgba(255, 70, 85, 0.1)' : 'rgba(255, 255, 255, 0.02)'}; padding: 12px; border-radius: 6px; position: relative; overflow: hidden;">
+                    ${data.spike_status.is_planted ? `<div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #ff4655; animation: pulse 1.5s infinite;"></div>` : ''}
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                        <span style="color: ${data.spike_status.is_planted ? '#ff4655' : '#64748b'}; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">💣 Spike Report</span>
+                        <span style="color: ${data.spike_status.is_planted ? '#ff4655' : '#cbd5e1'}; font-size: 0.75rem; font-weight: bold; animation: ${data.spike_status.is_planted ? 'pulse 1.5s infinite' : 'none'};">${data.spike_status.status_msg}</span>
+                    </div>
+                    <div style="font-size: 0.82rem; color: #cbd5e1;">
+                        ${data.spike_status.is_planted ? `STATUS: <b style="color: #ff4655;">PLANTED</b> | SECTOR: <b style="color: #00f5d4;">${data.location || 'UNKNOWN'}</b>` : `STATUS: <span style="color: #64748b;">NOT PLANTED</span>`}
+                    </div>
+                </div>
+                ` : ''}
+
                 ${data.visual_cues ? `
                 <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
                     <span style="color: #64748b; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">👁️ Visual Evidence</span>

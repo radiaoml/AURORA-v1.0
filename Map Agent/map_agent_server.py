@@ -29,6 +29,7 @@ from lore_geographer import LoreGeographer
 from tactical_specialist import TacticalSpecialist
 from report_specialist import ReportSpecialist
 from enemy_specialist import EnemySpecialist
+from spike_specialist import SpikeSpecialist
 
 load_dotenv()
 
@@ -39,6 +40,7 @@ lore_agent = LoreGeographer()
 tactical_agent = TacticalSpecialist()
 report_agent = ReportSpecialist()
 enemy_agent = EnemySpecialist()
+spike_agent = SpikeSpecialist()
 vision_model = genai.GenerativeModel('gemini-2.5-flash')
 
 app = FastAPI(title="AURORA Map Intelligence Agent v2")
@@ -266,6 +268,15 @@ async def analyze_image(file: UploadFile = File(...)):
     if minimap_img:
         tactical_state = enemy_agent.detect_enemies(minimap_img)
 
+    # Apply Spike Specialist
+    spike_status = {"status_msg": "🕒 PRE-PLANT", "is_planted": False}
+    if minimap_img:
+        try:
+            full_img = Image.open(io.BytesIO(image_bytes))
+            spike_status = spike_agent.detect_spike(full_img, minimap_img)
+        except Exception:
+            pass
+
     # Merge results
     result = {
         "map": detected_map,
@@ -282,7 +293,8 @@ async def analyze_image(file: UploadFile = File(...)):
         "coordinates": final_coords,
         "super_region": oracle_data.get("super_region"),
         "source": "Gemini Vision + Precision Tracer" if is_precision else "Gemini Vision + Oracle",
-        "tactical_state": tactical_state
+        "tactical_state": tactical_state,
+        "spike_status": spike_status
     }
 
     # Phase 6: Deep Tactical Analysis via Specialist Agent
