@@ -30,6 +30,7 @@ from tactical_specialist import TacticalSpecialist
 from report_specialist import ReportSpecialist
 from enemy_specialist import EnemySpecialist
 from spike_specialist import SpikeSpecialist
+from riot_id_specialist import RiotIDSpecialist
 
 load_dotenv()
 
@@ -41,6 +42,7 @@ tactical_agent = TacticalSpecialist()
 report_agent = ReportSpecialist()
 enemy_agent = EnemySpecialist()
 spike_agent = SpikeSpecialist()
+riot_agent = RiotIDSpecialist()
 vision_model = genai.GenerativeModel('gemini-2.5-flash')
 
 app = FastAPI(title="AURORA Map Intelligence Agent v2")
@@ -294,7 +296,8 @@ async def analyze_image(file: UploadFile = File(...)):
         "super_region": oracle_data.get("super_region"),
         "source": "Gemini Vision + Precision Tracer" if is_precision else "Gemini Vision + Oracle",
         "tactical_state": tactical_state,
-        "spike_status": spike_status
+        "spike_status": spike_status,
+        "map_uuid": riot_agent.get_map_uuid(detected_map)
     }
 
     # Phase 6: Deep Tactical Analysis via Specialist Agent
